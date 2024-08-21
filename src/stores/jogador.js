@@ -15,19 +15,18 @@ export const useJogadorStore = defineStore('jogador', () => {
   const jogadoresCount = computed(() => state.jogadores.length)
 
   
-  const getJogadores = async () => {
-    state.loading = true
-    try {
-      state.jogadores = await JogadorService.getJogadores()
-    } catch (error) {
-      state.error = error
-    } finally {
-      state.loading = false
-      state.connection = true
-    }
+const getJogadores = async () => {
+  state.loading = true;
+  try {
+    state.jogadores = await JogadorService.getJogadores();
+  } catch (error) {
+    state.error = error;
+  } finally {
+    state.loading = false;
+    state.connection = true;
   }
+};
 
- 
   const createJogador = async (newJogador) => {
     state.loading = true
     try {
