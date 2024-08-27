@@ -20,10 +20,9 @@ class JogadorService {
     }
   }
 
-
   async updateJogador(jogador) {
     try {
-      const { data } = await api.put(`/jogadores/${jogador.id}/`)
+      const { data } = await api.patch(`/jogadores/${jogador.id}/`, jogador)
       return data.results
     } catch (error) {
       console.log('error in updateJogador')
@@ -31,7 +30,6 @@ class JogadorService {
     }
   }
 
- 
   async deleteJogador(id) {
     try {
       const { data } = await api.delete(`/jogadores/${id}/`)

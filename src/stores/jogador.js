@@ -12,6 +12,7 @@ export const useJogadorStore = defineStore('jogador', () => {
   })
   const isLoading = computed(() => state.loading)
   const jogadoresCount = computed(() => state.jogadores.length)
+  const jogadores = computed(() => state.jogadores)
 
   const getJogadores = async () => {
     state.loading = true
@@ -39,13 +40,15 @@ export const useJogadorStore = defineStore('jogador', () => {
   const updateJogador = async (jogador) => {
     state.loading = true
     try {
-      const index = state.jogadores.findIndex((s) => s.id === jogador.id)
-      state.jogadores[index] = await JogadorService.getJogadores()
+      await JogadorService.updateJogador(jogador)
     } catch (error) {
       state.error = error
     } finally {
+      getJogadores()
       state.loading = false
     }
+
+    console.log(state.jogadores)
   }
 
   const deleteJogador = async (id) => {
@@ -66,6 +69,7 @@ export const useJogadorStore = defineStore('jogador', () => {
     state,
     isLoading,
     jogadoresCount,
+    jogadores,
     getJogadores,
     createJogador,
     updateJogador,
