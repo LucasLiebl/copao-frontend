@@ -12,7 +12,7 @@ export const useTimeStore = defineStore('time', () => {
   })
   const isLoading = computed(() => state.loading)
   const timesCount = computed(() => state.times.length)
-
+  const times = computed(() => state.times) 
 
   const getTimes = async () => {
     state.loading = true
@@ -42,11 +42,11 @@ export const useTimeStore = defineStore('time', () => {
   const updateTime = async (time) => {
     state.loading = true
     try {
-      const index = state.times.findIndex((s) => s.id === time.id)
-      state.times[index] = await TimeService.getTimes()
+      await TimeService.updateTime(time)
     } catch (error) {
       state.error = error
     } finally {
+      getTimes()
       state.loading = false
     }
   }
@@ -56,6 +56,8 @@ export const useTimeStore = defineStore('time', () => {
     state.loading = true
     try {
       const index = state.times.findIndex((s) => s.id === id)
+      console.log(index)
+      await TimeService.deleteTime(id)
       state.times.splice(index, 1)
     } catch (error) {
       state.error = error
@@ -68,6 +70,7 @@ export const useTimeStore = defineStore('time', () => {
     state,
     isLoading,
     timesCount,
+    times,
     getTimes,
     createTime,
     updateTime,

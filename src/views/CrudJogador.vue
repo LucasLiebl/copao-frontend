@@ -34,8 +34,9 @@ function salvar(newObject) {
 </script>
 
 <template>
-  <div>
-    <ul>  
+  <div class="loading" v-if="jogadorStore.isLoading">loading</div>
+  <div v-else>
+    <ul>
       <li v-for="jogador in jogadorStore.jogadores" :key="jogador" @click="editar(jogador)">
         {{ jogador }}
       </li>
@@ -50,8 +51,17 @@ function salvar(newObject) {
       <input type="number" placeholder="numero" v-model="newObject.numero" />
       <input type="submit" />
     </form>
-    <input type="number" v-model="deleteId" /><button @click="jogadorStore.deleteJogador(deleteId)">
+    <input type="number" v-model="deleteId" />
+    <button @click="jogadorStore.deleteJogador(deleteId)">
       delete
     </button>
   </div>
 </template>
+
+<style scoped>
+.loading {
+  background-color: red;
+  width: 100vw;
+  height: 100vh;
+}
+</style>
