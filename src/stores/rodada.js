@@ -13,6 +13,7 @@ export const useRodadaStore = defineStore('rodada', () => {
   })
   const isLoading = computed(() => state.loading)
   const rodadasCount = computed(() => state.rodadas.length)
+  const rodadas = computed(() => state.rodadas)
 
   
   const getRodadas = async () => {
@@ -70,6 +71,7 @@ export const useRodadaStore = defineStore('rodada', () => {
     isLoading,
     rodadasCount,
     getRodadas,
+    rodadas,
     createRodada,
     updateRodada,
     deleteRodada
