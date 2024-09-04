@@ -37,9 +37,18 @@ function salvar(newObject) {
   <div class="loading" v-if="rodadaStore.isLoading">loading</div>
   <div v-else>
     <ul>
-      <h1>rodadas get</h1>
       <li v-for="rodada in rodadaStore.rodadas" :key="rodada" @click="editar(rodada)">
-        {{ rodada }}
+        <h2>rodada do jogo: {{ rodada.numero_rodada }} </h2>
+        {{ rodada.data_inicio }}
+        {{ rodada.data_termino }}
+        <h1>rodadas.jogos</h1>
+        <ul>
+          <li v-for="jogo in rodada.jogos" :key="jogo">
+            {{ jogo }}
+            <h2>rodada do jogo: {{ rodada.numero_rodada }} </h2>
+          </li>
+          <hr>
+        </ul>
       </li>
     </ul>
 
