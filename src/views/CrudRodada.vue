@@ -1,7 +1,6 @@
 <script setup>
 import { onMounted, reactive, ref } from 'vue'
 import { useRodadaStore } from '@/stores'
-import rodada from '@/services/rodada';
 
 const rodadaStore = useRodadaStore()
 
@@ -13,7 +12,7 @@ const newObject = reactive({
   numero_rodada: '',
   data_inicio: '',
   data_termino: '',
-  campeonato: '',
+  campeonato: ''  ,
 })
 
 const deleteId = ref(0)
@@ -54,9 +53,9 @@ function salvar(newObject) {
 
     <h1>Rodada Test</h1>
     <form @submit.prevent="salvar(newObject)">
-      <input type="number" placeholder="numero da rodada" v-model="newObject.nome" />
-      <input type="date" placeholder="data de inicio" v-model="newObject.idade" />
-      <input type="date" placeholder="data de termino" v-model="newObject.email" />
+      <input type="number" placeholder="numero da rodada" v-model="newObject.numero_rodada" />
+      <input type="date" placeholder="data de inicio" v-model="newObject.data_inicio" />
+      <input type="date" placeholder="data de termino" v-model="newObject.data_termino" />
       <input type="submit" />
     </form>
     <input type="number" v-model="deleteId" />
