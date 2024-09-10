@@ -15,7 +15,7 @@ const newObject = reactive({
   campeonato: ''  ,
 })
 
-const deleteId = ref(0)
+const deleteNumero = ref(0)
 
 function editar(rodada_para_editar) {
   Object.assign(newObject, rodada_para_editar)
@@ -37,14 +37,13 @@ function salvar(newObject) {
   <div v-else>
     <ul>
       <li v-for="rodada in rodadaStore.rodadas" :key="rodada" @click="editar(rodada)">
-        <h2>rodada do jogo: {{ rodada.numero_rodada }} </h2>
-        {{ rodada.data_inicio }}
-        {{ rodada.data_termino }}
+        <h2>numero da rodada: {{ rodada.numero_rodada }} </h2>
+      inicio  {{ rodada.data_inicio }}
+      fim   {{ rodada.data_termino }}
         <h1>rodadas.jogos</h1>
         <ul>
           <li v-for="jogo in rodada.jogos" :key="jogo">
             {{ jogo }}
-            <h2>rodada do jogo: {{ rodada.numero_rodada }} </h2>
           </li>
           <hr>
         </ul>
@@ -58,8 +57,8 @@ function salvar(newObject) {
       <input type="date" placeholder="data de termino" v-model="newObject.data_termino" />
       <input type="submit" />
     </form>
-    <input type="number" v-model="deleteId" />
-    <button @click="rodadaStore.deleteRodada(deleteId)">
+    <input type="number" v-model="deleteNumero" />
+    <button @click="rodadaStore.deleteRodada(deleteNumero)">
       delete
     </button>
   </div>
