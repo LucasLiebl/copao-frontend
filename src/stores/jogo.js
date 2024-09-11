@@ -55,10 +55,12 @@ export const useJogoStore = defineStore('jogo', () => {
   }
 
 
-  const deleteJogo = async (id) => {
+  const deleteJogo = async (idJogo) => {
     state.loading = true
     try {
-      const index = state.jogos.findIndex((s) => s.id === id)
+      const index = state.jogos.findIndex((s) => s.id === idJogo)
+      console.log(index)
+      await JogoService.deleteJogo(idJogo)
       state.jogos.splice(index, 1)
     } catch (error) {
       state.error = error

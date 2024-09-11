@@ -38,7 +38,7 @@ class JogoService {
 
   async deleteJogo(id) {
     try {
-      const { data } = await api.delete(`/jogo/${id}/`)
+      const { data } = await api.delete(`/jogos/${id}/`)
       return data.results
     } catch (error) {
       console.log('error in deleteJogo', error)

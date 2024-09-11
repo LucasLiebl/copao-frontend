@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { useJogoStore, useTimeStore } from '@/stores'
 
 const timeStore = useTimeStore()
@@ -21,6 +21,8 @@ const newObject = reactive({
   cartoes: ''
 })
 
+const deleteID = ref(0)
+
 
 function editar(jogo_para_editar) {
   Object.assign(newObject, jogo_para_editar)
@@ -40,21 +42,7 @@ function salvar(newObject) {
 <template>
   <div class="loading" v-if="jogoStore.isLoading">loading</div>
   <div v-else>
-    <ul>
-      <li v-for="jogo in jogoStore.jogos" :key="jogo" @click="editar(jogo)">
-        <p>id: {{ jogo.id }}</p>
-        <p>data: {{ jogo.data }}</p>
-        <p>horario: {{ jogo.horario }}</p>
-        <p>endereco: {{ jogo.endereco }}</p>
-        <p>rodada: {{ jogo.rodada }}</p>
-        <p>time mandante: {{ jogo.time_mandante }}</p>
-        <p>time visitante: {{ jogo.time_visitante }}</p>
-        <p>gols: {{ jogo.gols }}</p>
-        <p>cartoes: {{ jogo.cartoes }}</p>
-      </li>
-    </ul>
-
-    <h1>Jogo Test</h1>
+    <h1>Jogo CRUD</h1>
     <form @submit.prevent="salvar(newObject)">
       <input type="date" placeholder="data" v-model="newObject.data" />
       <input type="time" placeholder="horario" v-model="newObject.horario" />
@@ -81,6 +69,22 @@ function salvar(newObject) {
     </form>
     <input type="number" v-model="deleteID" />
     <button @click="jogoStore.deleteJogo(deleteID)">delete</button>
+    
+    <h1>Jogo Listagem</h1>
+    <ul>
+      <li v-for="jogo in jogoStore.jogos" :key="jogo" @click="editar(jogo)">
+        <p>id: {{ jogo.id }}</p>
+        <p>data: {{ jogo.data }}</p>
+        <p>horario: {{ jogo.horario }}</p>
+        <p>endereco: {{ jogo.endereco }}</p>
+        <p>rodada: {{ jogo.rodada }}</p>
+        <p>time mandante: {{ jogo.time_mandante }}</p>
+        <p>time visitante: {{ jogo.time_visitante }}</p>
+        <p>gols: {{ jogo.gols }}</p>
+        <p>cartoes: {{ jogo.cartoes }}</p>
+        <hr>
+      </li>
+    </ul>
   </div>
 </template>
 

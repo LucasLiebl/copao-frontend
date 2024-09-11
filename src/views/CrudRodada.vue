@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, reactive, ref } from 'vue'
 import { useRodadaStore } from '@/stores'
+import CrudJogo from './CrudJogo.vue'
 
 const rodadaStore = useRodadaStore()
 
@@ -12,10 +13,10 @@ const newObject = reactive({
   numero_rodada: '',
   data_inicio: '',
   data_termino: '',
-  campeonato: ''  ,
+  campeonato: ''
 })
 
-const deleteNumero = ref(0)
+const deleteID = ref(0)
 
 function editar(rodada_para_editar) {
   Object.assign(newObject, rodada_para_editar)
@@ -35,32 +36,39 @@ function salvar(newObject) {
 <template>
   <div class="loading" v-if="rodadaStore.isLoading">loading</div>
   <div v-else>
-    <ul>
-      <li v-for="rodada in rodadaStore.rodadas" :key="rodada" @click="editar(rodada)">
-        <h2>numero da rodada: {{ rodada.numero_rodada }} </h2>
-      inicio  {{ rodada.data_inicio }}
-      fim   {{ rodada.data_termino }}
-        <h1>rodadas.jogos</h1>
-        <ul>
-          <li v-for="jogo in rodada.jogos" :key="jogo">
-            {{ jogo }}
-          </li>
-          <hr>
-        </ul>
-      </li>
-    </ul>
-
-    <h1>Rodada Test</h1>
+    <h1>Rodada CRUD</h1>
     <form @submit.prevent="salvar(newObject)">
       <input type="number" placeholder="numero da rodada" v-model="newObject.numero_rodada" />
       <input type="date" placeholder="data de inicio" v-model="newObject.data_inicio" />
       <input type="date" placeholder="data de termino" v-model="newObject.data_termino" />
       <input type="submit" />
     </form>
-    <input type="number" v-model="deleteNumero" />
-    <button @click="rodadaStore.deleteRodada(deleteNumero)">
-      delete
-    </button>
+    <input type="number" v-model="deleteID" />
+    <button @click="rodadaStore.deleteRodada(deleteID)">delete</button>
+
+    <h1>Rodada Listagem</h1>
+    <ul>
+      <li v-for="rodada in rodadaStore.rodadas" :key="rodada" @click="editar(rodada)">
+        <h2>numero da rodada: {{ rodada.numero_rodada }} id: {{ rodada.id }}</h2>
+        <p>inicio {{ rodada.data_inicio }} fim {{ rodada.data_termino }}</p>
+        <h2>rodadas.jogos</h2>
+        <ul>
+          <li v-for="jogo in rodada.jogos" :key="jogo">
+            <p>id: {{ jogo.id }}</p>
+            <p>data: {{ jogo.data }}</p>
+            <p>horario: {{ jogo.horario }}</p>
+            <p>endereco: {{ jogo.endereco }}</p>
+            <p>time mandante: {{ jogo.time_mandante }}</p>
+            <p>time visitante: {{ jogo.time_visitante }}</p>
+            <p>gols: {{ jogo.gols }}</p>
+            <p>cartoes: {{ jogo.cartoes }}</p>
+          </li>
+        </ul>
+        <hr />
+      </li>
+    </ul>
+
+    <CrudJogo />
   </div>
 </template>
 

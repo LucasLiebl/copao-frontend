@@ -54,10 +54,12 @@ export const useRodadaStore = defineStore('rodada', () => {
   }
 
  
-  const deleteRodada = async (numeroRodada) => {
+  const deleteRodada = async (idRodada) => {
     state.loading = true
     try {
-      const index = state.rodadas.findIndex((s) => s.numero_rodada === numeroRodada)
+      const index = state.rodadas.findIndex((s) => s.id === idRodada)
+      console.log(index)
+      await RodadaService.deleteRodada(idRodada)
       state.rodadas.splice(index, 1)
     } catch (error) {
       state.error = error

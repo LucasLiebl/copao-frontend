@@ -36,7 +36,7 @@ class RodadaService {
 
   async deleteRodada(id) {
     try {
-      const { data } = await api.delete(`/rodada/${id}/`)
+      const { data } = await api.delete(`/rodadas/${id}/`)
       return data.results
     } catch (error) {
       console.log('error in deleteRodada', error)
