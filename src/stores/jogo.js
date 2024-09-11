@@ -13,6 +13,8 @@ export const useJogoStore = defineStore('jogo', () => {
   })
   const isLoading = computed(() => state.loading)
   const jogosCount = computed(() => state.jogos.length)
+  const jogos = computed(() => state.jogos)
+
 
   
   const getJogos = async () => {
@@ -69,6 +71,7 @@ export const useJogoStore = defineStore('jogo', () => {
     state,
     isLoading,
     jogosCount,
+    jogos,
     getJogos,
     createJogo,
     updateJogo,
