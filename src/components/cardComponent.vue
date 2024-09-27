@@ -1,11 +1,9 @@
 <script setup>
-const times =[
-        { name: 'Vermelho', icon:('../../public/vermelho1.png') },
-        { name: 'Vermelho', icon:('../../public/vermelho1.png') },
-        { name: 'Vermelho', icon:('../../public/vermelho1.png') },
-        { name: 'Vermelho', icon:('../../public/vermelho1.png') },
-        { name: 'Vermelho', icon:('../../public/vermelho1.png') }
-      ]
+const props = defineProps({
+  datas: {
+    type: Object
+  },
+})
 
 </script>
 
@@ -13,8 +11,8 @@ const times =[
 
     <div class="card">
         <h1>times copão</h1>
-        <div class="time" v-for="time in times" :key="time">
-            {{ time.icon }} {{ time.name }}
+        <div class="time" v-for="time in props.datas" :key="time">
+            <img :src=time.image alt="">{{ time.name }}
         </div>
     
     
@@ -23,10 +21,14 @@ const times =[
 </template>
 <style>
 .card{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     background-color: #1E1E1E;
     width: 263px;
     height: 386px;
     border-radius: 15px;
+    margin: 100px;
 }
 .card>h1{
     font-size: 18px;
@@ -34,6 +36,9 @@ const times =[
     padding: 10px 15px;
 }
 .time{
-color: aliceblue;
+    color: #757575;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 }
 </style>
