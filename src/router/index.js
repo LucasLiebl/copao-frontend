@@ -4,6 +4,7 @@ import LayoutFull from '../layouts/LayoutFull.vue';
 import CrudJogador from '../views/CrudJogador.vue';
 import CrudTime from '../views/CrudTime.vue'
 import TestComponents from '@/views/TestComponents.vue';
+import TestCard from '@/views/TestCard.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,6 +28,11 @@ const router = createRouter({
           path : '/crudtime',
           name : '',
           component : CrudTime
+        },
+        {
+          path : '/testCard',
+          name : '',
+          component : TestCard
         },
       ],
     },
