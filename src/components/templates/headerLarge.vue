@@ -2,20 +2,35 @@
 </script>
 
 <template>
-  <div class="header">
-    <div class="logo">
-      <img src="/home/joao/front-copao/copao-frontend/public/COPAO.png" alt="logo">
+<header>
+  <div class="logo">
+      <img src="/home/joao.gomes/teste/copao-frontend/public/COPAO.png" alt="logo">
     </div>
     <nav class="nav-links">
-      <router-link to="/TestA" class="nav-item"><img src="/home/joao/front-copao/copao-frontend/public/Classificacao.png" alt=""> Classificação</router-link>
-      <router-link to="/chaveamento" class="nav-item"><img src="/home/joao/front-copao/copao-frontend/public/Chavemante.png" alt=""> Chaveamento</router-link>
-      <router-link to="/jogos" class="nav-item"><img src="/home/joao/front-copao/copao-frontend/public/Vector.png" alt=""> Jogos</router-link>
+      <router-link to="/TestA" 
+      
+      :class="{'nav-item nav-item-select': $route.path === '/TestA','nav-item': $route.path !== '/TestA'}">
+
+      <img src="/home/joao.gomes/teste/copao-frontend/public/Classificacao.png" alt=""> Classificação
+
+      </router-link>
+
+      <router-link to="/chaveamento"       
+      
+        :class="{'nav-item nav-item-select': $route.path === '/chaveamento','nav-item': $route.path !== '/chaveamento'}">
+        
+        <img src="/home/joao.gomes/teste/copao-frontend/public/Chavemante.png" alt=""> Chaveamento
+      
+      </router-link>
+          
+      <router-link to="/jogos" class="nav-item"><img
+          src="/home/joao.gomes/teste/copao-frontend/public/Classificacao.png" alt=""> Jogos</router-link>
     </nav>
-  </div>
-</template>
+  </header>  
+  </template>
 
 <style scoped>
-.header {
+header {
   display: flex;
   background-color: #1E1E1E;
   height: 111px;
@@ -31,7 +46,7 @@
 .nav-links {
   display: flex;
   gap: 40px;
-  margin-left: 80px;
+  margin-left: 40px;
 }
 
 .nav-item {
@@ -39,29 +54,21 @@
   text-decoration: none;
   font-size: 18px;
   position: relative;
-  padding-bottom: 5px;
   display: flex;
   align-items: center;
   gap: 5px;
+  transition: all .2s;
 }
 
-.nav-item:hover {
-  color: #ddd;
-}
-
-.nav-item::after {
+.nav-item-select::after {
   content: '';
   position: absolute;
-  bottom: -39px;
+  bottom: -42px;
   left: 0;
-  width: 0%;
+  width: 100%;
   height: 4px;
   background-color: white;
-  transition: width 0.3s ease-in-out;
-  border-radius: 10px;
-}
-
-.nav-item:hover::after {
-  width: 100%;
+  border-radius: 10px 10px 0px 0px;
+  transition: all .2s;
 }
 </style>

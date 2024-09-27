@@ -1,5 +1,6 @@
 <script setup>
 </script>
 <template>
-</template>
+
+<h1>Chavemante</h1></template>
 <style scoped></style>
