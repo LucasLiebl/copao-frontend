@@ -1,12 +1,12 @@
 <script setup>
 const times = [
-  { classificacao: 'Vermelho', P: '1', J: '2', V: '2' },
-  { classificacao: 'Preto', P: '12', J: '4', V: '5' },
-  { classificacao: 'Branco', P: '3', J: '9', V: '7' },
-  { classificacao: 'Rosa', P: '7', J: '6', V: '4' },
-  { classificacao: 'Verde', P: '1', J: '2', V: '3' },
-  { classificacao: 'Rosa', P: '7', J: '6', V: '4' },
-  { classificacao: 'Verde', P: '1', J: '2', V: '3' },
+  { classificacao: 'Vermelho', P: '1', J: '2', V: '2', Gols:'d', GolsSofridos:'d', Aproveitanmento:'d' },
+  { classificacao: 'Preto', P: '12', J: '4', V: '5', Gols:'d', GolsSofridos:'d', Aproveitanmento:'d' },
+  { classificacao: 'Branco', P: '3', J: '9', V: '7' , Gols:'d', GolsSofridos:'d', Aproveitanmento:'d'},
+  { classificacao: 'Rosa', P: '7', J: '6', V: '4', Gols:'d', GolsSofridos:'d', Aproveitanmento:'d' },
+  { classificacao: 'Verde', P: '1', J: '2', V: '3', Gols:'d', GolsSofridos:'d', Aproveitanmento:'d' },
+  { classificacao: 'Rosa', P: '7', J: '6', V: '4', Gols:'d', GolsSofridos:'d', Aproveitanmento:'d' },
+  { classificacao: 'Verde', P: '1', J: '2', V: '3', Gols:'d', GolsSofridos:'d', Aproveitanmento:'d' },
 ];
 </script>
 
@@ -27,6 +27,9 @@ const times = [
           <td>{{ time.P }}</td>
           <td>{{ time.J }}</td>
           <td>{{ time.V }}</td>
+          <td>{{ time.Gols }}</td>
+          <td>{{ time.Aproveitanmento }}</td>
+          <td>{{ time.GolsSofridos }}</td>
         </tr>
       </tbody>
     </table>
@@ -50,7 +53,7 @@ table {
   letter-spacing: 1px;
   background-color: #1E1E1E;
   color: #FFFFFF;
-  border: 2px solid rgb(160, 160, 160);
+  border: 5px solid #757575;
   border-radius: 15px;
 }
 
@@ -64,7 +67,7 @@ td {
 }
 
 .tabela-container{
-  background-color: black;
+  background-color: #1E1E1E;
   width: 1066px;
   height: 803px;
   align-items: center;
