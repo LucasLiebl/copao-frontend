@@ -1,13 +1,23 @@
-<script setup></script>
+<script setup>
+import { onMounted,  } from 'vue'
+import { useJogadorStore } from '@/stores'
+
+const jogadorStore = useJogadorStore()
+
+onMounted(() => {
+  jogadorStore.getJogadores()
+})
+
+</script>
 
 <template>
-  <div class="Card-Jogador">
-    <img src="/home/joao/front-copao/copao-frontend/copao-frontend/public/Eversn.png" alt="" />
+      <div class="loading" v-if="jogadorStore.isLoading">loading</div>
+    <div v-for="jogador in jogadorStore.jogadores" :key="jogador" class="Card-Jogador">
     <div class="Nome-Jogador">
-      <h1>1</h1>
+      <h1>{{jogador.numero}}</h1>
       <div class="Nome-Posicao">
-        <h3>Everson</h3>
-        <h4>Goleiro</h4>
+        <h3>{{jogador.nome}}</h3>
+        <h4>{{jogador.posicao}}</h4>
       </div>
     </div>
   </div>
