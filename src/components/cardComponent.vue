@@ -1,8 +1,26 @@
 <script setup>
+import { onMounted, reactive, ref } from 'vue'
+import { useTimeStore } from '@/stores'  // Ajuste o import se necessário
+
+
+const timeStore = useTimeStore()  // Atualize o nome do store
+
+onMounted(() => {
+  timeStore.getTimes() 
+  console.log(timeStore.getTimes())
+  // Atualize para obter os times
+})
+
 const props = defineProps({
-  datas: {
-    type: Object
-  },
+    datas: {
+    type: Array,
+    required: true,
+    },
+    titulo: {
+        type: String,
+        required: false,
+        default: 'Times Copão'
+    }
 })
 
 </script>
@@ -10,9 +28,9 @@ const props = defineProps({
 <template>
 
     <div class="card">
-        <h1>times copão</h1>
-        <div class="time" v-for="time in props.datas" :key="time">
-            <img :src=time.image alt="">{{ time.name }}
+        <h1>{{ props.titulo }}</h1>
+        <div class="object" v-for="object in props.datas" :key="object">
+        {{ object.nome }}
         </div>
     
     
@@ -22,7 +40,6 @@ const props = defineProps({
 <style>
 .card{
     display: flex;
-    align-items: center;
     flex-direction: column;
     background-color: #1E1E1E;
     width: 263px;
@@ -35,10 +52,14 @@ const props = defineProps({
     color: white;
     padding: 10px 15px;
 }
-.time{
+.object{
     color: #757575;
     display: flex;
-    align-items: center;
     margin-bottom: 10px;
+    margin-left: 75px;
 }
+.object>img{
+    width: 29px;
+}
+
 </style>
