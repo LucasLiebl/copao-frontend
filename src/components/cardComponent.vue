@@ -1,16 +1,4 @@
 <script setup>
-import { onMounted, reactive, ref } from 'vue'
-import { useTimeStore } from '@/stores'  // Ajuste o import se necessário
-
-
-const timeStore = useTimeStore()  // Atualize o nome do store
-
-onMounted(() => {
-  timeStore.getTimes() 
-  console.log(timeStore.getTimes())
-  // Atualize para obter os times
-})
-
 const props = defineProps({
     datas: {
     type: Array,
