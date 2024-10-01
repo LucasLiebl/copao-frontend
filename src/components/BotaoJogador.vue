@@ -39,6 +39,7 @@ const selectCategory = (category) => {
   width: 100%;
 }
 
+
 .categories {
   max-width: 600px;
   margin: 0 auto;
@@ -53,6 +54,7 @@ button {
   font-size: 16px;
   cursor: pointer;
   border-radius: 15px;
+
 }
 
 button.active {
@@ -71,4 +73,9 @@ button:not(.active):hover {
   font-weight: bold;
   margin-bottom: 20px; /* Distância entre o título e as categorias */ 
 }
+.elenco-container>h1{
+  margin-left: 665px;
+}
+
+
 </style>
