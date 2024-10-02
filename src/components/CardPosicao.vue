@@ -8,11 +8,15 @@ const jogadorStore = useJogadorStore()
 onMounted(() => {
   jogadorStore.getJogadores()
 })
+
+
+
 </script>
+
 
 <template>
     <div v-for="jogador in jogadorStore.jogadores" :key="jogador.id">
-    <div v-if="jogador.posicao === 'goleiro'"><CardJogador :nome="jogador.nome" :numero="jogador.numero" :posicao="jogador.posicao"/></div>
+    <div v-if="jogador.posicao === 'goleiro'"> <CardJogador :nome="jogador.nome" :numero="jogador.numero" :posicao="jogador.posicao"/></div>
     </div>
  
   <!-- <div v-for="jogador in jogadorStore.jogadores" :key="jogador.id">

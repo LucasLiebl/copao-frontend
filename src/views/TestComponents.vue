@@ -1,7 +1,6 @@
 <script setup>
+import { computed, onMounted } from 'vue'
 import CardJogador from '@/components/CardJogador.vue';
-
-import { onMounted } from 'vue'
 import { useJogadorStore } from '@/stores'
 
 const jogadorStore = useJogadorStore()
@@ -10,14 +9,78 @@ onMounted(() => {
   jogadorStore.getJogadores()
 })
 
-console.log(jogadorStore.jogadores)
+const goleiros = computed(() => {
+  return jogadorStore.jogadores.filter(jogador => jogador.posicao === 'goleiro')
+})
+
+const alas = computed(() => {
+  return jogadorStore.jogadores.filter(jogador => jogador.posicao === 'ala')
+})
+const fixos = computed(() => {
+  return jogadorStore.jogadores.filter(jogador => jogador.posicao === 'fixo')
+})
+const pivos = computed(() => {
+  return jogadorStore.jogadores.filter(jogador => jogador.posicao === 'pivo')
+})
 </script>
+
 <template>
-    <div v-for="jogador in jogadorStore.jogadores" :key="jogador.id">
-    <div><CardJogador :nome="jogador.nome" :numero="jogador.numero" :posicao="jogador.posicao"/></div>
+  <div class="jogadores-container">
+    <div class="posicao-container">
+      <h1>GOLEIROS</h1>
+      <div class="jogadores-linha">
+        <div v-for="goleiro in goleiros" :key="goleiro.id" class="jogador-card">
+          <CardJogador :nome="goleiro.nome" :numero="goleiro.numero" :posicao="goleiro.posicao" />
+        </div>
+      </div>
     </div>
-  </template>
+
+    <div class="posicao-container">
+      <h1>ALAS</h1>
+      <div class="jogadores-linha">
+        <div v-for="ala in alas" :key="ala.id" class="jogador-card">
+          <CardJogador :nome="ala.nome" :numero="ala.numero" :posicao="ala.posicao" />
+        </div>
+      </div>
+    </div>
+
+    <div class="posicao-container">
+      <h1>FIXOS</h1>
+      <div class="jogadores-linha">
+        <div v-for="fixo in fixos" :key="fixo.id" class="jogador-card">
+          <CardJogador :nome="fixo.nome" :numero="fixo.numero" :posicao="fixo.posicao" />
+        </div>
+      </div>
+    </div>
+
+    <div class="posicao-container">
+      <h1>PIVOS</h1>
+      <div class="jogadores-linha">
+        <div v-for="pivo in pivos" :key="pivo.id" class="jogador-card">
+          <CardJogador :nome="pivo.nome" :numero="pivo.numero" :posicao="pivo.posicao" />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
   
-  <style scoped>
+<style scoped>
+.jogadores-container {
+  display: flex;
+  flex-direction: column; 
+  background-color: #1E1E1E;
+  border-radius: 10px;
+  padding: 30px;
+}
+.jogadores-linha {
+  display: flex; 
+  flex-wrap: wrap;  
+}
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #ffff;
+}
 
 </style>
