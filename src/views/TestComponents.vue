@@ -1,8 +1,13 @@
-<script setup></script>
-<template>
+<script setup>
+import BotaoJogador from '../components/BotaoJogador.vue'
 
-  a
-  </template>
+</script>
+
+  <template>
+  
+<BotaoJogador/>
+    </template>
   
   <style scoped>
+
 </style>

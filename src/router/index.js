@@ -28,6 +28,11 @@ const router = createRouter({
           name : '',
           component : CrudTime
         },
+        {
+          path : '/testCard',
+          name : '',
+          component : TestCard
+        },
       ],
     },
     {
