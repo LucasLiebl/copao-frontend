@@ -3,7 +3,8 @@ import BotaoJogador from '../components/BotaoJogador.vue'
 
 </script>
 
-<template>
+  <template>
+  
 <BotaoJogador/>
     </template>
   
