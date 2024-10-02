@@ -1,4 +1,5 @@
 <script setup>
+import JogoComponent from '@/components/JogoComponent.vue';
 import { onMounted, reactive, ref } from 'vue'
 import { useJogoStore, useTimeStore } from '@/stores'
 
@@ -73,6 +74,9 @@ function salvar(newObject) {
     <h1>Jogo Listagem</h1>
     <ul>
       <li v-for="jogo in jogoStore.jogos" :key="jogo" @click="editar(jogo)">
+        <JogoComponent :data="jogo.data" :horario="jogo.horario" :endereco="jogo.endereco" :timeM="jogo.time_mandante" 
+        :timeV="jogo.time_visitante "
+        ></JogoComponent>
         <p>id: {{ jogo.id }}</p>
         <p>data: {{ jogo.data }}</p>
         <p>horario: {{ jogo.horario }}</p>
