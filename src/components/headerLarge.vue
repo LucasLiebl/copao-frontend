@@ -4,14 +4,14 @@
 <template>
 <header>
   <div class="logo">
-      <img src="/home/joao.gomes/teste/copao-frontend/public/COPAO.png" alt="logo">
+      <img src="https://i.ibb.co/9VfWVgh/COPAO-1.png" alt="logo">
     </div>
     <nav class="nav-links">
       <router-link to="/TestA" 
       
       :class="{'nav-item nav-item-select': $route.path === '/TestA','nav-item': $route.path !== '/TestA'}">
 
-      <img src="/home/joao.gomes/teste/copao-frontend/public/Classificacao.png" alt=""> Classificação
+      <img src="https://i.ibb.co/BNTvDmn/Classificacao-Vector.png" alt=""> Classificação
 
       </router-link>
 
@@ -19,12 +19,12 @@
       
         :class="{'nav-item nav-item-select': $route.path === '/chaveamento','nav-item': $route.path !== '/chaveamento'}">
         
-        <img src="/home/joao.gomes/teste/copao-frontend/public/Chavemante.png" alt=""> Chaveamento
+        <img src="https://i.ibb.co/MDkmH5j/Chavemante-Vector.png" alt=""> Chaveamento
       
       </router-link>
           
       <router-link to="/jogos" class="nav-item"><img
-          src="/home/joao.gomes/teste/copao-frontend/public/Classificacao.png" alt=""> Jogos</router-link>
+          src="https://i.ibb.co/bNk0pxT/Vector.png" alt=""> Jogos</router-link>
     </nav>
   </header>  
   </template>

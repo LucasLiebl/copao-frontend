@@ -1,9 +1,9 @@
 <script setup>
-import headerLarge from '@/components/templates/headerLarge.vue';
+import LargeHeader from './components/templates/large/LargeHeader.vue';
 </script>
 
 <template>
-  <headerLarge></headerLarge>
+  <LargeHeader />
   <RouterView />
 </template>
 
