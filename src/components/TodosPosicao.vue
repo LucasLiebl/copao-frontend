@@ -68,5 +68,34 @@ const pivos = computed(() => {
 
   
 <style scoped>
+.jogadores-container {
+  display: flex;
+  flex-direction: column; 
+  background-color: #1E1E1E;
+  border-radius: 10px;
+  padding: 30px;
+  margin: 50px;
+}
+.posicao-container {
+  margin-bottom: 40px; 
+}
+.jogadores-linha {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; 
+
+}
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+.posicao-container > h1 {
+  margin-left: 0px;
+  text-align: left; 
+}
 
 </style>
+
