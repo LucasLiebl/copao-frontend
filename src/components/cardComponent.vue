@@ -30,10 +30,11 @@ const props = defineProps({
     display: flex;
     flex-direction: column;
     background-color: #1E1E1E;
-    width: 263px;
-    height: 386px;
+    width: 13.5vw;
+    height: 37.6vh;
     border-radius: 15px;
-    margin: 100px;
+margin: 50px 50px 0px 40px;
+
 }
 .card>h1{
     font-size: 18px;

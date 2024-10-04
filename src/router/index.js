@@ -6,8 +6,7 @@ import TestConponent from '../views/TestComponent.vue';
 import TestA from '../views/TestA.vue';
 import Chaveamento from '../views/Chaveamento.vue'
 import CrudTime from '../views/CrudTime.vue'
-import Tabela from '@/views/Tabela.vue';
-import TestCard from '@/views/TestCard.vue'
+import TabelaView from '@/views/TabelaView.vue';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -31,11 +30,6 @@ const router = createRouter({
           name : '',
           component : CrudTime
         },
-        {
-          path : '/testCard',
-          name : '',
-          component : TestCard
-        },
       ],
    
     },
@@ -55,10 +49,10 @@ const router = createRouter({
       component : Chaveamento
     },
     {
-      path : '/test',
+      path : '/Classificacao',
       name : '',
-      component : Tabela
-    }
+      component : TabelaView
+    },
   ],
 });
 

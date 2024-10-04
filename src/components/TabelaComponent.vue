@@ -46,8 +46,8 @@ const times = [
 table {
   border-collapse: separate;
   border-spacing: 0;
-  width: 971px;
-  height: 683px;
+  width: 93%;
+  height: 85%;
   font-family: sans-serif;
   font-size: 1rem;
   letter-spacing: 1px;
@@ -55,6 +55,7 @@ table {
   color: #FFFFFF;
   border: 5px solid #757575;
   border-radius: 15px;
+    
 }
 
 
@@ -68,11 +69,11 @@ td {
 
 .tabela-container{
   background-color: #1E1E1E;
-  width: 1066px;
-  height: 803px;
+  width: 72vw;
+  height: 80vh;
   align-items: center;
   border-radius: 10px;
-  margin-left: 700px;
   border-radius: 15px; 
+  margin-top: 50px;
   }
 </style>
