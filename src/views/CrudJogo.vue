@@ -75,7 +75,7 @@ function salvar(newObject) {
     <ul>
       <li v-for="jogo in jogoStore.jogos" :key="jogo" @click="editar(jogo)">
         <JogoComponent :data="jogo.data" :horario="jogo.horario" :endereco="jogo.endereco" :timeM="jogo.time_mandante" 
-        :timeV="jogo.time_visitante "
+        :timeV="jogo.time_visitante" :escudoM="jogo.time_mandante_escudo" :escudoV="jogo.time_visitante_escudo"
         ></JogoComponent>
         <p>id: {{ jogo.id }}</p>
         <p>data: {{ jogo.data }}</p>

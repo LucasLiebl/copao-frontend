@@ -1,4 +1,5 @@
 <script setup>
+import dateFormat, { masks } from "dateformat";
 import { onMounted, reactive, ref } from 'vue'
 import { useRodadaStore } from '@/stores'
 import CrudJogo from './CrudJogo.vue'
@@ -56,7 +57,7 @@ function salvar(newObject) {
           <li v-for="jogo in rodada.jogos" :key="jogo">
             <p>id: {{ jogo.id }}</p>
             <p>data: {{ jogo.data }}</p>
-            <p>horario: {{ jogo.horario }}</p>
+            <p>horario: {{  jogo.horario }}</p>
             <p>endereco: {{ jogo.endereco }}</p>
             <p>time mandante: {{ jogo.time_mandante }}</p>
             <p>time visitante: {{ jogo.time_visitante }}</p>
