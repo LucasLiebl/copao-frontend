@@ -2,9 +2,14 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import LayoutFull from '../layouts/LayoutFull.vue';
 import CrudJogador from '../views/CrudJogador.vue';
+import TestConponent from '../views/TestComponent.vue';
+import TestA from '../views/TestA.vue';
+import Chaveamento from '../views/Chaveamento.vue'
 import CrudTime from '../views/CrudTime.vue'
 import CrudRodada from '@/views/CrudRodada.vue';
 import CrudJogo from '@/views/CrudJogo.vue'
+import Tabela from '@/views/Tabela.vue';
+import TestCard from '@/views/TestCard.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,8 +44,33 @@ const router = createRouter({
           name : '',
           component : CrudJogo
         }
+          path : '/testCard',
+          name : '',
+          component : TestCard
+        },
       ],
+   
     },
+    {
+      path : '/test',
+      name : '',
+      component : TestConponent
+    },
+    {
+      path : '/testA',
+      name : '',
+      component : TestA
+    },
+    {
+      path : '/chaveamento',
+      name : '',
+      component : Chaveamento
+    },
+    {
+      path : '/test',
+      name : '',
+      component : Tabela
+    }
   ],
 });
 

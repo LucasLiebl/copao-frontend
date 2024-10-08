@@ -1,4 +1,7 @@
+<script setup>
+import headerLarge from '@/components/headerLarge.vue';
+</script>
 <template>
-    <h2>Large Header</h2>
+<headerLarge />
   </template>
   
