@@ -4,7 +4,7 @@ import LayoutFull from '../layouts/LayoutFull.vue';
 import CrudJogador from '../views/CrudJogador.vue';
 import CrudTime from '../views/CrudTime.vue'
 import TestComponents from '@/views/TestComponents.vue';
-import Todos from '/home/joao/1front/copao-frontend/src/components/TodosPosicao.vue';
+import Todos from '@/views/TodosPosicaoView.vue';
 import Goleiros from '../components/GoleiroPosicao.vue';
 import Fixos from '../components/FixoPosicao.vue';
 import Alas from '../components/AlaPosicao.vue';
@@ -42,7 +42,7 @@ const router = createRouter({
       component : TestComponents
     },
     {
-      path: '/todos',
+      path: '/todos/:id',
       name: 'todos',
       component: Todos
     },

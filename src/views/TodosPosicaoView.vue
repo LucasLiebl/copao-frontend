@@ -1,28 +1,19 @@
 <script setup>
 import { computed, onMounted } from 'vue'
 import CardJogador from '@/components/CardJogador.vue';
-import { useJogadorStore } from '@/stores'
+import { useTimeStore } from '@/stores'
 import BotaoJogador from '@/components/BotaoJogador.vue';
+import { useRoute } from 'vue-router';
 
-const jogadorStore = useJogadorStore()
+const timeStore = useTimeStore()
+const route = useRoute()
 
-onMounted(() => {
-  jogadorStore.getJogadores()
+onMounted(async () => {
+  console.log('assss')
+  await timeStore.getTime(1)
+  console.log(timeStore.time)
 })
 
-const goleiros = computed(() => {
-  return jogadorStore.jogadores.filter(jogador => jogador.posicao === 'goleiro')
-})
-
-const alas = computed(() => {
-  return jogadorStore.jogadores.filter(jogador => jogador.posicao === 'ala')
-})
-const fixos = computed(() => {
-  return jogadorStore.jogadores.filter(jogador => jogador.posicao === 'fixo')
-})
-const pivos = computed(() => {
-  return jogadorStore.jogadores.filter(jogador => jogador.posicao === 'pivo')
-})
 </script>
 
 <template>
@@ -31,8 +22,9 @@ const pivos = computed(() => {
     <div class="posicao-container">
       <h1>GOLEIROS</h1>
       <div class="jogadores-linha">
-        <div v-for="goleiro in goleiros" :key="goleiro.id" class="jogador-card">
-          <CardJogador :nome="goleiro.nome" :numero="goleiro.numero" :posicao="goleiro.posicao" />
+        {{ timeStore.time.jogadores }}
+        <div v-for="item in timeStore.time.jogadores" :key="item.jogador.id" class="jogador-card">
+          <CardJogador :nome="item.jogador.nome" :numero="item.jogador.numero" :posicao="item.jogador.posicao" />
         </div>
       </div>
     </div>

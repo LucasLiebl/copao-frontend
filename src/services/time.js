@@ -40,6 +40,16 @@ class TimeService {
       throw error
     }
   }
+
+  async getTime(id) {
+    try {
+      const { data } = await api.get(`/times/${id}/`)
+      return data
+    } catch (error) {
+      console.log('error in getTimes', error)
+      throw error
+    }
+  }
 }
 
 export default new TimeService()

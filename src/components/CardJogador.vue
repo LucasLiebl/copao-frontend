@@ -32,7 +32,7 @@ const props = defineProps ({
       <h1>{{props.numero}}</h1>
       <div class="Nome-Posicao">
         <h3>{{props.nome}}</h3>
-        <h4>{{props.posicao.toUpperCase()}}</h4>
+        <h4>{{props.posicao}}</h4>
       </div>
     </div>
   </div>
