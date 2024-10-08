@@ -6,8 +6,11 @@ import TestConponent from '../views/TestComponent.vue';
 import TestA from '../views/TestA.vue';
 import Chaveamento from '../views/Chaveamento.vue'
 import CrudTime from '../views/CrudTime.vue'
+import CrudRodada from '@/views/CrudRodada.vue';
+import CrudJogo from '@/views/CrudJogo.vue'
 import Tabela from '@/views/Tabela.vue';
 import TestCard from '@/views/TestCard.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -32,6 +35,15 @@ const router = createRouter({
           component : CrudTime
         },
         {
+          path : '/crudrodada',
+          name : '',
+          component : CrudRodada
+        },
+        {
+          path : '/crudjogo',
+          name : '',
+          component : CrudJogo
+        }
           path : '/testCard',
           name : '',
           component : TestCard
