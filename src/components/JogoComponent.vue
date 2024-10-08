@@ -1,5 +1,5 @@
 <script setup>
-import dateFormat, { masks } from "dateformat";
+import dateFormat from "dateformat";
 
 const props = defineProps ({
     data : {

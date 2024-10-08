@@ -1,7 +1,7 @@
 <script setup>
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted} from 'vue'
 import { useTimeStore, useJogadorStore } from '@/stores'  // Ajuste o import se necessário
-import cardComponent from '@/components/cardComponent.vue';
+import cardComponent from '@/components/CardComponent.vue';
 
 
 const timeStore = useTimeStore()  // Atualize o nome do store

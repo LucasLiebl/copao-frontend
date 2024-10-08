@@ -1,76 +1,52 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
 import LayoutFull from '../layouts/LayoutFull.vue';
 import CrudJogador from '../views/CrudJogador.vue';
-import TestConponent from '../views/TestComponent.vue';
-import TestA from '../views/TestA.vue';
-import Chaveamento from '../views/Chaveamento.vue'
-import CrudTime from '../views/CrudTime.vue'
+import CrudTime from '../views/CrudTime.vue';
 import CrudRodada from '@/views/CrudRodada.vue';
-import CrudJogo from '@/views/CrudJogo.vue'
+import CrudJogo from '@/views/CrudJogo.vue';
 import Tabela from '@/views/Tabela.vue';
-import TestCard from '@/views/TestCard.vue'
+import TestCard from '@/views/TestCard.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: '',
+      name: 'LayoutFull',
       component: LayoutFull,
       children: [
         {
-          path: '',
-          name: 'Home',
-          component: HomeView,
+          path: 'tabela',
+          name: 'tabela',
+          component: Tabela,
         },
         {
-          path :'/crudjogador',
-          name: '',
-          component : CrudJogador,
+          path: 'crudjogador',
+          name: 'CrudJogador',
+          component: CrudJogador,
         },
         {
-          path : '/crudtime',
-          name : '',
-          component : CrudTime
+          path: 'crudtime',
+          name: 'CrudTime',
+          component: CrudTime,
         },
         {
-          path : '/crudrodada',
-          name : '',
-          component : CrudRodada
+          path: 'crudrodada',
+          name: 'CrudRodada',
+          component: CrudRodada,
         },
         {
-          path : '/crudjogo',
-          name : '',
-          component : CrudJogo
-        }
-          path : '/testCard',
-          name : '',
-          component : TestCard
+          path: 'crudjogo',
+          name: 'CrudJogo',
+          component: CrudJogo,
+        },
+        {
+          path: 'testCard',
+          name: 'TestCard',
+          component: TestCard,
         },
       ],
-   
     },
-    {
-      path : '/test',
-      name : '',
-      component : TestConponent
-    },
-    {
-      path : '/testA',
-      name : '',
-      component : TestA
-    },
-    {
-      path : '/chaveamento',
-      name : '',
-      component : Chaveamento
-    },
-    {
-      path : '/test',
-      name : '',
-      component : Tabela
-    }
   ],
 });
 

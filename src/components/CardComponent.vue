@@ -33,7 +33,6 @@ const props = defineProps({
     width: 263px;
     height: 386px;
     border-radius: 15px;
-    margin: 100px;
 }
 .card>h1{
     font-size: 18px;
