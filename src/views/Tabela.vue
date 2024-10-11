@@ -33,6 +33,7 @@ onMounted(() => {
 display: flex;
 padding: 34px;
 gap: 34px;
+flex-direction: column;
 
 }
 .cards{
