@@ -13,6 +13,7 @@ export const useRodadaStore = defineStore('rodada', () => {
   })
   const isLoading = computed(() => state.loading)
   const rodadasCount = computed(() => state.rodadas.length)
+  const rodadas = computed(() => state.rodadas)
 
   
   const getRodadas = async () => {
@@ -53,10 +54,12 @@ export const useRodadaStore = defineStore('rodada', () => {
   }
 
  
-  const deleteRodada = async (id) => {
+  const deleteRodada = async (idRodada) => {
     state.loading = true
     try {
-      const index = state.rodadas.findIndex((s) => s.id === id)
+      const index = state.rodadas.findIndex((s) => s.id === idRodada)
+      console.log(index)
+      await RodadaService.deleteRodada(idRodada)
       state.rodadas.splice(index, 1)
     } catch (error) {
       state.error = error
@@ -70,6 +73,7 @@ export const useRodadaStore = defineStore('rodada', () => {
     isLoading,
     rodadasCount,
     getRodadas,
+    rodadas,
     createRodada,
     updateRodada,
     deleteRodada

@@ -1,38 +1,49 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
 import LayoutFull from '../layouts/LayoutFull.vue';
 import CrudJogador from '../views/CrudJogador.vue';
-import CrudTime from '../views/CrudTime.vue'
-import TestComponents from '@/views/TestComponents.vue';
-import Todos from '@/views/TodosPosicaoView.vue';
-import Goleiros from '../components/GoleiroPosicao.vue';
-import Fixos from '../components/FixoPosicao.vue';
-import Alas from '../components/AlaPosicao.vue';
-import Pivos from '../components/PivoPosicao.vue';
-
+import CrudTime from '../views/CrudTime.vue';
+import CrudRodada from '@/views/CrudRodada.vue';
+import CrudJogo from '@/views/CrudJogo.vue';
+import Tabela from '@/views/Tabela.vue';
+import TestCard from '@/views/TestCard.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: '',
+      name: 'LayoutFull',
       component: LayoutFull,
       children: [
         {
-          path: '',
-          name: 'Home',
-          component: HomeView,
+          path: 'tabela',
+          name: 'tabela',
+          component: Tabela,
         },
         {
-          path :'/crudjogador',
-          name: '',
-          component : CrudJogador,
+          path: 'crudjogador',
+          name: 'CrudJogador',
+          component: CrudJogador,
         },
         {
-          path : '/crudtime',
-          name : '',
-          component : CrudTime
+          path: 'crudtime',
+          name: 'CrudTime',
+          component: CrudTime,
+        },
+        {
+          path: 'crudrodada',
+          name: 'CrudRodada',
+          component: CrudRodada,
+        },
+        {
+          path: 'crudjogo',
+          name: 'CrudJogo',
+          component: CrudJogo,
+        },
+        {
+          path: 'testCard',
+          name: 'TestCard',
+          component: TestCard,
         },
         {
           path: '/todos/:id',
@@ -41,11 +52,6 @@ const router = createRouter({
           props: true
         },
       ],
-    },
-    {
-      path : '/testComponent',
-      name : '',
-      component : TestComponents
     },
   ],
 });
