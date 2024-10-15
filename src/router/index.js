@@ -34,6 +34,12 @@ const router = createRouter({
           name : '',
           component : CrudTime
         },
+        {
+          path: '/todos/:id',
+          name: 'todos',
+          component: Todos,
+          props: true
+        },
       ],
     },
     {
@@ -41,31 +47,6 @@ const router = createRouter({
       name : '',
       component : TestComponents
     },
-    {
-      path: '/todos/:id',
-      name: 'todos',
-      component: Todos
-    },
-    {
-      path: '/goleiros',
-      name: 'goleiros',
-      component: Goleiros
-    },
-    {
-      path: '/fixos',
-      name: 'fixos',
-      component: Fixos
-    },
-    {
-      path: '/alas',
-      name: 'alas',
-      component: Alas
-    },
-    {
-      path: '/pivos',
-      name: 'pivos',
-      component: Pivos
-    }
   ],
 });
 
