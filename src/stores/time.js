@@ -8,11 +8,13 @@ export const useTimeStore = defineStore('time', () => {
     selectedTime: null,
     loading: false,
     error: null,
-    connection: false
+    connection: false,
+    time: {}
   })
   const isLoading = computed(() => state.loading)
   const timesCount = computed(() => state.times.length)
   const times = computed(() => state.times) 
+  const time = computed(() => state.time)
 
   const getTimes = async () => {
     state.loading = true
@@ -66,14 +68,29 @@ export const useTimeStore = defineStore('time', () => {
     }
   }
 
+  const getTime = async (id) => {
+    state.loading = true
+    try {
+      console.log(id)
+      const data = await TimeService.getTime(id)
+      state.time = data
+    } catch (error) {
+      state.error = error
+    } finally {
+      state.loading = false
+    }
+  }
+
   return {
     state,
     isLoading,
     timesCount,
     times,
+    time,
     getTimes,
     createTime,
     updateTime,
-    deleteTime
+    deleteTime,
+    getTime
   }
 })

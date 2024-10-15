@@ -1,60 +1,46 @@
+<script setup>
+
+defineEmits(['selecionarPosicao'])
+
+const props = defineProps ({
+  posicao:
+  {type: String},
+  id:{
+    type: String
+  }
+})
+
+
+</script>
 <template>
-  <div class="elenco-container">
-    <h1 class="title">Elenco</h1>
-    <div class="categories">
-      <button
-        v-for="category in categories"
-        :key="category"
-        :class="{ active: selectedCategory === category }"
-        @click="selectCategory(category)"
-      >
-        {{ category }}
-      </button>
-    </div>
-  </div>
+        <button @click="$emit('selecionarPosicao', props.id)">
+          {{ props.posicao }}
+        </button>
 </template>
 
-<script setup>
-import { ref } from 'vue';
-
-
-// Definindo as categorias
-const categories = ['TODOS', 'GOLEIROS', 'FIXOS', 'ALAS', 'PIVOS'];
-
-// Estado reativo para a categoria selecionada
-const selectedCategory = ref('TODOS');
-
-// Função para alterar a categoria selecionada
-const selectCategory = (category) => {
-  selectedCategory.value = category;
-};
-</script>
-
 <style scoped>
+
 .elenco-container {
   background-color: #2c2c2c;
   display: flex;
   flex-direction: column;
   padding: 20px;
-  width: 100%;
 }
 
 
-.categories {
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: left;
-}
 
 button {
   background-color: #4f4f4f;
   color: white;
   border: none;
-  padding: 10px 20px;
-  font-size: 16px;
+  width: 200px;
+  height: 38px;
+  font-size: 25px;
   cursor: pointer;
   border-radius: 15px;
-
+  margin-left: 20px;
+  margin-right: 20px;
+  
 }
 
 button.active {
@@ -66,16 +52,11 @@ button:not(.active):hover {
   background-color: #6f6f6f;
 }
 
-/* Estilo do título "Elenco" acima da categoria "TODOS" */
 .title {
   color: white;
-  font-size: 24px;
+  font-size: 40px;
   font-weight: bold;
-  margin-bottom: 20px; /* Distância entre o título e as categorias */ 
+  margin-bottom: 10px;
+  margin-left: 61px;
 }
-.elenco-container>h1{
-  margin-left: 665px;
-}
-
-
 </style>

@@ -45,6 +45,12 @@ const router = createRouter({
           name: 'TestCard',
           component: TestCard,
         },
+        {
+          path: '/todos/:id',
+          name: 'todos',
+          component: Todos,
+          props: true
+        },
       ],
     },
   ],
