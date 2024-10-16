@@ -3,17 +3,17 @@ import api from '../plugins/api.js'
 class TimeJogadorService {
   async getTimeJogadores() {
     try {
-      const { data } = await api.get(`/timejogadores`)
+      const { data } = await api.get(`/time_jogadores/`)
       return data.results
     } catch (error) {
-      console.log('error in getTimeJogadores', error)
+      console.log('error in getTime_Jogadores', error)
       throw error
     }
   }
 
   async createTimeJogador(newTimeJogador) {
     try {
-      const { data } = await api.post(`/timejogadores/`, newTimeJogador)
+      const { data } = await api.post(`/time_jogadores/`, newTimeJogador)
       return data.results
     } catch (error) {
       console.log('error in createTimeJogador', error)
@@ -23,7 +23,7 @@ class TimeJogadorService {
 
   async updateTimeJogador(timeJogador) {
     try {
-      const { data } = await api.put(`/timejogadores/${timeJogador.id}/`)
+      const { data } = await api.put(`/time_jogadores/${timeJogador.id}/`)
       return data.results
     } catch (error) {
       console.log('error in updateTimeJogador')
@@ -33,7 +33,7 @@ class TimeJogadorService {
 
   async deleteTimeJogador(id) {
     try {
-      const { data } = await api.delete(`/timejogadores/${id}/`)
+      const { data } = await api.delete(`/time_jogadores/${id}/`)
       return data.results
     } catch (error) {
       console.log('error in deleteTimeJogador', error)

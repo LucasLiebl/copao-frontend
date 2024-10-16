@@ -8,7 +8,7 @@ const props = defineProps({
         type: String,
         required: false,
         default: 'Times Copão'
-    }
+    },
 })
 
 </script>
@@ -18,7 +18,7 @@ const props = defineProps({
     <div class="card">
         <h1>{{ props.titulo }}</h1>
         <div class="object" v-for="object in props.datas" :key="object">
-        {{ object.nome }}
+            {{ object.nome }}
         </div>
     
     
