@@ -7,7 +7,7 @@ const props = defineProps({
     titulo: {
         type: String,
         required: true,
-        default: 'Times Copão'
+        default: 'Artilheiros'
     },
     id: {
         type: String,
@@ -22,7 +22,7 @@ const props = defineProps({
     <div class="card">
         <h1>{{ props.titulo }}</h1>
         <div class="object" v-for="object in props.datas" :key="object">
-            <RouterLink :to="`/todos/${object.id}`">{{ object.nome }}</RouterLink>
+        {{ object.nome }}
         </div>
     
     

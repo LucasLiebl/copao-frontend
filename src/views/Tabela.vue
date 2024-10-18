@@ -1,17 +1,18 @@
 <script setup>
 import TabelaComponent from '@/components/TabelaComponent.vue';
 import CardComponent from '@/components/CardComponent.vue';
+import CardComponentArt from '@/components/CardComponentArt.vue';
 import { onMounted } from 'vue'
-import { useTimeStore, useTimeJogadorStore } from '@/stores'  // Ajuste o import se necessário
+import { useTimeStore, useJogadorStore } from '@/stores'  // Ajuste o import se necessário
+import { JogadorService } from '@/services';
 
 
 const timeStore = useTimeStore()  // Atualize o nome do store
-const timeJogadorStore = useTimeJogadorStore()
+const JogadorStore = useJogadorStore()
 
 onMounted(async () => {
   await timeStore.getTimes()
-  await timeJogadorStore.getTimeJogadores()
-  console.log(timeJogadorStore.timeJogadores)
+  await JogadorStore.getJogadores()
 })
 
 
@@ -21,7 +22,7 @@ onMounted(async () => {
   <div class="container">
     <div class="cards">
       <CardComponent :datas="timeStore.times"  />
-      <CardComponent :datas="timeJogadorStore.timeJogadores.map(jogador => jogador.jogador)" :titulo="'Artilheiros'" />
+      <CardComponentArt :datas="JogadorStore.jogadores" :titulo="'Artilheiros'" />
     </div>
 
 
