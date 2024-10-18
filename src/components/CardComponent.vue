@@ -6,9 +6,13 @@ const props = defineProps({
     },
     titulo: {
         type: String,
-        required: false,
+        required: true,
         default: 'Times Copão'
     },
+    id: {
+        type: String,
+        required: true
+    }
 })
 
 </script>
@@ -18,7 +22,7 @@ const props = defineProps({
     <div class="card">
         <h1>{{ props.titulo }}</h1>
         <div class="object" v-for="object in props.datas" :key="object">
-            {{ object.nome }}
+        {{ object.nome }}
         </div>
     
     

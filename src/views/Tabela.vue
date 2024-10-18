@@ -20,8 +20,8 @@ onMounted(async () => {
 <template>
   <div class="container">
     <div class="cards">
-      <CardComponent :datas="timeStore.times"/>
-      <CardComponent :datas="timeJogadorStore.timeJogadores.map(jogador => jogador.jogador)" :titulo="Artilheiros" />
+      <CardComponent :datas="timeStore.times"  />
+      <CardComponent :datas="timeJogadorStore.timeJogadores.map(jogador => jogador.jogador)" :titulo="'Artilheiros'" />
     </div>
 
 
