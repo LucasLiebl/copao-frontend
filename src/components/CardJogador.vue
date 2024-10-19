@@ -41,7 +41,6 @@ const props = defineProps ({
 <style scoped>
 .Card-Jogador {
   display: flex;
-  margin: 50px;
   justify-content:center;
   flex-direction: column;
   text-align: center;

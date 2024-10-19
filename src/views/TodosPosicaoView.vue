@@ -11,7 +11,6 @@ const posicaoSelecionada = ref(0)
 onMounted(async () => {
   if (props.id) {
     await timeStore.getTime(props.id)
-    console.log(timeStore.time.jogadores.jogador)
   }
 })
 
@@ -40,22 +39,21 @@ const categories = [
 </script>
 
 <template>
-
   <div class="jogadores-container">
+    <div class="sizecontainer">
+    <h1 class="elenco"> Elenco {{ timeStore.time.nome }} </h1>
     <div class="buttons-posicao">
-    <div v-for="category in categories" :key="category.id">
-      <BotaoJogador
+      <BotaoJogador 
+      v-for="category in categories" :key="category.id"
         @selecionarPosicao="selecionarPosicao"
         :posicao="category.texto"
         :id="category.id"
+        :posicaoSelecionada="posicaoSelecionada"
       >
       </BotaoJogador>
-    </div>
   </div>
     <div class="posicao-container">
-      <h1>{{ posicao[posicaoSelecionada] }}</h1>
-      <div class="jogadores-linha">
-        <div v-for="item in timeStore.time.jogadores" :key="item.jogador.id" class="jogador-card">
+        <div v-for="item in timeStore.time.jogadores" :key="item.jogador.id" >
           <CardJogador
             :nome="item.jogador.nome"
             :numero="item.jogador.numero"
@@ -63,36 +61,47 @@ const categories = [
             v-if="mostrar(item.jogador.posicao)"
           />
         </div>
-      </div>
     </div>
+  </div>
   </div>
 </template>
 
 <style scoped>
-.buttons-posicao{
-  display: flex;
-  flex-direction: row;
-}
-.jogadores-container {
+.sizecontainer{
   display: flex;
   flex-direction: column;
-  background-color: #1e1e1e;
-  border-radius: 10px;
+  align-items: flex-start;
+  margin-left:110px;
+  margin-right: 110px;
+  gap: 40px ;
 }
-.posicao-container {
-  margin-bottom: 40px;
+.elenco{
+  font-size: 32px;
+  font-weight: 500;
+  color: white
 }
-.jogadores-linha {
+.buttons-posicao{
+
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
   gap: 20px;
 }
-h1 {
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-  color: #ffffff;
-  text-align: center;
+.jogadores-container {
+  width: 1351px;
+  margin: 44px;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  padding-bottom: 42px;
+  padding-top: 42px;
 }
+.posicao-container {
+  margin-top: 20px;
+  display: flex;
+  gap: 30px ; 
+  flex-wrap: wrap;
+  justify-content: space-between;
+  }
+
 
 .posicao-container > h1 {
   margin-left: 0px;

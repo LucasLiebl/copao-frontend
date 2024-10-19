@@ -7,13 +7,18 @@ const props = defineProps ({
   {type: String},
   id:{
     type: String
+  },
+  posicaoSelecionada:{
+    type: String
   }
 })
 
 
 </script>
 <template>
-        <button @click="$emit('selecionarPosicao', props.id)">
+        <button  :class="{'button buttonActive': props.posicaoSelecionada === props.id,'button ': props.posicaoSelecionada !== props.id}"
+
+         @click="$emit('selecionarPosicao', props.id)">
           {{ props.posicao }}
         </button>
 </template>
@@ -29,29 +34,26 @@ const props = defineProps ({
 
 
 
-button {
-  background-color: #4f4f4f;
+.button {
+  background-color: #1E1E1E;
   color: white;
   border: none;
   width: 200px;
   height: 38px;
-  font-size: 25px;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
-  border-radius: 15px;
-  margin-left: 20px;
-  margin-right: 20px;
-  
+  border-radius: 10px;
+  transition: all .2s;
 }
-
-button.active {
-  background-color: #e5e5e5;
-  color: black;
+.button:hover{
+  background-color: #D9D9D9;
+  color: #1E1E1E;
 }
-
-button:not(.active):hover {
-  background-color: #6f6f6f;
+.buttonActive{
+  background-color: #D9D9D9;
+  color: #1E1E1E;
 }
-
 .title {
   color: white;
   font-size: 40px;

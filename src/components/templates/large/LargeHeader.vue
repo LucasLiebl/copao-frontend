@@ -11,7 +11,7 @@
       
       :class="{'nav-item nav-item-select': $route.path === '/tabela','nav-item': $route.path !== '/tabela'}">
 
-      <img src="https://i.ibb.co/BNTvDmn/Classificacao-Vector.png" alt=""> Classificação
+      <img src="https://i.ibb.co/BNTvDmn/Classificacao-Vector.png" alt="" class="icon"> Classificação
 
       </router-link>
 
@@ -19,12 +19,12 @@
       
         :class="{'nav-item nav-item-select': $route.path === '/chaveamento','nav-item': $route.path !== '/chaveamento'}">
         
-        <img src="https://i.ibb.co/MDkmH5j/Chavemante-Vector.png" alt=""> Chaveamento
+        <img src="https://i.ibb.co/MDkmH5j/Chavemante-Vector.png" alt="" class="icon"> Chaveamento
       
       </router-link>
           
-      <router-link to="/jogos" class="nav-item"><img
-          src="https://i.ibb.co/bNk0pxT/Vector.png" alt=""> Jogos</router-link>
+      <router-link to="/jogos" :class="{'nav-item nav-item-select': $route.path === '/jogos','nav-item': $route.path !== '/jogos'}"><img
+          src="https://i.ibb.co/bNk0pxT/Vector.png" alt="" class="icon"> Jogos</router-link>
     </nav>
   </header>  
   </template>
@@ -42,6 +42,9 @@ header {
 .logo img {
   width: 200px;
 }
+.icon{
+  color: #757575;
+}
 
 .nav-links {
   display: flex;
@@ -50,16 +53,18 @@ header {
 }
 
 .nav-item {
-  color: white;
+  color: #757575;
   text-decoration: none;
   font-size: 18px;
   position: relative;
   display: flex;
   align-items: center;
   gap: 5px;
-  transition: all .2s;
+  transition: all .1s;
 }
-
+.nav-item-select{
+  color: white;
+}
 .nav-item-select::after {
   content: '';
   position: absolute;

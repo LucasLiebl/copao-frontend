@@ -1,5 +1,5 @@
 <script setup>
-  import MediumHeader from '@/components/templates/medium/MediumHeader.vue';
+  import LargeHeader from '@/components/templates/large/LargeHeader.vue';
   import MediumAside from '@/components/templates/medium/MediumAside.vue';
   import MediumFooter from '@/components/templates/medium/MediumFooter.vue';
 </script>
@@ -7,7 +7,7 @@
 <template>
   <div id="layout-medium">
     <header>
-      <medium-header />
+      <large-header />
     </header>
     <aside>
       <medium-aside />
