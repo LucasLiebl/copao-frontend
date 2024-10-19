@@ -1,56 +1,63 @@
 <script setup>
 const props = defineProps({
-    datas: {
+  datas: {
     type: Array,
+    required: true
+  },
+  titulo: {
+    type: String,
     required: true,
-    },
-    titulo: {
-        type: String,
-        required: true,
-        default: 'Artilheiros'
-    },
-    id: {
-        type: String,
-        required: true
-    }
+    default: 'Artilheiros'
+  },
+  id: {
+    type: String,
+    required: true
+  }
 })
-
 </script>
 
 <template>
-
-    <div class="card">
-        <h1>{{ props.titulo }}</h1>
-        <div class="object" v-for="object in props.datas" :key="object">
-        {{ object.nome }}
-        </div>
-    
-    
-    
+  <div class="card">
+    <h4 class="titulo">{{ props.titulo }}</h4>
+    <div class="objetos">
+      <div class="object" v-for="object in props.datas.slice(0, 6)" :key="object">
+        <img :src="object.times[0].time.escudo.file" alt="">
+        <h4> {{ object.nome }} </h4>
+      </div>
     </div>
+  </div>
 </template>
-<style>
-.card{
+<style scoped>
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: #1e1e1e;
+  width: 263px;
+  height: 386px;
+  border-radius: 15px;
+  padding: 15px;
+  gap: 28px;
+}
+.titulo{
+    color: white
+}
+h4 {
+  font-size: 18px;
+  font-weight: 400;
+}
+.object {
+  color: #757575;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.objetos{
     display: flex;
     flex-direction: column;
-    background-color: #1E1E1E;
-    width: 263px;
-    height: 386px;
-    border-radius: 15px;
+    gap: 20px;
+    margin-left: 60px
 }
-.card>h1{
-    font-size: 18px;
-    color: white;
-    padding: 10px 15px;
+img {
+  width: 29px;
 }
-.object{
-    color: #757575;
-    display: flex;
-    margin-bottom: 10px;
-    margin-left: 75px;
-}
-.object>img{
-    width: 29px;
-}
-
 </style>

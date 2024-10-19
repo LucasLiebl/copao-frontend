@@ -13,7 +13,9 @@ const JogadorStore = useJogadorStore()
 onMounted(async () => {
   await timeStore.getTimes()
   await JogadorStore.getJogadores()
+  console.log(JogadorStore.jogadores)
 })
+
 
 
 </script>
