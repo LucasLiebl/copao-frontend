@@ -1,10 +1,10 @@
 <script setup>
-  import LargeHeader from '@/components/templates/large/LargeHeader.vue';
+import LargeHeader from '@/components/templates/large/LargeHeader.vue';
 </script>
 <template>
   <div id="layout-large">
     <header>
-      <large-header />
+      <LargeHeader/>
     </header>
 
     <main>

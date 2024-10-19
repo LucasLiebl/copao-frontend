@@ -76,7 +76,7 @@ color: #757575;
     gap: 22px;
     & h1{
     font-size: 30px;
-    font-weight:600;
+    font-weight:500;
    } 
 }
 img{
