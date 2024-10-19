@@ -7,6 +7,7 @@ import CrudJogo from '@/views/CrudJogo.vue';
 import Tabela from '@/views/Tabela.vue';
 import TestCard from '@/views/TestCard.vue';
 import TodosPosicaoView from '@/views/TodosPosicaoView.vue';
+import Jogos from '@/views/JogosView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -51,6 +52,11 @@ const router = createRouter({
           name: 'todos',
           component: TodosPosicaoView,
           props: true
+        },
+        {
+          path: 'jogos',
+          name: 'jogos',
+          component: Jogos,
         },
       ],
     },
