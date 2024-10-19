@@ -4,7 +4,7 @@ import CrudJogador from '../views/CrudJogador.vue';
 import CrudTime from '../views/CrudTime.vue';
 import CrudRodada from '@/views/CrudRodada.vue';
 import CrudJogo from '@/views/CrudJogo.vue';
-import Tabela from '@/views/Tabela.vue';
+import Tabela from '@/views/TabelaView.vue';
 import TestCard from '@/views/TestCard.vue';
 import TodosPosicaoView from '@/views/TodosPosicaoView.vue';
 import Jogos from '@/views/JogosView.vue';
@@ -18,7 +18,7 @@ const router = createRouter({
       component: LayoutFull,
       children: [
         {
-          path: '/',
+          path: 'tabela',
           name: 'tabela',
           component: Tabela,
         },

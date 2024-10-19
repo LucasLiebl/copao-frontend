@@ -12,6 +12,7 @@ export const useTimeJogadorStore = defineStore('timejogador', () => {
   })
   const isLoading = computed(() => state.loading)
   const timeJogadoresCount = computed(() => state.timejogadores.length)
+  const timeJogadores = computed(() => state.timejogadores)
 
   const getTimeJogadores = async () => {
     state.loading = true
@@ -67,6 +68,7 @@ export const useTimeJogadorStore = defineStore('timejogador', () => {
     state,
     isLoading,
     timeJogadoresCount,
+    timeJogadores,
     getTimeJogadores,
     createTimeJogador,
     updateTimeJogador,
