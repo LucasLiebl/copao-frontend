@@ -33,6 +33,7 @@ const SeletorRodada = ref(1)
             :time-v="jogo.time_visitante"
             :escudo-m="jogo.time_mandante_escudo"
             :escudo-v="jogo.time_visitante_escudo"
+            :gols="jogo.gols"
           ></JogoComponent>
       </div>
     </div>

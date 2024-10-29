@@ -90,6 +90,37 @@ function salvar(newObject) {
       </li>
     </ul>
   </div>
+
+  <div>
+    <select name="" id="">
+      <option value="1">
+        jogador 1
+      </option>
+      <option value="1">
+        jogador 1
+      </option>
+      <option value="1">
+        jogador 1
+      </option>
+      <option value="1">
+        jogador 1
+      </option>
+      <option value="1">
+        jogador 1
+      </option>
+      <option value="1">
+        jogador 1
+      </option>
+      <option value="1">
+        jogador 1
+      </option>
+    </select>
+    <select>
+      <option value="1">Mandante</option>
+      <option value="2">visitante</option>
+    </select>
+    <input type="checkbox" label="Gol pró">
+  </div>
 </template>
 
 <style scoped>
