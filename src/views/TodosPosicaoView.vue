@@ -1,32 +1,21 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onBeforeMount, computed } from 'vue'
 import CardJogador from '@/components/CardJogador.vue'
 import { useTimeStore } from '@/stores'
 import BotaoJogador from '@/components/BotaoJogador.vue'
 
 const props = defineProps(['id'])
 const timeStore = useTimeStore()
-const posicaoSelecionada = ref(0)
+const posicaoSelecionada = ref(1)
 
-onMounted(async () => {
+onBeforeMount(async () => {
   if (props.id) {
     await timeStore.getTime(props.id)
   }
 })
 
-const posicao = {
-  1: 'Goleiro',
-  2: 'Fixo',
-  3: 'Ala',
-  4: 'Pivo'
-}
-
 function selecionarPosicao(posicao) {
   posicaoSelecionada.value = posicao
-}
-
-function mostrar(posicao) {
-  return posicao == posicaoSelecionada.value || posicaoSelecionada.value == 0
 }
 
 const categories = [
@@ -36,6 +25,13 @@ const categories = [
   { id: 3, texto: 'ALAS' },
   { id: 4, texto: 'PIVOS' }
 ]
+const jogadores = computed(() => {
+  if (posicaoSelecionada.value === 0) {
+    return timeStore.time.jogadores
+  } else {
+    return  timeStore.time.jogadores.filter(j => j.jogador.posicao === posicaoSelecionada.value)
+  }
+})
 </script>
 
 <template>
@@ -53,14 +49,12 @@ const categories = [
       </BotaoJogador>
   </div>
     <div class="posicao-container">
-        <div v-for="item in timeStore.time.jogadores" :key="item.jogador.id" >
-          <CardJogador
+        <CardJogador
+            v-for="item in jogadores" :key="item.jogador.id"       
             :nome="item.jogador.nome"
             :numero="item.jogador.numero"
-            :posicao="posicao[item.jogador.posicao]"
-            v-if="mostrar(item.jogador.posicao)"
+            :posicao="categories.find(c => c.id == item.jogador.posicao).texto"
           />
-        </div>
     </div>
   </div>
   </div>

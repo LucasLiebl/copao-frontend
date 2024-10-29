@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onBeforeMount, ref, computed } from 'vue'
 import { useRodadaStore } from '@/stores'
 import JogoComponent from '@/components/JogoComponent.vue'
 import ChevronLeft from 'vue-material-design-icons/ChevronLeft.vue'
@@ -7,11 +7,17 @@ import ChevronRight from 'vue-material-design-icons/ChevronRight.vue'
 
 const rodadaStore = useRodadaStore()
 
-onMounted(() => {
+onBeforeMount(() => {
   rodadaStore.getRodadas()
 })
 
 const SeletorRodada = ref(1)
+
+function jogosRodada (jogos) {
+  return jogos.filter(j => j.rodada === SeletorRodada.value) 
+}
+
+
 </script>
 
 <template>
@@ -22,9 +28,10 @@ const SeletorRodada = ref(1)
         <h1>Rodada {{ SeletorRodada }}</h1>
         <ChevronRight @click="SeletorRodada++" class="icon" :size="34"></ChevronRight>
       </div>
-      <div v-for="rodada in rodadaStore.rodadas" :key="rodada.id" >
+      <div class="jogosComponent"
+       v-for="rodada in rodadaStore.rodadas" :key="rodada.id" >
           <JogoComponent
-            v-for="jogo in rodada.jogos" v-if="rodada.id === SeletorRodada"
+            v-for="jogo in jogosRodada(rodada.jogos)"
             :key="jogo.id"
             :data="jogo.data"
             :endereco="jogo.endereco"
@@ -41,6 +48,11 @@ const SeletorRodada = ref(1)
 </template>
 
 <style scoped>
+.jogosComponent{
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+}
 .container {
   padding: 45px;
   display: flex;
