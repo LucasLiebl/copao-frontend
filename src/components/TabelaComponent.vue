@@ -10,7 +10,7 @@ const props = defineProps({
 <template>
   <div class="tabela-container">
     <table class="tabela">
-      <thead>
+        <thead>
         <tr>
           <th scope="col">Classificação</th>
           <th scope="col">P</th>
@@ -18,6 +18,9 @@ const props = defineProps({
           <th scope="col">V</th>
           <th scope="col">E</th>
           <th scope="col">D</th>
+          <th scope="col">GP</th>
+          <th scope="col">GC</th>
+          <th scope="col">%</th>
         </tr>
       </thead>
       <tbody>
@@ -29,8 +32,8 @@ const props = defineProps({
           <td>{{ time.empate }}</td>
           <td>{{ time.derrota }}</td>
           <td>{{ time.gols_pro }}</td>
-          <td>{{ time.Aproveitanmento }}</td>
           <td>{{ time.gols_contra }}</td>
+          <td>{{ (time.vitoria/(time.vitoria + time.empate + time.derrota) * 100).toFixed(0)  }} </td>
         </tr>
       </tbody>
     </table>
