@@ -38,6 +38,7 @@
     display: flex;
     flex-direction: column;
     min-height: 88vh; 
+
   }
 
   .content {
@@ -56,13 +57,15 @@
     text-align: center;
     padding: 30px;
     bottom: 0px;
-    position: absolute;
     width: 100%;
+    position: fixed;
+  
   }
 
 .nav-links {
   display: flex;
   gap: 95px;
+  
 }
 
 .nav-item {
