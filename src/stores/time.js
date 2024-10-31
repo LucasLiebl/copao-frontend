@@ -9,7 +9,9 @@ export const useTimeStore = defineStore('time', () => {
     loading: false,
     error: null,
     connection: false,
-    time: {}
+    time: {
+      jogadores: []
+    }
   })
   const isLoading = computed(() => state.loading)
   const timesCount = computed(() => state.times.length)

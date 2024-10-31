@@ -15,16 +15,19 @@ const props = defineProps ({
         type: Image
     },
     timeM : {
-        type : String
+        type : Array
     },
     timeV : {
-        type : String
+        type : Array
     },
     escudoM:{
         type : String
     },
     escudoV:{
         type : String
+    },
+    gols: {
+        type: Array
     }
 })
 </script>
@@ -35,22 +38,22 @@ const props = defineProps ({
 </div>
 <div class="times">
     <div class="timeM">
-        <h1>{{props.timeM}}</h1>
+        <h1>{{props.timeM.nome}}</h1>
         <div class="escudoTime">
             <img :src="props.escudoM" alt="">
         </div>
     </div>
     <div class="placar">
-        <h1> 0 </h1>
+        <h1> {{  gols ? gols.filter((g) => g?.time == timeM?.id).length : [].length }} </h1>
         <h1 class="versus"> x </h1>
-        <h1> 0 </h1>
+        <h1> {{  gols ? gols.filter((g) => g?.time == timeV?.id).length : [].length }} </h1>
 
     </div>
     <div class="timeV">
         <div class="escudoTime">
             <img :src="props.escudoV" alt="">
         </div>
-        <h1>{{props.timeV}}</h1>
+        <h1>{{props.timeV.nome}}</h1>
     </div></div>
 </div>
 </template>

@@ -4,7 +4,6 @@ import CardComponent from '@/components/CardComponent.vue';
 import CardComponentArt from '@/components/CardComponentArt.vue';
 import { onMounted } from 'vue'
 import { useTimeStore, useJogadorStore } from '@/stores'  // Ajuste o import se necessário
-import { JogadorService } from '@/services';
 
 
 const timeStore = useTimeStore()  // Atualize o nome do store
@@ -28,7 +27,7 @@ onMounted(async () => {
     </div>
 
 
-    <TabelaComponent></TabelaComponent>
+    <TabelaComponent :times="timeStore.times"></TabelaComponent>
   </div>
 
 </template>

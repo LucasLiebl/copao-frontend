@@ -1,36 +1,39 @@
 <script setup>
 
-const times = [
-  { classificacao: 'Vermelho', P: '1', J: '2', V: '2', Gols:'d', GolsSofridos:'d', Aproveitanmento:'d' },
-  { classificacao: 'Preto', P: '12', J: '4', V: '5', Gols:'d', GolsSofridos:'d', Aproveitanmento:'d' },
-  { classificacao: 'Branco', P: '3', J: '9', V: '7' , Gols:'d', GolsSofridos:'d', Aproveitanmento:'d'},
-  { classificacao: 'Rosa', P: '7', J: '6', V: '4', Gols:'d', GolsSofridos:'d', Aproveitanmento:'d' },
-  { classificacao: 'Verde', P: '1', J: '2', V: '3', Gols:'d', GolsSofridos:'d', Aproveitanmento:'d' },
-  { classificacao: 'Rosa', P: '7', J: '6', V: '4', Gols:'d', GolsSofridos:'d', Aproveitanmento:'d' },
-  { classificacao: 'Verde', P: '1', J: '2', V: '3', Gols:'d', GolsSofridos:'d', Aproveitanmento:'d' },
-];
+const props = defineProps({
+  times:{
+    type: Object
+  }
+})
 </script>
 
 <template>
   <div class="tabela-container">
     <table class="tabela">
-      <thead>
+        <thead>
         <tr>
           <th scope="col">Classificação</th>
           <th scope="col">P</th>
           <th scope="col">J</th>
           <th scope="col">V</th>
+          <th scope="col">E</th>
+          <th scope="col">D</th>
+          <th scope="col">GP</th>
+          <th scope="col">GC</th>
+          <th scope="col">%</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(time, index) in times" :key="index">
-          <th scope="row">{{ time.classificacao }}</th>
-          <td>{{ time.P }}</td>
-          <td>{{ time.J }}</td>
-          <td>{{ time.V }}</td>
-          <td>{{ time.Gols }}</td>
-          <td>{{ time.Aproveitanmento }}</td>
-          <td>{{ time.GolsSofridos }}</td>
+        <tr v-for="(time, index) in props.times" :key="index">
+          <th scope="row">TIME</th>
+          <td>{{ time.pontos }}</td>
+          <td>{{ time.vitoria + time.empate + time.derrota }}</td>
+          <td>{{ time.vitoria }}</td>
+          <td>{{ time.empate }}</td>
+          <td>{{ time.derrota }}</td>
+          <td>{{ time.gols_pro }}</td>
+          <td>{{ time.gols_contra }}</td>
+          <td>{{ (time.vitoria/(time.vitoria + time.empate + time.derrota) * 100).toFixed(0)  }} </td>
         </tr>
       </tbody>
     </table>
