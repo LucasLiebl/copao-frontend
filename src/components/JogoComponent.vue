@@ -15,10 +15,10 @@ const props = defineProps ({
         type: Image
     },
     timeM : {
-        type : Array
+        type : Object
     },
     timeV : {
-        type : Array
+        type : Object
     },
     escudoM:{
         type : String
