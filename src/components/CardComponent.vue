@@ -14,6 +14,9 @@ const props = defineProps({
     required: true
   }
 })
+function primeiraLetraMaiuscula(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
 </script>
 
 <template>
@@ -23,7 +26,7 @@ const props = defineProps({
     
         <RouterLink class="object" v-for="object in props.datas" :key="object" :to="`/todos/${object.id}`">
           <img :src="object.escudo.url" alt="" />
-          <h4>{{ object.nome }}</h4>
+          <h4>{{ primeiraLetraMaiuscula(object.nome) }}</h4>
         </RouterLink>
     </div>
   </div>
@@ -37,8 +40,7 @@ const props = defineProps({
   height: 386px;
   border-radius: 15px;
   padding: 15px;
-  gap: 28px;
-}
+  gap: 12px;}
 .titulo {
   color: white;
 }
@@ -56,8 +58,8 @@ h4 {
 .objetos {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  margin-left: 60px;
+  gap: 12px;
+  margin-left: 45px;
 }
 img {
   width: 29px;

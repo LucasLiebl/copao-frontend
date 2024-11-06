@@ -26,8 +26,8 @@ onMounted(async () => {
       <CardComponentArt :datas="JogadorStore.jogadores" :titulo="'Artilheiros'" />
     </div>
 
-
-    <TabelaComponent :times="timeStore.times"></TabelaComponent>
+    <div class="tabelaContainer"> <TabelaComponent :times="timeStore.times"></TabelaComponent> </div>
+   
   </div>
 
 </template>
@@ -39,8 +39,17 @@ onMounted(async () => {
   gap: 34px;
   flex-direction: row;
 
-}
 
+}
+.tabelaContainer{
+  padding-top: 15px;
+  display: flex;
+  width: 1200px;
+  background-color: #1E1E1E;
+  border-radius: 15px;
+  align-items: flex-start;
+  justify-content: center;
+}
 .cards {
   display: flex;
   flex-direction: column;

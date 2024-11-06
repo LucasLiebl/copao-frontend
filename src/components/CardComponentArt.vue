@@ -36,10 +36,9 @@ const props = defineProps({
   height: 386px;
   border-radius: 15px;
   padding: 15px;
-  gap: 28px;
-}
-.titulo{
-    color: white
+  gap: 12px;}
+.titulo {
+  color: white;
 }
 h4 {
   font-size: 18px;
@@ -50,12 +49,13 @@ h4 {
   display: flex;
   align-items: center;
   gap: 3px;
+  text-decoration: none
 }
-.objetos{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-left: 60px
+.objetos {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-left: 45px;
 }
 img {
   width: 29px;

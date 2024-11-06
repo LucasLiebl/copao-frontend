@@ -1,19 +1,19 @@
-  <script setup>
-import { computed } from 'vue';
+<script setup>
+import { computed } from 'vue'
 
-  const props = defineProps({
-    times:{
-      type: Object
-    }
-  })
+const props = defineProps({
+  times: {
+    type: Object
+  }
+})
 
-  const sortedTimes = computed(() => {
-  return [...props.times].sort((a, b) => b.pontos - a.pontos); // Ordena em ordem decrescente de pontos
-});
-  </script>
+const sortedTimes = computed(() => {
+  return [...props.times].sort((a, b) => b.pontos - a.pontos) // Ordena em ordem decrescente de pontos
+})
+
+console.log( "sorted times ",sortedTimes)
+</script>
 <template>
-  <div class="table-page">
-  
     <table>
       <thead>
         <tr>
@@ -32,38 +32,44 @@ import { computed } from 'vue';
         </tr>
       </thead>
       <tbody>
-     <tr v-for="(time, index) in sortedTimes" :key="index">
-          <td> <span>{{ sortedTimes.indexOf(time) + 1 }}º </span> </td>
-          <td style="font-weight: 900">
-            <div class="nomeTime-box">
+        <tr v-for="(time, index) in sortedTimes" :key="index" class="tr-dados">
+          <td style="width: 70px">
+            <div class="posicao">
               <span
                 :class="
-                  (sortedTimes.indexOf(time) + 1) <= 8 && (sortedTimes.indexOf(time) + 1) + 1 >= 6
+                  sortedTimes.indexOf(time) + 1 >= 5
                     ? 'zona-r'
-                    : (sortedTimes.indexOf(time) + 1) <= 5 && (sortedTimes.indexOf(time) + 1) >= 4
-                    ? 'zona-n'
-                    : 'zona-c'
+                      : 'zona-c'
                 "
               >
               </span>
-
-              <span style="display: flex;"><img style="width: 4vh" :src="time.escudo.url" alt="" /></span>
-
-              <span>{{ time.nome }}</span>
+              <span><h1>{{ sortedTimes.indexOf(time) + 1 }}º  </h1></span>
             </div>
           </td>
-          <td class="marks">{{ (time.pontos) }}</td>
+
+          <td style="font-weight: 900; width: 220px">
+            <div class="nomeEscudo">
+              <span style="display: flex"
+                ><img style="width: 4vh" :src="time.escudo.url" alt=""
+              /></span>
+
+              <span> <h1>{{ time.nome.charAt(0).toUpperCase() + time.nome.slice(1) }}</h1></span>
+            </div>
+          </td>
+          <td class="marks">{{ time.pontos }}</td>
           <td>{{ time.jogos }}</td>
-          <td class="marks">{{ time.vitoria + time.empate + time.derrota }}</td>
+          <td class="marks">{{ time.jogos }}</td>
           <td>{{ time.vitoria }}</td>
           <td class="marks">{{ time.empate }}</td>
           <td>{{ time.derrota }}</td>
           <td class="marks">{{ time.gols_pro }}</td>
           <td>{{ time.gols_contra }}</td>
-          <td class="marks">{{ (time.vitoria/(time.vitoria + time.empate + time.derrota) * 100).toFixed(0) }}</td>
+          <td class="marks">
+            {{ ((time.vitoria / (time.vitoria + time.empate + time.derrota)) * 100).toFixed(0) }}
+          </td>
           <td class="ult_jogos">
             <span
-            v-for="jogo in time.ultimos_jogos"
+              v-for="jogo in time.ultimos_jogos"
               :key="jogo.legth"
               :class="jogo == '1' ? 'v' : jogo == '-1' ? 'd' : 'e'"
             >
@@ -72,17 +78,29 @@ import { computed } from 'vue';
         </tr>
       </tbody>
     </table>
-  </div>
 </template>
 <style scoped>
-h1 {
-  color:white;
-  padding: 54px 0px 0px 0px;
-  text-align: start;
-  font-weight: 900;
+table {
+  width: 90%;
+  border-collapse: separate; /* Set to 'separate' to make 'border-spacing' work */
+  border-spacing: 0 20px; /* Adjust the second value for vertical spacing */
+  border-radius: 15px;
+  color: white;
+  font-size: 17px;
 }
-
-.nomeTime-box {
+h1{
+  font-weight: 600;
+  font-size: 17px;
+}
+th{
+  color: #585858;
+}
+.tr-dados {
+  background-color: #303030;
+  text-align: center;
+  height: 60px;
+}
+.nomeEscudo {
   display: flex;
   align-items: center;
   gap: 1vw;
@@ -90,26 +108,32 @@ h1 {
 .zona-r {
   display: block;
   width: 2px;
-  height: 2vh;
+  height: 100%;
   background-color: red;
 }
 .zona-n {
   display: block;
   width: 2px;
-  height: 2vh;
+  height: 100%;
   background-color: grey;
 }
 .zona-c {
   display: block;
   width: 2px;
-  height: 2vh;
+  height: 100%;
   background-color: green;
+}
+.posicao {
+  height: 60px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
 }
 .ult_jogos {
   display: flex;
-  height: 6vh;
-  align-items: center;
-  justify-content: space-evenly;
+  height: 60px;
+    align-items: center;
+    justify-content: space-evenly;
 }
 .v {
   width: 1.1vh;
@@ -134,29 +158,5 @@ h1 {
   border-radius: 50%;
   content: '';
   display: block;
-}
-
-.table-page {
-  width: 70vw;
-  background-color: #1E1E1E;
-  border-radius: 15px;
-}
-tr {
-  text-align: center;
-  border-bottom: solid 1px #ddd;
-  height: 6vh;
-  width: 60vw;
-}
-
-table {
-  color:white;
-  border-top: 1px solid #ddd;
-  border-collapse: collapse;
-}
-.marks {
-}
-
-th {
-  padding: 5px 10px;
 }
 </style>

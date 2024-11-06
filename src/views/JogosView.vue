@@ -38,8 +38,8 @@ function jogosRodada (jogos) {
             :horario="jogo.horario"
             :time-m="jogo.time_mandante"
             :time-v="jogo.time_visitante"
-            :escudo-m="jogo.time_mandante_escudo"
-            :escudo-v="jogo.time_visitante_escudo"
+            :escudo-m="jogo.time_mandante.escudo.url"
+            :escudo-v="jogo.time_visitante.escudo.url"
             :gols="jogo.gols"
           ></JogoComponent>
       </div>
