@@ -10,7 +10,7 @@ const rodadaStore = useRodadaStore()
 onBeforeMount(() => {
   rodadaStore.getRodadas()
 })
-
+console.log(rodadaStore.rodadas)
 const RodadaNumero = ref(1)
 
 function jogosRodada (jogos) {
@@ -50,6 +50,7 @@ function SeletorRodada(operation){
             :escudo-m="jogo.time_mandante.escudo.url"
             :escudo-v="jogo.time_visitante.escudo.url"
             :gols="jogo.gols"
+            :id="jogo.id"
           ></JogoComponent>
       </div>
     </div>

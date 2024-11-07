@@ -8,10 +8,6 @@ const props = defineProps({
     type: String,
     required: true,
     default: 'Times Copão'
-  },
-  id: {
-    type: String,
-    required: true
   }
 })
 function primeiraLetraMaiuscula(string) {
@@ -24,7 +20,7 @@ function primeiraLetraMaiuscula(string) {
     <h4 class="titulo">{{ props.titulo }}</h4>
     <div class="objetos">
     
-        <RouterLink class="object" v-for="object in props.datas" :key="object" :to="`/todos/${object.id}`">
+        <RouterLink class="object" v-for="object in props.datas" :key="object" :to="`/time/${object.id}`">
           <img :src="object.escudo.url" alt="" />
           <h4>{{ primeiraLetraMaiuscula(object.nome) }}</h4>
         </RouterLink>

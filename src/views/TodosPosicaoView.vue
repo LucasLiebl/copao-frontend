@@ -6,7 +6,7 @@ import BotaoJogador from '@/components/BotaoJogador.vue'
 
 const props = defineProps(['id'])
 const timeStore = useTimeStore()
-const posicaoSelecionada = ref(1)
+const posicaoSelecionada = ref(0)
 
 onBeforeMount(async () => {
   if (props.id) {
@@ -29,7 +29,7 @@ const jogadores = computed(() => {
   if (posicaoSelecionada.value === 0) {
     return timeStore.time.jogadores
   } else {
-    return  timeStore.time.jogadores.filter(j => j.jogador.posicao === posicaoSelecionada.value)
+    return  timeStore.time.jogadores.filter((j) => j.jogador.posicao === posicaoSelecionada.value)
   }
 })
 </script>
