@@ -57,13 +57,13 @@ console.log( "sorted times ",sortedTimes)
             </div>
           </td>
           <td class="marks">{{ time.pontos }}</td>
-          <td>{{ time.jogos }}</td>
-          <td class="marks">{{ time.jogos }}</td>
-          <td>{{ time.vitoria }}</td>
-          <td class="marks">{{ time.empate }}</td>
-          <td>{{ time.derrota }}</td>
-          <td class="marks">{{ time.gols_pro }}</td>
-          <td>{{ time.gols_contra }}</td>
+          <td>{{ (time.jogos).legth }}</td>
+          <td class="marks">{{ time.vitoria }}</td>
+          <td>{{ time.empate }}</td>
+          <td class="marks">{{ time.derrota }}</td>
+          <td>{{ time.gols_pro }}</td>
+          <td class="marks">{{ time.gols_contra }}</td>
+          <td>{{ time.gols_pro - time.gols_contra }}</td>
           <td class="marks">
             {{ ((time.vitoria / (time.vitoria + time.empate + time.derrota)) * 100).toFixed(0) }}
           </td>

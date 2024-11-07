@@ -11,12 +11,21 @@ onBeforeMount(() => {
   rodadaStore.getRodadas()
 })
 
-const SeletorRodada = ref(1)
+const RodadaNumero = ref(1)
 
 function jogosRodada (jogos) {
-  return jogos.filter(j => j.rodada === SeletorRodada.value) 
+  return jogos.filter(j => j.rodada === RodadaNumero.value) 
 }
-
+function SeletorRodada(operation){
+  if (operation == -1){
+    if(RodadaNumero.value >= 2) {
+      RodadaNumero.value--
+    }
+  }
+  else{
+    RodadaNumero.value++
+  }
+}
 
 </script>
 
@@ -24,9 +33,9 @@ function jogosRodada (jogos) {
   <div class="container">
     <div class="inside-container">
       <div class="numero-rodada">
-        <ChevronLeft @click="SeletorRodada--" class="icon" :size="34"></ChevronLeft>
-        <h1>Rodada {{ SeletorRodada }}</h1>
-        <ChevronRight @click="SeletorRodada++" class="icon" :size="34"></ChevronRight>
+        <ChevronLeft @click="SeletorRodada(-1)" class="icon" :size="34"></ChevronLeft>
+        <h1>Rodada {{ RodadaNumero }}</h1>
+        <ChevronRight @click="SeletorRodada(1)" class="icon" :size="34"></ChevronRight>
       </div>
       <div class="jogosComponent"
        v-for="rodada in rodadaStore.rodadas" :key="rodada.id" >
