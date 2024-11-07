@@ -57,7 +57,7 @@ console.log( "sorted times ",sortedTimes)
             </div>
           </td>
           <td class="marks">{{ time.pontos }}</td>
-          <td>{{ (time.jogos).legth }}</td>
+          <td>{{ time.jogos.length }}</td>
           <td class="marks">{{ time.vitoria }}</td>
           <td>{{ time.empate }}</td>
           <td class="marks">{{ time.derrota }}</td>

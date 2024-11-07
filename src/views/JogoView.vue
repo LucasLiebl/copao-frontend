@@ -1,21 +1,24 @@
 <script setup>
-import { onBeforeMount, computed } from 'vue'
-import { useJogoStore } from '@/stores'
+import { onBeforeMount, computed, ref  } from 'vue'
+import { useJogoStore, useJogadorStore } from '@/stores'
 import JogoGrandeComponent from '@/components/JogoGrandeComponent.vue'
 
 const props = defineProps(['id'])
 const jogoStore = useJogoStore()
+const jogadorStore = useJogadorStore()
 
 onBeforeMount(async () => {
-  if (props.id) {
-    await jogoStore.getJogos(props.id)
-  }
+   await jogoStore.getJogos(props.id)
+   await jogadorStore.getJogadores()
+   console.log(jogoStore.jogos)
 })
 
 const jogo = computed(() => {
   return jogoStore.jogos.filter((j) => j.id == props.id)
 })
-console.log(jogo.value)
+
+
+
 </script>
 
 <template>

@@ -4,7 +4,7 @@
 <template>
 <header>
   <div class="logo">
-      <img src="https://i.ibb.co/9VfWVgh/COPAO-1.png" alt="logo">
+      <router-link to="/tabela"> <img src="https://i.ibb.co/9VfWVgh/COPAO-1.png" alt="logo"></router-link>
     </div>
     <nav class="nav-links">
       <router-link to="/tabela" 

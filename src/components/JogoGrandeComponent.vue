@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onBeforeMount } from "vue";
+import { onBeforeMount, ref } from "vue";
 import dateFormat from "dateformat";
 import { useJogadorStore } from "@/stores";
 
@@ -39,134 +39,116 @@ const props = defineProps ({
     },
 })
 
-console.log(props.gols)
-
-const golsMandante = ref('')
-
-function jogadorFezGol(jogadorID){
-    if ()
-  golsMandante.value += jogadorStore.jogador.filter((j) => j.id == jogadorID)
-  
-}
 
 
-
-for(gol in props.gols){
-    if(gol.time == timeM.id){
-        golsMandante.value = gol.jogador
-    }
-
-}
 </script>
 <template>
-<div class="jogoComponent">
-<div class="dataJogo">
-    <p> {{dateFormat(props.data, "dd/mm")}} · {{ props.endereco }} · {{props.horario.slice(0,5)}} </p>
-</div>
-<div class="times">
-    <div class="timeM">
-        <div class="escudoTime">
-            <img :src="props.escudoM" alt="">
-        </div>
-        <h1>{{props.timeM.nome}}</h1>
-        
+  <div class="jogoComponent">
+    <div class="dataJogo">
+      <p>
+        {{ dateFormat(props.data, 'dd/mm') }} · {{ props.endereco }} ·
+        {{ props.horario.slice(0, 5) }}
+      </p>
     </div>
-    <div class="placar">
-        <h1> {{  gols ? gols.filter((g) => g?.time == timeM?.id).length : [].length }} </h1>
-        <h1 class="versus"> - </h1>
-        <h1> {{  gols ? gols.filter((g) => g?.time == timeV?.id).length : [].length }} </h1>
+    <div class="times">
+      <div class="timeM">
+        <div class="escudoTime">
+          <img :src="props.escudoM" alt="" />
+        </div>
+        <h1>{{ props.timeM.nome }}</h1>
+      </div>
+      <div class="placar">
+        <h1>{{ gols ? gols.filter((g) => g?.time == timeM?.id).length : [].length }}</h1>
+        <h1 class="versus">-</h1>
+        <h1>{{ gols ? gols.filter((g) => g?.time == timeV?.id).length : [].length }}</h1>
+      </div>
+      <div class="timeV">
+        <h1>{{ props.timeV.nome }}</h1>
+        <div class="escudoTime">
+          <img :src="props.escudoV" alt="" />
+        </div>
+      </div>
+    </div>
 
-    </div>
-    <div class="timeV">
-        <h1>{{props.timeV.nome}}</h1>
-        <div class="escudoTime">
-            <img :src="props.escudoV" alt="">
-        </div>
-        
-    </div></div>
-    
     <div class="gols">
-        {{  }}
+      {{}}
     </div>
-</div>    
+  </div>
 </template>
 <style scoped>
-.jogoComponent{
-    width: 1200px;
-    height: 300px;
-    background-color: #1e1e1e;
-    border-radius: 25px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 10px;
-    text-decoration: none
+.jogoComponent {
+  width: 1200px;
+  height: 300px;
+  background-color: #1e1e1e;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+  text-decoration: none;
 }
-.dataJogo{
-font-size: 16px;
-font-weight: 500;
-color: #757575;
+.dataJogo {
+  font-size: 16px;
+  font-weight: 500;
+  color: #757575;
 }
-.times{
-    display: flex;
-    align-items: center;
-    align-items: flex-start;
-    & h1{
+.times {
+  display: flex;
+  align-items: center;
+  align-items: flex-start;
+  & h1 {
     font-size: 20px;
-    font-weight:500;
-   } 
+    font-weight: 500;
+  }
 }
-img{
-    width: 100px;
+img {
+  width: 100px;
 }
-.timeV{
-   display: flex;
-   align-items: center;
-   justify-content: flex-end;
-   gap: 15px;
-   color: white;
-   width: 350px; 
-   height: 60px;
-    background-color: #303030;
-    border-radius: 0px 40px 40px 0px;
+.timeV {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 15px;
+  color: white;
+  width: 350px;
+  height: 60px;
+  background-color: #303030;
+  border-radius: 0px 40px 40px 0px;
 }
-.timeM{
-    display: flex;
-   align-items: center;
-   justify-content: flex-start;
-   gap: 15px;
-   color: white;
-   width: 350px; 
-   height: 60px;
-    background-color: #303030;
-    border-radius: 40px 0px 0px 40px;
+.timeM {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+  color: white;
+  width: 350px;
+  height: 60px;
+  background-color: #303030;
+  border-radius: 40px 0px 0px 40px;
 }
-.timeV{
-    
+.timeV {
 }
-.escudoTime{
-    width: 92px;
-    height: 92px;
-    border-radius: 25px;
+.escudoTime {
+  width: 92px;
+  height: 92px;
+  border-radius: 25px;
 }
-.placar{
-    display: flex;
-    gap: 10px; 
-    border-radius: 0px 0px 15px 15px;
-    background-color: #161616;
-    color: white;
-    width: 150px;
-    height: 100px;
-    justify-content: center;
-    align-items: center;
-    & .versus{
-        color: #757575;
-    };
-    & h1{
-        font-size: 60px;
-    font-weight:700;
-    }
-   
-
+.placar {
+  display: flex;
+  gap: 10px;
+  border-radius: 0px 0px 15px 15px;
+  background-color: #161616;
+  color: white;
+  width: 150px;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+  & .versus {
+    color: #757575;
+  }
+  & h1 {
+    font-size: 60px;
+    font-weight: 700;
+  }
 }
 </style>
