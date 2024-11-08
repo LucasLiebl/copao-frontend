@@ -9,11 +9,13 @@ export const useJogoStore = defineStore('jogo', () => {
     selectedJogo: null,
     loading: false,
     error: null,
-    connection: false
+    connection: false,
+    jogo: [],
   })
   const isLoading = computed(() => state.loading)
   const jogosCount = computed(() => state.jogos.length)
   const jogos = computed(() => state.jogos)
+  const jogo = computed(() => state.jogo)
 
 
   
@@ -29,6 +31,18 @@ export const useJogoStore = defineStore('jogo', () => {
     }
   }
 
+  const getJogo = async (id) => {
+    state.loading = true
+    try {
+      console.log(id)
+      const data = await JogoService.getJogo(id)
+      state.jogo = data
+    } catch (error) {
+      state.error = error
+    } finally {
+      state.loading = false
+    }
+  }
   
   const createJogo = async (newJogo) => {
     state.loading = true
@@ -74,7 +88,9 @@ export const useJogoStore = defineStore('jogo', () => {
     isLoading,
     jogosCount,
     jogos,
+    jogo,
     getJogos,
+    getJogo,
     createJogo,
     updateJogo,
     deleteJogo

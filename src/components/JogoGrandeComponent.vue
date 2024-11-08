@@ -9,35 +9,45 @@ onBeforeMount(() => {
   jogadorStore.getJogadores()
 })
 
-const props = defineProps ({
-    data : {
-        type: String
-    },
-    horario : {
-        type: String
-    },
-    endereco : {
-        type: String
-    },
-    foto : {
-        type: Image
-    },
-    timeM : {
-        type : Object
-    },
-    timeV : {
-        type : Object
-    },
-    escudoM:{
-        type : String
-    },
-    escudoV:{
-        type : String
-    },
-    gols: {
-        type: Array
-    },
-})
+const props = defineProps({
+  data: {
+    type: String,
+    default: ""
+  },
+  horario: {
+    type: String,
+    default: ""
+  },
+  endereco: {
+    type: String,
+    default: ""
+  },
+  foto: {
+    type: String,
+    default: ""
+  },
+  timeM: {
+    type: Object,
+    default: () => ({ nome: "", id: null, escudo: "" })
+  },
+  timeV: {
+    type: Object,
+    default: () => ({ nome: "", id: null, escudo: "" })
+  },
+  escudoM: {
+    type: String,
+    default: ""
+  },
+  escudoV: {
+    type: String,
+    default: ""
+  },
+  gols: {
+    type: Array,
+    default: () => []
+  }
+});
+
 
 
 

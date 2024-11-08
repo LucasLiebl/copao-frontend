@@ -13,6 +13,15 @@ class JogoService {
     }
   }
 
+  async getJogo(id) {
+    try {
+      const { data } = await api.get(`/jogos/${id}/`)
+      return data
+    } catch (error) {
+      console.log('error in getJogos', error)
+      throw error
+    }
+  }
 
   async createJogo(newJogo) {
     try {

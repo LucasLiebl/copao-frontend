@@ -29,7 +29,7 @@ const jogadores = computed(() => {
   if (posicaoSelecionada.value === 0) {
     return timeStore.time.jogadores
   } else {
-    return  timeStore.time.jogadores.filter((j) => j.jogador.posicao === posicaoSelecionada.value)
+    return  timeStore.time.jogadores.filter((j) => j.posicao === posicaoSelecionada.value)
   }
 })
 </script>
@@ -37,7 +37,7 @@ const jogadores = computed(() => {
 <template>
   <div class="jogadores-container">
     <div class="sizecontainer">
-    <h1 class="elenco"> Elenco {{ timeStore.time.nome }} </h1>
+    <h1 class="elenco"> <img class="img" :src="timeStore.time.escudo?.url" alt=""> Elenco {{ timeStore.time.nome }} </h1>
     <div class="buttons-posicao">
       <BotaoJogador 
       v-for="category in categories" :key="category.id"
@@ -49,11 +49,11 @@ const jogadores = computed(() => {
       </BotaoJogador>
   </div>
     <div class="posicao-container">
-        <CardJogador
-            v-for="item in jogadores" :key="item.jogador.id"       
-            :nome="item.jogador.nome"
-            :numero="item.jogador.numero"
-            :posicao="categories.find(c => c.id == item.jogador.posicao).texto"
+      <CardJogador
+            v-for="item in jogadores" :key="item.id"       
+            :nome="item.nome"
+            :numero="item.numero"
+            :posicao="categories.find(c => c.id == item.posicao).texto"
           />
     </div>
   </div>
@@ -70,9 +70,12 @@ const jogadores = computed(() => {
   gap: 40px ;
 }
 .elenco{
+  display: flex;
   font-size: 32px;
   font-weight: 500;
-  color: white
+  color: white;
+  align-items: center;
+  gap: 10px;
 }
 .buttons-posicao{
 
@@ -95,7 +98,7 @@ const jogadores = computed(() => {
   flex-wrap: wrap;
   justify-content: space-between;
   }
-
+.img{height: 40px;}
 
 .posicao-container > h1 {
   margin-left: 0px;
