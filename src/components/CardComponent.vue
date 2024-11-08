@@ -33,7 +33,7 @@ function primeiraLetraMaiuscula(string) {
   flex-direction: column;
   background-color: #1e1e1e;
   width: 263px;
-  height: 386px;
+  height: 420px;
   border-radius: 15px;
   padding: 15px;
   gap: 12px;}

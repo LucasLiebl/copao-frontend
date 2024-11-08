@@ -77,9 +77,9 @@ const props = defineProps ({
 </template>
 <style scoped>
 .jogoComponent {
-  width: 1200px;
+  width: 1000px;
   height: 300px;
-  background-color: #1e1e1e;
+  background-color: #0e0e0e;
   border-radius: 25px;
   display: flex;
   flex-direction: column;

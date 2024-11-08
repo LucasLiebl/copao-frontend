@@ -21,7 +21,7 @@ const props = defineProps({
     <h4 class="titulo">{{ props.titulo }}</h4>
     <div class="objetos">
       <div class="object" v-for="object in props.datas.slice(0, 6)" :key="object">
-        <img :src="object.times[0].time.escudo.file" alt="">
+        <img :src="object.times[0].escudo" alt="">
         <h4> {{ object.nome }} </h4>
       </div>
     </div>
@@ -33,7 +33,7 @@ const props = defineProps({
   flex-direction: column;
   background-color: #1e1e1e;
   width: 263px;
-  height: 386px;
+  height: 420px;
   border-radius: 15px;
   padding: 15px;
   gap: 12px;}
