@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onBeforeMount, computed } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import CardJogador from '@/components/CardJogador.vue'
 import { useTimeStore } from '@/stores'
 import BotaoJogador from '@/components/BotaoJogador.vue'
@@ -8,10 +8,11 @@ const props = defineProps(['id'])
 const timeStore = useTimeStore()
 const posicaoSelecionada = ref(0)
 
-onBeforeMount(async () => {
+onMounted(async () => {
   if (props.id) {
     await timeStore.getTime(props.id)
-  }
+    console.log(timeStore.time)
+  }   
 })
 
 function selecionarPosicao(posicao) {
