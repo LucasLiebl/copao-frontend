@@ -19,11 +19,11 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "http://localhost:19003/api/",
+    baseURL: "https://copao-api.onrender.com/api/",
     headers: {
         "Content-Type": "application/json",
     },
-    timeout: 10000,
+    timeout: 100000,
 });
 
 export default api;
