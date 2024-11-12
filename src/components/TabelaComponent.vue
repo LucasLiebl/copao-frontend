@@ -81,7 +81,7 @@ console.log( "sorted times ",sortedTimes)
 </template>
 <style scoped>
 table {
-  width: 90%;
+  min-width: 1200px;
   border-collapse: separate; /* Set to 'separate' to make 'border-spacing' work */
   border-spacing: 0 20px; /* Adjust the second value for vertical spacing */
   border-radius: 15px;
@@ -158,5 +158,21 @@ th{
   border-radius: 50%;
   content: '';
   display: block;
+}
+@media only screen and (min-width: 320px) {
+  table{
+    padding-left: 430px;
+  }
+}
+@media only screen and (min-width: 900px){
+  table{
+    padding-left: 370px;
+  }
+}
+@media only screen and (min-width: 1200px){
+  table{
+    padding-left: 5%;
+    padding-right: 5%;
+  }
 }
 </style>

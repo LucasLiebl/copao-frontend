@@ -49,11 +49,29 @@ onMounted(async () => {
   border-radius: 15px;
   align-items: flex-start;
   justify-content: center;
+  overflow-x: scroll;
 }
 .cards {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 34px;
+}
+@media only screen and (max-width: 768px) {
+  .container {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 10px ;
+  }
+  .cards {
+    display: flex;
+    align-items: center;
+    
+  }
+  .tabelaContainer{
+    width: 100%;
+    padding: 20px;
+  }
+
 }
 </style>
