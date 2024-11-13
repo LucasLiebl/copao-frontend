@@ -36,15 +36,15 @@ const props = defineProps ({
 })
 </script>
 <template>
-<RouterLink class="jogoComponent" :to="`/jogo/${props.id}`">
+<RouterLink class="jogoComponent" :to="`/jogo/${props?.id}`">
 <div class="dataJogo">
-    <p> {{dateFormat(props.data, "dd/mm")}} · {{ props.endereco }} · {{props.horario.slice(0,5)}} </p>
+    <p> {{dateFormat(props?.data, "dd/mm")}} · {{ props?.endereco }} · {{props?.horario?.slice(0,5)}} </p>
 </div>
 <div class="times">
     <div class="timeM">
-        <h1>{{props.timeM.nome}}</h1>
+        <h1>{{props?.timeM?.nome}}</h1>
         <div class="escudoTime">
-            <img :src="props.escudoM" alt="">
+            <img :src="props?.escudoM" alt="">
         </div>
     </div>
     <div class="placar">
@@ -55,9 +55,9 @@ const props = defineProps ({
     </div>
     <div class="timeV">
         <div class="escudoTime">
-            <img :src="props.escudoV" alt="">
+            <img :src="props?.escudoV" alt="">
         </div>
-        <h1>{{props.timeV.nome}}</h1>
+        <h1>{{props?.timeV?.nome}}</h1>
     </div></div>
 </RouterLink>    
 </template>
