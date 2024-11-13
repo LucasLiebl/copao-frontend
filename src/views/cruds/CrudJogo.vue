@@ -7,10 +7,10 @@ const timeStore = useTimeStore()
 const jogoStore = useJogoStore()
 const rodadaStore = useRodadaStore()
 
-onMounted(() => {
-  jogoStore.getJogos()
-  timeStore.getTimes()
-  rodadaStore.getRodadas()
+onMounted(async () => {
+  await jogoStore.getJogos()
+  await timeStore.getTimes()
+  await rodadaStore.getRodadas()
 })
 const newObject = reactive({
   data: '',
@@ -66,113 +66,173 @@ const golsJsonField = ref({
 })
 
 function salvarGols() {
-  allGoals.value.push(golsJsonField)
+  console.log({...golsJsonField.value})
+  allGoals.value.push({...golsJsonField.value})
+  // allGoals.value = {...golsJsonField} + allGoals.value
+
 }
 </script>
 
 <template>
-  <div class="loading" v-if="jogoStore.isLoading">loading</div>
-  <div v-else>
-    <h1>Jogo CRUD</h1>
-    <form @submit.prevent="salvar       (newObject)">
-      <input type="date" placeholder="data" v-model="newObject.data" />
-      <input type="time" placeholder="horario" v-model="newObject.horario" />
-      <input type="text" placeholder="endereco" v-model="newObject.endereco" />
-
-      <label for="rodada">Rodada</label>
-      <input type="number" v-model="newObject.rodada" />
-
-      <label for="timeM">Time Mandante</label>
-      <select name="" id="" v-model="newObject.time_mandante">
-        <option v-for="time in timeStore.times" :key="time" :value="time.id">
-          {{ time.nome }}
-        </option>
-      </select>
-
-      <label for="timeV">Time Visitante</label>
-      <select name="" id="" v-model="newObject.time_visitante">
-        <option v-for="time in timeStore.times" :key="time" :value="time.id">
-          {{ time.nome }}
-        </option>
-      </select>
-
-      <label for="marcadorGol">Marcador gol</label>
-      <select name="" id="" v-model="golsJsonField.jogador">
-        <option v-for="jogador in selectJogadores" :key="jogador.id" :value="jogador.id">
-          {{ jogador.nome }}
-        </option>
-      </select>
-
-      <label for="timeMarcador">Time Marcador</label>
-      <select name="" id="" v-model="golsJsonField.time">
-        <option v-for="time in selectTimes" :key="time.id" :value="time.id">{{ time.nome }}</option>
-      </select>
-
-      <input type="checkbox" v-model="golsJsonField.gol_pro" />
-      {{ golsJsonField }}
-
-      <input type="submit" value="salvar gols" @click="salvarGols()" />
-      {{ allGoals }}
-
-      <input type="submit" />
-    </form>
-    <input type="number" v-model="deleteID" />
-    <button @click="jogoStore.deleteJogo(deleteID)">delete</button>
-
-    <h1>Jogo Listagem</h1>
-    <ul>
-      <li v-for="jogo in jogoStore.jogos" :key="jogo" @click="editar(jogo)">
-        <JogoComponent
-          :key="jogo.id"
-          :data="jogo.data"
-          :endereco="jogo.endereco"
-          :horario="jogo.horario"
-          :time-m="jogo.time_mandante"
-          :time-v="jogo.time_visitante"
-          :escudo-m="jogo.time_mandante.escudo.url"
-          :escudo-v="jogo.time_visitante.escudo.url"
-          :gols="jogo.gols"
-          :id="jogo.id"
-        ></JogoComponent>
-        <p>id: {{ jogo.id }}</p>
-        <p>data: {{ jogo.data }}</p>
-        <p>horario: {{ jogo.horario }}</p>
-        <p>endereco: {{ jogo.endereco }}</p>
-        <p>rodada: {{ jogo.rodada }}</p>
-        <p>time mandante: {{ jogo.time_mandante }}</p>
-        <p>time visitante: {{ jogo.time_visitante }}</p>
-        <p>gols: {{ jogo.gols }}</p>
-        <p>cartoes: {{ jogo.cartoes }}</p>
-        <hr />
-      </li>
-    </ul>
+  <div :class="timeStore.isLoading ? 'loading' : 'notLoading'">
+    <svg viewBox="25 25 50 50">
+      <circle r="20" cy="50" cx="50"></circle>
+    </svg>
   </div>
 
-  <div>
-    <select name="" id="">
-      <option value="1">jogador 1</option>
-      <option value="1">jogador 1</option>
-      <option value="1">jogador 1</option>
-      <option value="1">jogador 1</option>
-      <option value="1">jogador 1</option>
-      <option value="1">jogador 1</option>
-      <option value="1">jogador 1</option>
-    </select>
-    <select>
-      <option value="1">Mandante</option>
-      <option value="2">visitante</option>
-    </select>
-    <input type="checkbox" label="Gol pró" />
+  <div :class="timeStore.isLoading ? 'notLoading' : 'container'">
+    <div>
+      <h1>Jogo CRUD</h1>
+      <form @submit.prevent="salvar(newObject)">
+        <input type="date" placeholder="data" v-model="newObject.data" />
+        <input type="time" placeholder="horario" v-model="newObject.horario" />
+        <input type="text" placeholder="endereco" v-model="newObject.endereco" />
+
+        <label for="rodada">Rodada</label>
+        <input type="number" v-model="newObject.rodada" />
+
+        <label for="timeM">Time Mandante</label>
+        <select name="" id="" v-model="newObject.time_mandante">
+          <option v-for="time in timeStore.times" :key="time" :value="time.id">
+            {{ time.nome }}
+          </option>
+        </select>
+
+        <label for="timeV">Time Visitante</label>
+        <select name="" id="" v-model="newObject.time_visitante">
+          <option v-for="time in timeStore.times" :key="time" :value="time.id">
+            {{ time.nome }}
+          </option>
+        </select>
+
+        <label for="marcadorGol">Marcador gol</label>
+        <select name="" id="" v-model="golsJsonField.jogador">
+          <option v-for="jogador in selectJogadores" :key="jogador.id" :value="jogador.id">
+            {{ jogador.nome }}
+          </option>
+        </select>
+
+        <label for="timeMarcador">Time Marcador</label>
+        <select name="" id="" v-model="golsJsonField.time">
+          <option v-for="time in selectTimes" :key="time.id" :value="time.id">
+            {{ time.nome }}
+          </option>
+        </select>
+
+        <input type="checkbox" v-model="golsJsonField.gol_pro" />
+        <h3>
+          {{ golsJsonField }}
+        </h3>
+
+        <input type="submit" value="salvar gols" @click="salvarGols()" />
+        <h3>{{ allGoals }}</h3>
+
+        <input type="submit" />
+      </form>
+      <input type="number" v-model="deleteID" />
+      <button @click="jogoStore.deleteJogo(deleteID)">delete</button>
+
+      <h1>Jogo Listagem</h1>
+      <ul>
+        <li v-for="jogo in jogoStore.jogos" :key="jogo" @click="editar(jogo)">
+          <JogoComponent
+            :key="jogo?.id"
+            :data="jogo?.data"
+            :endereco="jogo?.endereco"
+            :horario="jogo?.horario"
+            :time-m="jogo?.time_mandante"
+            :time-v="jogo?.time_visitante"
+            :escudo-m="jogo?.time_mandante.escudo.url"
+            :escudo-v="jogo?.time_visitante.escudo.url"
+            :gols="jogo?.gols"
+            :id="jogo?.id"
+          ></JogoComponent>
+          <p>id: {{ jogo?.id }}</p>
+          <p>data: {{ jogo?.data }}</p>
+          <p>horario: {{ jogo?.horario }}</p>
+          <p>endereco: {{ jogo?.endereco }}</p>
+          <p>rodada: {{ jogo?.rodada }}</p>
+          <p>time mandante: {{ jogo?.time_mandante }}</p>
+          <p>time visitante: {{ jogo?.time_visitante }}</p>
+          <p>gols: {{ jogo?.gols }}</p>
+          <p>cartoes: {{ jogo?.cartoes }}</p>
+          <hr />
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <select name="" id="">
+        <option value="1">jogador 1</option>
+        <option value="1">jogador 1</option>
+        <option value="1">jogador 1</option>
+        <option value="1">jogador 1</option>
+        <option value="1">jogador 1</option>
+        <option value="1">jogador 1</option>
+        <option value="1">jogador 1</option>
+      </select>
+      <select>
+        <option value="1">Mandante</option>
+        <option value="2">visitante</option>
+      </select>
+      <input type="checkbox" label="Gol pró" />
+    </div>
   </div>
 </template>
 
 <style scoped>
-* {
-  background-color: rgb(255, 255, 255);
+svg {
+  width: 3.25em;
+  transform-origin: center;
+  animation: rotate4 2s linear infinite;
+}
+circle {
+  fill: none;
+  stroke: hsl(0, 0%, 100%);
+  stroke-width: 2;
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: dash4 1.5s ease-in-out infinite;
+}
+@keyframes rotate4 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes dash4 {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dashoffset: -125px;
+  }
+}
+.notLoading {
+  display: none;
+  transition: 5ms;
 }
 .loading {
-  background-color: red;
   width: 100vw;
   height: 100vh;
+  position: fixed;
+  background-color: rgb(32, 32, 32);
+  transition: 5ms;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+p,
+h1,
+h3,
+h4,
+h2,
+label {
+  color: white;
 }
 </style>

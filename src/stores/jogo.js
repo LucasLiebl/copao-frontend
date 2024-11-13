@@ -59,7 +59,8 @@ export const useJogoStore = defineStore('jogo', () => {
   const createJogo = async (newJogo) => {
     state.loading = true
     try {
-      state.jogos.push(await JogoService.createJogo(newJogo))
+      await JogoService.createJogo(newJogo)
+      await getJogos()
     } catch (error) {
       state.error = error
     } finally {
