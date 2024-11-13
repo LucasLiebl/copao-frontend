@@ -15,13 +15,13 @@ onMounted(async () => {
 })
 </script>
 
-<template>
+<template >
   <div  :class="timeStore.isLoading ? 'loading' : 'notLoading'">
     <svg viewBox="25 25 50 50" >
       <circle r="20" cy="50" cx="50"></circle>
     </svg>
   </div>
-  <div class="container">
+  <div :class="timeStore.isLoading ? 'notLoading' : 'container'">
     <div class="cards">
       <CardComponent :datas="timeStore.times" />
       <CardComponentArt :datas="JogadorStore.jogadores" :titulo="'Artilheiros'" />
@@ -42,7 +42,7 @@ svg {
 
 circle {
   fill: none;
-  stroke: hsl(0, 97%, 59%);
+  stroke: hsl(0, 0%, 100%);
   stroke-width: 2;
   stroke-dasharray: 1, 200;
   stroke-dashoffset: 0;
@@ -71,17 +71,20 @@ circle {
     stroke-dashoffset: -125px;
   }
 }
-.isLoading{
+.notLoading{
   display: none;
   transition: 5ms;
 }
 .loading {
-  display: flex;
   width: 100vw;
   height: 100vh;
-  display: block;
-  background-color: rgba(0, 0, 0, 0.138);
+  position: fixed;
+  background-color: rgb(32, 32, 32);
   transition: 5ms;
+  display: flex;
+  align-content: center;
+  justify-content: center
+  
 }
 .container {
   display: flex;
