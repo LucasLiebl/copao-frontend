@@ -66,10 +66,9 @@ const golsJsonField = ref({
 })
 
 function salvarGols() {
-  console.log({...golsJsonField.value})
-  allGoals.value.push({...golsJsonField.value})
+  console.log({ ...golsJsonField.value })
+  allGoals.value.push({ ...golsJsonField.value })
   // allGoals.value = {...golsJsonField} + allGoals.value
-
 }
 </script>
 
@@ -81,106 +80,187 @@ function salvarGols() {
   </div>
 
   <div :class="timeStore.isLoading ? 'notLoading' : 'container'">
-    <div>
-      <h1>Jogo CRUD</h1>
-      <form @submit.prevent="salvar(newObject)">
-        <input type="date" placeholder="data" v-model="newObject.data" />
-        <input type="time" placeholder="horario" v-model="newObject.horario" />
-        <input type="text" placeholder="endereco" v-model="newObject.endereco" />
+    <form @submit.prevent="salvar(newObject)">
 
-        <label for="rodada">Rodada</label>
-        <input type="number" v-model="newObject.rodada" />
+      <H1>INFOS</H1>
+      <div class="infosSection">
+        <div class="infosDiv">
+          <div class="inputdiv">
+            <label for="timeM">Time Mandante</label>
+            <select name="" id="" v-model="newObject.time_mandante">
+              <option v-for="time in timeStore.times" :key="time" :value="time.id">
+                {{ time.nome }}
+              </option>
+            </select>
+          </div>
 
-        <label for="timeM">Time Mandante</label>
-        <select name="" id="" v-model="newObject.time_mandante">
-          <option v-for="time in timeStore.times" :key="time" :value="time.id">
-            {{ time.nome }}
-          </option>
-        </select>
+          <div class="inputdiv">
+            <label for="timeV">Time Visitante</label>
+            <select name="" id="" v-model="newObject.time_visitante">
+              <option v-for="time in timeStore.times" :key="time" :value="time.id">
+                {{ time.nome }}
+              </option>
+            </select>
+          </div>
+        </div>
 
-        <label for="timeV">Time Visitante</label>
-        <select name="" id="" v-model="newObject.time_visitante">
-          <option v-for="time in timeStore.times" :key="time" :value="time.id">
-            {{ time.nome }}
-          </option>
-        </select>
+        <div class="infosDiv">
+          <div class="inputdiv">
+            <label for="data">Data</label>
+            <input type="date" v-model="newObject.data" />
+          </div>
+          <div class="inputdiv">
+            <label for="horario">Horario</label> <input type="time" v-model="newObject.horario" />
+          </div>
+        </div>
 
-        <label for="marcadorGol">Marcador gol</label>
-        <select name="" id="" v-model="golsJsonField.jogador">
-          <option v-for="jogador in selectJogadores" :key="jogador.id" :value="jogador.id">
-            {{ jogador.nome }}
-          </option>
-        </select>
+        <div class="infosDiv">
+          <div class="inputdiv">
+            <label for="local">Local</label>
+            <input type="text" v-model="newObject.endereco" />
+          </div>
+          <div class="inputdiv">
+            <label for="rodada">Rodada</label> <input type="number" v-model="newObject.rodada" />
+          </div>
+        </div>
+      </div>
 
-        <label for="timeMarcador">Time Marcador</label>
-        <select name="" id="" v-model="golsJsonField.time">
-          <option v-for="time in selectTimes" :key="time.id" :value="time.id">
-            {{ time.nome }}
-          </option>
-        </select>
+      <H1>GOLS</H1>
+      <div class="golsSection">
+        <div class="inputdiv">
+          <label for="marcadorGol">Marcador</label>
+          <select name="" id="" v-model="golsJsonField.jogador">
+            <option v-for="jogador in selectJogadores" :key="jogador.id" :value="jogador.id">
+              {{ jogador.nome }} ({{ jogador.id }})
+            </option>
+          </select>
+        </div>
 
-        <input type="checkbox" v-model="golsJsonField.gol_pro" />
-        <h3>
-          {{ golsJsonField }}
-        </h3>
+        <div class="inputdiv">
+          <label for="timeMarcador">Time Marcador</label>
+          <select name="" id="" v-model="golsJsonField.time">
+            <option v-for="time in selectTimes" :key="time.id" :value="time.id">
+              {{ time.nome }} ({{time.id}})
+            </option>
+          </select>
+        </div>
 
-        <input type="submit" value="salvar gols" @click="salvarGols()" />
-        <h3>{{ allGoals }}</h3>
+        <button type="button" @click="salvarGols()">OK</button>
+      </div>
 
-        <input type="submit" />
-      </form>
-      <input type="number" v-model="deleteID" />
-      <button @click="jogoStore.deleteJogo(deleteID)">delete</button>
+      <div v-for="gol in allGoals " :key="gol">
+        {{ gol }}
+      </div>
 
-      <h1>Jogo Listagem</h1>
-      <ul>
-        <li v-for="jogo in jogoStore.jogos" :key="jogo" @click="editar(jogo)">
-          <JogoComponent
-            :key="jogo?.id"
-            :data="jogo?.data"
-            :endereco="jogo?.endereco"
-            :horario="jogo?.horario"
-            :time-m="jogo?.time_mandante"
-            :time-v="jogo?.time_visitante"
-            :escudo-m="jogo?.time_mandante.escudo.url"
-            :escudo-v="jogo?.time_visitante.escudo.url"
-            :gols="jogo?.gols"
-            :id="jogo?.id"
-          ></JogoComponent>
-          <p>id: {{ jogo?.id }}</p>
-          <p>data: {{ jogo?.data }}</p>
-          <p>horario: {{ jogo?.horario }}</p>
-          <p>endereco: {{ jogo?.endereco }}</p>
-          <p>rodada: {{ jogo?.rodada }}</p>
-          <p>time mandante: {{ jogo?.time_mandante }}</p>
-          <p>time visitante: {{ jogo?.time_visitante }}</p>
-          <p>gols: {{ jogo?.gols }}</p>
-          <p>cartoes: {{ jogo?.cartoes }}</p>
-          <hr />
-        </li>
-      </ul>
-    </div>
+      <input type="submit" />
+    </form>
 
-    <div>
-      <select name="" id="">
-        <option value="1">jogador 1</option>
-        <option value="1">jogador 1</option>
-        <option value="1">jogador 1</option>
-        <option value="1">jogador 1</option>
-        <option value="1">jogador 1</option>
-        <option value="1">jogador 1</option>
-        <option value="1">jogador 1</option>
-      </select>
-      <select>
-        <option value="1">Mandante</option>
-        <option value="2">visitante</option>
-      </select>
-      <input type="checkbox" label="Gol pró" />
-    </div>
+    <h1>Jogo Listagem</h1>
+    <ul>
+      <li v-for="jogo in jogoStore.jogos" :key="jogo" @click="editar(jogo)">
+        <JogoComponent
+          :key="jogo?.id"
+          :data="jogo?.data"
+          :endereco="jogo?.endereco"
+          :horario="jogo?.horario"
+          :time-m="jogo?.time_mandante"
+          :time-v="jogo?.time_visitante"
+          :escudo-m="jogo?.time_mandante.escudo.url"
+          :escudo-v="jogo?.time_visitante.escudo.url"
+          :gols="jogo?.gols"
+          :id="jogo?.id"
+        ></JogoComponent>
+        <p>id: {{ jogo?.id }}</p>
+        <p>data: {{ jogo?.data }}</p>
+        <p>horario: {{ jogo?.horario }}</p>
+        <p>endereco: {{ jogo?.endereco }}</p>
+        <p>rodada: {{ jogo?.rodada }}</p>
+        <p>time mandante: {{ jogo?.time_mandante }}</p>
+        <p>time visitante: {{ jogo?.time_visitante }}</p>
+        <p>gols: {{ jogo?.gols }}</p>
+        <p>cartoes: {{ jogo?.cartoes }}</p>
+        <hr />
+      </li>
+    </ul>
+    <input type="number" v-model="deleteID" />
+    <button @click="jogoStore.deleteJogo(deleteID)">delete</button>
   </div>
 </template>
 
 <style scoped>
+.container {
+  width: 805px;
+  height: 763px;
+  background-color: #1e1e1e;
+  border-radius: 15px;
+  padding: 25px;
+
+  & h1 {
+    font-size: 18px;
+    font-weight: 800;
+    padding-bottom: 10px;
+  }
+}
+
+input,
+select {
+  height: 54px;
+  background-color: #161616;
+  outline: 0;
+  border: 0;
+  border-radius: 15px;
+  color: #757575;
+}
+option{
+  background-color: #1e1e1e;
+}
+
+.inputdiv {
+  display: flex;
+  flex-direction: column;
+}
+
+::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+.infosSection {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.golsSection{
+  display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: flex-end;
+    & .inputdiv{
+      width: 240px;
+    }
+}
+
+.infosDiv {
+  display: flex;
+  justify-content: start;
+  gap: 30px;
+  & .inputdiv {
+    width: 340px;
+  }
+}
+
+label {
+  margin-left: 15px;
+}
+
+button {
+  height: 54px;
+  width: 54px;
+  background-color: white;
+  border: none;
+  border-radius: 15px;
+}
+
 svg {
   width: 3.25em;
   transform-origin: center;
