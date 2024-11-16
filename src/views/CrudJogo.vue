@@ -1,16 +1,20 @@
 <script setup>
 import JogoComponent from '@/components/JogoComponent.vue'
 import { onMounted, reactive, ref, computed } from 'vue'
-import { useJogoStore, useTimeStore, useRodadaStore } from '@/stores'
+import { useJogoStore, useTimeStore, useRodadaStore, useJogadorStore } from '@/stores'
+import jogador from '@/services/jogador'
 
 const timeStore = useTimeStore()
 const jogoStore = useJogoStore()
 const rodadaStore = useRodadaStore()
+const jogadorStore = useJogadorStore()
 
 onMounted(async () => {
   await jogoStore.getJogos()
   await timeStore.getTimes()
   await rodadaStore.getRodadas()
+  await jogadorStore.getJogadores()
+  console.log(jogadorStore.jogadores)
 })
 const newObject = reactive({
   data: '',
@@ -60,15 +64,32 @@ const selectTimes = computed(() => {
 const allGoals = ref([])
 
 const golsJsonField = ref({
+  id: 0,
   jogador: null,
   time: null,
   gol_pro: true
 })
 
+function calcID() {
+  return allGoals.value.length + 1
+}
+
 function salvarGols() {
   console.log({ ...golsJsonField.value })
+  golsJsonField.value.id = calcID()
   allGoals.value.push({ ...golsJsonField.value })
-  // allGoals.value = {...golsJsonField} + allGoals.value
+  console.log(allGoals.value)
+}
+function removerGol(index) {
+  console.log(index)
+  allGoals.value.splice(index - 1, 1)
+}
+
+function acharJogador(jogadorID) {
+  return jogadorStore.jogadores.find((j) => j.id === jogadorID).nome
+}
+function acharTime(timeID) {
+  return timeStore.times.find((t) => t.id === timeID).nome
 }
 </script>
 
@@ -81,7 +102,6 @@ function salvarGols() {
 
   <div :class="timeStore.isLoading ? 'notLoading' : 'container'">
     <form @submit.prevent="salvar(newObject)">
-
       <H1>INFOS</H1>
       <div class="infosSection">
         <div class="infosDiv">
@@ -140,7 +160,7 @@ function salvarGols() {
           <label for="timeMarcador">Time Marcador</label>
           <select name="" id="" v-model="golsJsonField.time">
             <option v-for="time in selectTimes" :key="time.id" :value="time.id">
-              {{ time.nome }} ({{time.id}})
+              {{ time.nome }} ({{ time.id }})
             </option>
           </select>
         </div>
@@ -148,46 +168,90 @@ function salvarGols() {
         <button type="button" @click="salvarGols()">OK</button>
       </div>
 
-      <div v-for="gol in allGoals " :key="gol">
-        {{ gol }}
+      <div class="golsList">
+        <div v-for="gol in allGoals" :key="gol" class="golDiv">
+          <div>{{ acharJogador(gol.jogador) }}</div>
+          <div>{{ acharTime(gol.time) }}</div>
+          <div>{{ gol.gol_pro }}</div>
+          <div class="buttons">
+            <div class="squareButton" @click="removerGol(gol.id)" > {{gol.id}} </div>
+            <div class="squareButton"></div>
+          </div>
+        </div>
       </div>
 
       <input type="submit" />
     </form>
-
-    <h1>Jogo Listagem</h1>
-    <ul>
-      <li v-for="jogo in jogoStore.jogos" :key="jogo" @click="editar(jogo)">
-        <JogoComponent
-          :key="jogo?.id"
-          :data="jogo?.data"
-          :endereco="jogo?.endereco"
-          :horario="jogo?.horario"
-          :time-m="jogo?.time_mandante"
-          :time-v="jogo?.time_visitante"
-          :escudo-m="jogo?.time_mandante.escudo.url"
-          :escudo-v="jogo?.time_visitante.escudo.url"
-          :gols="jogo?.gols"
-          :id="jogo?.id"
-        ></JogoComponent>
-        <p>id: {{ jogo?.id }}</p>
-        <p>data: {{ jogo?.data }}</p>
-        <p>horario: {{ jogo?.horario }}</p>
-        <p>endereco: {{ jogo?.endereco }}</p>
-        <p>rodada: {{ jogo?.rodada }}</p>
-        <p>time mandante: {{ jogo?.time_mandante }}</p>
-        <p>time visitante: {{ jogo?.time_visitante }}</p>
-        <p>gols: {{ jogo?.gols }}</p>
-        <p>cartoes: {{ jogo?.cartoes }}</p>
-        <hr />
-      </li>
-    </ul>
-    <input type="number" v-model="deleteID" />
-    <button @click="jogoStore.deleteJogo(deleteID)">delete</button>
   </div>
+  <h1>Jogo Listagem</h1>
+  <ul>
+    <li v-for="jogo in jogoStore.jogos" :key="jogo" @click="editar(jogo)">
+      <JogoComponent
+        :key="jogo?.id"
+        :data="jogo?.data"
+        :endereco="jogo?.endereco"
+        :horario="jogo?.horario"
+        :time-m="jogo?.time_mandante"
+        :time-v="jogo?.time_visitante"
+        :escudo-m="jogo?.time_mandante.escudo.url"
+        :escudo-v="jogo?.time_visitante.escudo.url"
+        :gols="jogo?.gols"
+        :id="jogo?.id"
+      ></JogoComponent>
+      <p>id: {{ jogo?.id }}</p>
+      <p>data: {{ jogo?.data }}</p>
+      <p>horario: {{ jogo?.horario }}</p>
+      <p>endereco: {{ jogo?.endereco }}</p>
+      <p>rodada: {{ jogo?.rodada }}</p>
+      <p>time mandante: {{ jogo?.time_mandante }}</p>
+      <p>time visitante: {{ jogo?.time_visitante }}</p>
+      <p>gols: {{ jogo?.gols }}</p>
+      <p>cartoes: {{ jogo?.cartoes }}</p>
+      <hr />
+    </li>
+  </ul>
+  <input type="number" v-model="deleteID" />
+  <button @click="jogoStore.deleteJogo(deleteID)">delete</button>
 </template>
 
 <style scoped>
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+}
+.golsList{
+  display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: flex-end;
+}
+.buttons {
+  display: flex;
+  gap: 15px;
+}
+.squareButton {
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  border-radius: 15px;
+}
+.golDiv {
+  display: flex;
+  gap: 15%;
+  width:  600px;
+  height: 54px;
+  background-color: #161616;
+  border-radius: 15px;
+  align-items: center;
+  padding: 0px 20px 0px 20px;
+  font-size: 18px;
+  color: #757575;
+  font-weight: 700;
+  justify-content: center;
+}
+
 .container {
   width: 805px;
   height: 763px;
@@ -211,7 +275,7 @@ select {
   border-radius: 15px;
   color: #757575;
 }
-option{
+option {
   background-color: #1e1e1e;
 }
 
@@ -230,14 +294,14 @@ option{
   gap: 30px;
 }
 
-.golsSection{
+.golsSection {
   display: flex;
-    flex-direction: row;
-    gap: 30px;
-    align-items: flex-end;
-    & .inputdiv{
-      width: 240px;
-    }
+  flex-direction: row;
+  gap: 30px;
+  align-items: flex-end;
+  & .inputdiv {
+    width: 240px;
+  }
 }
 
 .infosDiv {
