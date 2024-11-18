@@ -85,6 +85,7 @@ function removerGol(index) {
   allGoals.value.splice(index - 1, 1)
 }
 
+
 function acharJogador(jogadorID) {
   return jogadorStore.jogadores.find((j) => j.id === jogadorID).nome
 }
@@ -175,12 +176,11 @@ function acharTime(timeID) {
           <div>{{ gol.gol_pro }}</div>
           <div class="buttons">
             <div class="squareButton" @click="removerGol(gol.id)" > {{gol.id}} </div>
-            <div class="squareButton"></div>
           </div>
         </div>
       </div>
 
-      <input type="submit" />
+      <input type="submit" class="saveButton"> 
     </form>
   </div>
   <h1>Jogo Listagem</h1>
@@ -215,6 +215,14 @@ function acharTime(timeID) {
 </template>
 
 <style scoped>
+.saveButton {
+  height: 54px;
+  width: 100px;
+  background-color: #E72740;
+  border-radius: 15px;
+  color: white;
+  font-weight: 700;
+}
 form {
   display: flex;
   flex-direction: column;
@@ -223,7 +231,7 @@ form {
 }
 .golsList{
   display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 30px;
     align-items: flex-end;
 }
@@ -254,7 +262,7 @@ form {
 
 .container {
   width: 805px;
-  height: 763px;
+  height: 100%;
   background-color: #1e1e1e;
   border-radius: 15px;
   padding: 25px;
