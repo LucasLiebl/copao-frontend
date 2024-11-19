@@ -2,7 +2,6 @@
 import JogoComponent from '@/components/JogoComponent.vue'
 import { onMounted, reactive, ref, computed } from 'vue'
 import { useJogoStore, useTimeStore, useRodadaStore, useJogadorStore } from '@/stores'
-import jogador from '@/services/jogador'
 
 const timeStore = useTimeStore()
 const jogoStore = useJogoStore()
@@ -85,12 +84,11 @@ function removerGol(index) {
   allGoals.value.splice(index - 1, 1)
 }
 
-
 function acharJogador(jogadorID) {
-  return jogadorStore.jogadores.find((j) => j.id === jogadorID).nome
+  return jogadorStore.jogadores.find((j) => j.id === jogadorID)?.nome
 }
 function acharTime(timeID) {
-  return timeStore.times.find((t) => t.id === timeID).nome
+  return timeStore.times.find((t) => t.id === timeID)?.nome
 }
 </script>
 
@@ -141,7 +139,13 @@ function acharTime(timeID) {
             <input type="text" v-model="newObject.endereco" />
           </div>
           <div class="inputdiv">
-            <label for="rodada">Rodada</label> <input type="number" v-model="newObject.rodada" />
+            <label for="rodada">Rodada</label> 
+            <select name="" id="" v-model="newObject.rodada">
+              <option v-for="rodada in rodadaStore.rodadas" :key="rodada" :value="rodada.id">
+                {{ rodada.numero_rodada }}
+              </option>
+            </select>
+
           </div>
         </div>
       </div>
