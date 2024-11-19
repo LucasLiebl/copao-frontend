@@ -85,7 +85,8 @@ function removerGol(index) {
 }
 
 function acharJogador(jogadorID) {
-  return jogadorStore.jogadores.find((j) => j.id === jogadorID)?.nome
+  console.log(jogadorStore.jogadores.find((j) => j.id === jogadorID)?.nome)
+  return jogadorStore.jogadores.find((j) => j.id === jogadorID)
 }
 function acharTime(timeID) {
   return timeStore.times.find((t) => t.id === timeID)?.nome
@@ -175,7 +176,7 @@ function acharTime(timeID) {
 
       <div class="golsList">
         <div v-for="gol in allGoals" :key="gol" class="golDiv">
-          <div>{{ acharJogador(gol.jogador) }}</div>
+          <div>{{ acharJogador(gol.jogador)?.nome }}</div>
           <div>{{ acharTime(gol.time) }}</div>
           <div>{{ gol.gol_pro }}</div>
           <div class="buttons">

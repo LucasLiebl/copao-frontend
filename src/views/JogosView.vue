@@ -14,7 +14,7 @@ console.log(rodadaStore.rodadas)
 const RodadaNumero = ref(1)
 
 function jogosRodada (jogos) {
-  return jogos.filter(j => j.rodada === RodadaNumero.value) 
+  return jogos.filter(j => j.rodada.numero_rodada === RodadaNumero.value) 
 }
 function SeletorRodada(operation){
   if (operation == -1){
