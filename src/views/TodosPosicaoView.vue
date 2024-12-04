@@ -51,10 +51,10 @@ const jogadores = computed(() => {
     <div class="posicao-container">
       <CardJogador
             v-for="item in jogadores" :key="item.id" 
-            :foto="item.foto"      
-            :nome="item.nome"
-            :numero="item.numero"
-            :posicao="categories.find(c => c.id == item.posicao).texto"
+            :foto="item?.foto"      
+            :nome="item?.nome"
+            :numero="item?.numero"
+            :posicao="categories.find(c => c.id == item.posicao)?.texto"
           />
     </div>
   </div>

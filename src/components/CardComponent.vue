@@ -21,7 +21,7 @@ function primeiraLetraMaiuscula(string) {
     <div class="objetos">
     
         <RouterLink class="object" v-for="object in props.datas" :key="object" :to="`/time/${object.id}`">
-          <img :src="object.escudo.url" alt="" />
+          <img :src="object?.escudo?.url" alt="" />
           <h4>{{ primeiraLetraMaiuscula(object.nome) }}</h4>
         </RouterLink>
     </div>

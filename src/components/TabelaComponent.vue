@@ -50,7 +50,7 @@ console.log( "sorted times ",sortedTimes)
           <td style="font-weight: 900; width: 220px">
             <div class="nomeEscudo">
               <span style="display: flex"
-                ><img style="width: 4vh" :src="time.escudo.url" alt=""
+                ><img style="width: 4vh" :src="time.escudo?.url" alt=""
               /></span>
 
               <span> <h1>{{ time.nome.charAt(0).toUpperCase() + time.nome.slice(1) }}</h1></span>

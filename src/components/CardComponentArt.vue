@@ -21,7 +21,7 @@ const props = defineProps({
     <h4 class="titulo">{{ props.titulo }}</h4>
     <div class="objetos">
       <div class="object" v-for="object in props.datas.slice(0, 6)" :key="object">
-        <img :src="object.times[0].escudo" alt="">
+        <img :src="object.times[0]?.escudo" alt="">
         <h4> {{ object.nome }} </h4>
       </div>
     </div>

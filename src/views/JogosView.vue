@@ -7,15 +7,16 @@ import ChevronRight from 'vue-material-design-icons/ChevronRight.vue'
 
 const rodadaStore = useRodadaStore()
 
-onBeforeMount(() => {
-  rodadaStore.getRodadas()
+onBeforeMount(async () => {
+  await rodadaStore.getRodadas()
 })
-console.log(rodadaStore.rodadas)
 const RodadaNumero = ref(1)
 
 function jogosRodada (jogos) {
-  return jogos.filter(j => j.rodada === RodadaNumero.value) 
+  console.log(jogos)
+  return jogos.filter(j => j.rodada.numero_rodada === RodadaNumero.value) 
 }
+
 function SeletorRodada(operation){
   if (operation == -1){
     if(RodadaNumero.value >= 2) {
@@ -47,8 +48,8 @@ function SeletorRodada(operation){
             :horario="jogo.horario"
             :time-m="jogo.time_mandante"
             :time-v="jogo.time_visitante"
-            :escudo-m="jogo.time_mandante.escudo.url"
-            :escudo-v="jogo.time_visitante.escudo.url"
+            :escudo-m="jogo.time_mandante.escudo?.url"
+            :escudo-v="jogo.time_visitante.escudo?.url"
             :gols="jogo.gols"
             :id="jogo.id"
           ></JogoComponent>
