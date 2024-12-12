@@ -5,7 +5,7 @@ class RodadaService {
 
   async getRodadas() {
     try {
-      const { data } = await api.get(`/rodadas`)
+      const { data } = await api.get(`api/rodadas`)
       return data.results
     } catch (error) {
       console.log('error in getRodadas', error)
@@ -15,7 +15,7 @@ class RodadaService {
 
   async createRodada(newRodada) {
     try {
-      const { data } = await api.post(`/rodadas/`, newRodada)
+      const { data } = await api.post(`api/rodadas/`, newRodada)
       return data.results
     } catch (error) {
       console.log('error in createRodada', error)
@@ -26,7 +26,7 @@ class RodadaService {
 
   async updateRodada(rodada) {
     try {
-      const { data } = await api.put(`/rodadas/${rodada.id}/`)
+      const { data } = await api.put(`api/rodadas/${rodada.id}/`)
       return data.results
     } catch (error) {
       console.log('error in updateRodada')
@@ -36,7 +36,7 @@ class RodadaService {
 
   async deleteRodada(id) {
     try {
-      const { data } = await api.delete(`/rodadas/${id}/`)
+      const { data } = await api.delete(`api/rodadas/${id}/`)
       return data.results
     } catch (error) {
       console.log('error in deleteRodada', error)

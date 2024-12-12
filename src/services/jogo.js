@@ -5,7 +5,7 @@ class JogoService {
 
   async getJogos() {
     try {
-      const { data } = await api.get(`/jogos`)
+      const { data } = await api.get(`api/jogos`)
       return data.results
     } catch (error) {
       console.log('error in getJogos', error)
@@ -15,7 +15,7 @@ class JogoService {
 
   async getJogo(id) {
     try {
-      const { data } = await api.get(`/jogos/${id}/`)
+      const { data } = await api.get(`api/jogos/${id}/`)
       return data
     } catch (error) {
       console.log('error in getJogos', error)
@@ -25,7 +25,7 @@ class JogoService {
 
   async createJogo(newJogo) {
     try {
-      const { data } = await api.post(`/jogos/`, newJogo)
+      const { data } = await api.post(`api/jogos/`, newJogo)
       return data.results
     } catch (error) {
       console.log('error in createJogo', error)
@@ -36,7 +36,7 @@ class JogoService {
  
   async updateJogo(jogo) {
     try {
-      const { data } = await api.put(`/jogos/${jogo.id}/`)
+      const { data } = await api.put(`api/jogos/${jogo.id}/`)
       return data.results
     } catch (error) {
       console.log('error in updateJogo')

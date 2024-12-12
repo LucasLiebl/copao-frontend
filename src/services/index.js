@@ -3,7 +3,6 @@ import JogadorService from './jogador';
 import JogoService from './jogo';
 import RodadaService from './rodada'
 import TimeService from './time'
-import TimeJogadorService from './timejogador';
 
 export {
     CampeonatoService,
@@ -11,5 +10,4 @@ export {
     JogoService,
     RodadaService,
     TimeService,
-    TimeJogadorService
 };

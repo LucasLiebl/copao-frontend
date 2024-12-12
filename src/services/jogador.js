@@ -2,7 +2,7 @@ import api from '@/plugins/api'
 class JogadorService {
   async getJogadores() {
     try {
-      const { data } = await api.get(`/jogadores/`)
+      const { data } = await api.get(`api/jogadores/`)
       return data.results
     } catch (error) {
       console.log('error in getJogadores', error)
@@ -12,7 +12,7 @@ class JogadorService {
 
   async createJogador(newJogador) {
     try {
-      const { data } = await api.post(`/jogadores/`, newJogador)
+      const { data } = await api.post(`api/jogadores/`, newJogador)
       return data.results
     } catch (error) {
       console.log('error in createJogador', error)
@@ -22,7 +22,7 @@ class JogadorService {
 
   async updateJogador(jogador) {
     try {
-      const { data } = await api.patch(`/jogadores/${jogador.id}/`, jogador)
+      const { data } = await api.patch(`api/jogadores/${jogador.id}/`, jogador)
       return data.results
     } catch (error) {
       console.log('error in updateJogador')
@@ -32,7 +32,7 @@ class JogadorService {
 
   async deleteJogador(id) {
     try {
-      const { data } = await api.delete(`/jogadores/${id}/`)
+      const { data } = await api.delete(`api/jogadores/${id}/`)
       return data.results
     } catch (error) {
       console.log('error in deleteJogador', error)

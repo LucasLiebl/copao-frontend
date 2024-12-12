@@ -8,15 +8,13 @@ const authService = AuthService;
 
 export const useAuthStore = defineStore('auth', () => {
   const state = reactive({
-    token: useStorage('token', null),
-    decodedToken: computed(() => state.token ? jwtDecode(state.token) : "sem token"),
+    token: useStorage('token', ''),
     loading: false,
-    error: null, 
     isLogged: useStorage('isLogged', false),
-    email: computed(() => state.decodedToken.email),
-    id: computed(() => state.decodedToken.id),
-    foto: computed(() => state.decodedToken.foto),
-    nome: computed(() => state.decodedToken.name),
+    email: computed(() => state.token ? jwtDecode(state.token).email : ''),
+    id: computed(() => state.token ? jwtDecode(state.token).id : ''),
+    foto: computed(() => state.token ? jwtDecode(state.token).foto : ''),
+    nome: computed(() => state.token ? jwtDecode(state.token).nome : ''),
   });
     const isLoading = computed(() => state.loading);
     const isLogged = computed(() => state.isLogged);
@@ -29,29 +27,54 @@ export const useAuthStore = defineStore('auth', () => {
       };
     })
 
-    const getToken = async (user) => {
-      console.log('Start of getToken');
+    const setToken = (newToken) => {
+     state.token = newToken
+    };
+
+    const loginUser = async (user) => {
+      state.token = '';
+      state.isLogged = false;
       state.loading = true;
       try {
-        console.log('Calling authService.getToken');
-        const data = await authService.getToken(user);
-        console.log('Token received:', data);
-        state.token = data;
+        const response = await authService.getToken(user);
+        console.log('response:', response);
+        setToken(response.access);
+        state.isLogged = true;
+        return response
       } catch (error) {
-        console.error('Error occurred:', error);
-        state.error = error;
+        console.error('Erro no login:', error);
+        state.isLogged = false;
+        state.token = '';
+        throw error;
       } finally {
-        console.log('Executing finally block');
+        state.loading = false
       }
-      state.loading = false;
-      state.isLogged = true;
-    };
-    const unsetToken = async () => {
-      state.token = null;
-      state.isLogged = false;
-    }
+
+    // const unsetToken = async () => {
+    //   state.token = null;
+    //   state.isLogged = false;
+    // }
     
+    }
 
+    const createUser = async(user) =>{
+      state.token = '';
+      state.isLogged = false;
+      state.loading = true;
+      try {
+        const response = await authService.createUser(user);
+        console.log('response:', response);
+        state.error = null;
+        return response
+      } catch (error) {
+        console.error('Erro no cadastro:', error);
+        state.error = error;
+        throw error;
+      } finally {
+        state.loading = false
+      }
 
-  return { state, getToken, isLoading, isLogged, user, unsetToken };
+    }
+
+  return { state, setToken, isLoading, isLogged, user, loginUser, createUser };
 });

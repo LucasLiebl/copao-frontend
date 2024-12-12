@@ -8,6 +8,7 @@ const router = useRouter()
 const authStore = useAuthStore()
 
 const user = reactive({
+  name: 'Bruno',  
   email: 'bruno@gabigol.com',
   password: 'pedroguilherme'
 })
@@ -19,15 +20,15 @@ async function handleLogin() {
   console.log("Função handleLogin foi chamada");
 
   try {
-    const response = await authStore.loginUser(user);
+    const response = await authStore.createUser(user);
 
     if (response) {
-      alert('Login efetuado com sucesso. Redirenionando para a página de home.');
-      router.push('/home');
+      alert('Registro efetuado com sucesso. Redirenionando para a página de login.');
+      router.push('/login');
     }
   } catch (error) {
-    console.error('Erro no login:', error);
-    alert('Erro no login. Verifique suas credenciais.');
+    console.error('Erro no registro:', error);
+    alert('Erro no registro. Verifique suas credenciais.');
   }
 }
 </script>
@@ -36,11 +37,15 @@ async function handleLogin() {
   <div class="container">
     <div class="authContainer">
       <div class="img-container">
-        <img src="https://i.ibb.co/hssQjFr/IMG-0309.jpg" alt="" />
+        <img src="https://i.ibb.co/V3qVcFz/IMG-0362.jpg" alt="" />
       </div>
       <div class="login-container">
         <div><img src="https://i.ibb.co/9VfWVgh/COPAO-1.png" alt="" /></div>
         <form class="form">
+            <div class="input-group">
+            <input type="email" v-model="user.name" />
+            <label for="" class="placeholder">Nome</label>
+          </div>
           <div class="input-group">
             <input type="email" v-model="user.email" />
             <label for="" class="placeholder">Email</label>
@@ -48,12 +53,11 @@ async function handleLogin() {
           <div class="input-group">
             <input type="password" v-model="user.password" />
             <label for="" class="placeholder">Senha</label>
-            <p class="forgetPass" @click="alert()">Esqueceu a senha?</p>
           </div>
           <div class="input-group">
-            <div class="button" @click="handleLogin()">Login</div>
+            <div class="button" @click="handleLogin()">Register</div>
             
-            <p class="register">Nao possui uma conta? <RouterLink class="register-link" to="/register">Resgistre-se</RouterLink> </p>
+            <p class="register">Ja possui uma conta? <RouterLink class="register-link" to="/login">Log-in</RouterLink> </p>
           </div>
         </form>
       </div>
@@ -89,13 +93,7 @@ async function handleLogin() {
     font-weight: 500;
 
 }
-.forgetPass {
-  margin-top: 10px;
-  color: #da0000;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 0.9rem;
-}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -164,7 +162,7 @@ h1 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 0px 100px 100px 0px;
+    border-radius: 100px 0px 0px 100px;
   }
 }
 
@@ -177,7 +175,7 @@ h1 {
 }
 .authContainer {
   display: flex;
-  flex-direction: row;  
+  flex-direction: row-reverse;  
   background-color: #1e1e1e;
   border-radius: 10px;
   width: 100%;

@@ -3,7 +3,6 @@ import { useJogadorStore } from "../stores/jogador.js";
 import { useJogoStore } from "../stores/jogo.js";
 import { useRodadaStore } from "../stores/rodada.js";
 import { useTimeStore } from "../stores/time.js";
-import { useTimeJogadorStore } from "./timejogador.js";
 
 export {
     useCampeonatoStore,
@@ -11,5 +10,4 @@ export {
     useRodadaStore,
     useJogadorStore,
     useTimeStore,
-    useTimeJogadorStore
 }

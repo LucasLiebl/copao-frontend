@@ -3,7 +3,7 @@ import api from '../plugins/api'
 class TimeService {
   async getTimes() {
     try {
-      const { data } = await api.get(`/times/`)
+      const { data } = await api.get(`api/times/`)
       return data.results
     } catch (error) {
       console.log('error in getTimes', error)
@@ -13,7 +13,7 @@ class TimeService {
 
   async createTime(newTime) {
     try {
-      const { data } = await api.post(`/times/`, newTime)
+      const { data } = await api.post(`api/times/`, newTime)
       return data.results
     } catch (error) {
       console.log('error in createTime', error)
@@ -23,7 +23,7 @@ class TimeService {
 
   async updateTime(time) {
     try {
-      const { data } = await api.patch(`/times/${time.id}/`, time)
+      const { data } = await api.patch(`api/times/${time.id}/`, time)
       return data.results
     } catch (error) {
       console.log('error in updateTime')
@@ -33,7 +33,7 @@ class TimeService {
 
   async deleteTime(id) {
     try {
-      const { data } = await api.delete(`/times/${id}/`)
+      const { data } = await api.delete(`api/times/${id}/`)
       return data.results
     } catch (error) {
       console.log('error in deleteTime', error)
@@ -43,7 +43,7 @@ class TimeService {
 
   async getTime(id) {
     try {
-      const { data } = await api.get(`/times/${id}/`)
+      const { data } = await api.get(`api/times/${id}/`)
       return data
     } catch (error) {
       console.log('error in getTimes', error)
