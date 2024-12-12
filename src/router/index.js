@@ -9,6 +9,7 @@ import TestCard from '@/views/TestCard.vue';
 import TodosPosicaoView from '@/views/TodosPosicaoView.vue';
 import Jogos from '@/views/JogosView.vue';
 import JogoView from '@/views/JogoView.vue';
+import LoginView from '@/views/LoginView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -64,6 +65,11 @@ const router = createRouter({
           name: 'jogo',
           component: JogoView,
           props: true,
+        },
+        {
+          path: 'login',
+          name: 'login',
+          component: LoginView,
         },
       ],
     },
