@@ -52,6 +52,7 @@ function SeletorRodada(operation){
             :escudo-v="jogo.time_visitante.escudo?.url"
             :gols="jogo.gols"
             :id="jogo.id"
+            :tipo="jogo.tipo_jogo"
           ></JogoComponent>
       </div>
     </div>

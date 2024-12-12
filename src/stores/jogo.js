@@ -43,6 +43,18 @@ export const useJogoStore = defineStore('jogo', () => {
       state.loading = false
     }
   }
+
+  const getJogosbyTipo = async (tipo) => {
+    state.loading = true
+    try {
+      state.jogos = await JogoService.getJogosbyTipo(tipo)
+    } catch (error) {
+      state.error = error
+      throw error
+    } finally {
+      state.loading = false
+    }
+  }
   
   const createJogo = async (newJogo) => {
     state.loading = true
@@ -93,6 +105,7 @@ export const useJogoStore = defineStore('jogo', () => {
     getJogo,
     createJogo,
     updateJogo,
-    deleteJogo
+    deleteJogo,
+    getJogosbyTipo
   }
 })

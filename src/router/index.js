@@ -11,6 +11,7 @@ import Jogos from '@/views/JogosView.vue';
 import JogoView from '@/views/JogoView.vue';
 import LoginView from '@/views/LoginView.vue';
 import RegisterView from '@/views/RegisterView.vue';
+import ChaveamentoView from '@/views/ChaveamentoView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -76,6 +77,11 @@ const router = createRouter({
           path: 'register',
           name: 'register',
           component: RegisterView,
+        },
+        {
+          path: 'chaveamento',
+          name: 'chaveamento',
+          component: ChaveamentoView,
         }
       ],
     },

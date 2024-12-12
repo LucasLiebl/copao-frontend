@@ -56,8 +56,8 @@ const props = defineProps({
   <div class="jogoComponent">
     <div class="dataJogo">
       <p>
-        {{ dateFormat(props.data, 'dd/mm') }} · {{ props.endereco }} ·
-        {{ props.horario.slice(0, 5) }}
+        {{ dateFormat(props.data, 'dd/mm') }} · {{ props.endereco ? props.endereco : "Local não definido" }} ·
+        {{ props.horario ? props.horario.slice(0, 5) : "Horário não definido" }}
       </p>
     </div>
     <div class="times">

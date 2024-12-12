@@ -23,6 +23,17 @@ class JogoService {
     }
   }
 
+  async getJogosbyTipo(tipo) {
+    try {
+      const { data } = await api.get(`api/jogos/`)
+      return data.results.filter(j => j.tipo_jogo === tipo)
+
+    } catch (error) {
+      console.log('error in getJogos', error)
+      throw error
+    }
+  }
+
   async createJogo(newJogo) {
     try {
       const { data } = await api.post(`api/jogos/`, newJogo)
