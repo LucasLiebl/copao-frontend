@@ -27,6 +27,7 @@ const router = createRouter({
           path: 'crudjogador',
           name: 'CrudJogador',
           component: CrudJogador,
+          props: true,
         },
         {
           path: 'crudtime',

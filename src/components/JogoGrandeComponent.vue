@@ -1,6 +1,6 @@
 <script setup>
 import { onBeforeMount, ref } from "vue";
-import dateFormat from "dateformat";
+// import dateFormat from "dateformat";
 import { useJogadorStore } from "@/stores";
 
 const jogadorStore = useJogadorStore()
