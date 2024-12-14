@@ -85,6 +85,7 @@ define(['./workbox-b5f7729d'], (function (workbox) { 'use strict';
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "revision": "0.ljht0nup4lo"
 =======
     "revision": "0.l82pahrf9to"
@@ -95,6 +96,9 @@ define(['./workbox-b5f7729d'], (function (workbox) { 'use strict';
 =======
     "revision": "0.7u5fcob3oj"
 >>>>>>> 7a06b96 (Começo do mobile da tela da classificação)
+=======
+    "revision": "0.5j6us33cqj8"
+>>>>>>> 4e4578f (Começo do mobiel da tela de eleco)
   }], {});
   workbox.cleanupOutdatedCaches();
   workbox.registerRoute(new workbox.NavigationRoute(workbox.createHandlerBoundToURL("index.html"), {
