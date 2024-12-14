@@ -84,6 +84,7 @@ define(['./workbox-b5f7729d'], (function (workbox) { 'use strict';
     "url": "index.html",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "revision": "0.ljht0nup4lo"
 =======
     "revision": "0.l82pahrf9to"
@@ -91,6 +92,9 @@ define(['./workbox-b5f7729d'], (function (workbox) { 'use strict';
 =======
     "revision": "0.h29itra19d"
 >>>>>>> d134a13 (mobile da pagina da tabela quase feito)
+=======
+    "revision": "0.7u5fcob3oj"
+>>>>>>> 7a06b96 (Começo do mobile da tela da classificação)
   }], {});
   workbox.cleanupOutdatedCaches();
   workbox.registerRoute(new workbox.NavigationRoute(workbox.createHandlerBoundToURL("index.html"), {
