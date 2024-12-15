@@ -1,12 +1,13 @@
 <script setup>
-import { onBeforeMount, ref } from "vue";
+import { onMounted, ref, computed } from "vue";
 import dateFormat from "dateformat";
-import { useJogadorStore } from "@/stores";
+import { useJogadorStore, useTimeStore } from "@/stores";
 
 const jogadorStore = useJogadorStore()
+const timeStore = useTimeStore()
 
-onBeforeMount(() => {
-  jogadorStore.getJogadores()
+onMounted(async () => {
+  await jogadorStore.getJogadores()
 })
 
 const props = defineProps({
@@ -48,6 +49,19 @@ const props = defineProps({
   }
 });
 
+function primeiraLetraMaiuscula(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+function getJogador(id) {
+  return jogadorStore.jogadores.filter((j) => j.id == id)
+}
+function getTime(id) {
+  return timeStore.times.filter((t) => t.id == id)
+}
+
+const golsTimeM = computed(() => props.gols.filter((gol) => gol.time === props.timeM.id));
+const golsTimeV = computed(() => props.gols.filter((gol) => gol.time === props.timeV.id));
 
 
 
@@ -56,7 +70,7 @@ const props = defineProps({
   <div class="jogoComponent">
     <div class="dataJogo">
       <p>
-        {{ dateFormat(props.data, 'dd/mm') }} · {{ props.endereco ? props.endereco : "Local não definido" }} ·
+        {{ dateFormat(props.data, 'dd/mm') }} · {{ props.endereco ? primeiraLetraMaiuscula(props.endereco) : "Local não definido" }} ·
         {{ props.horario ? props.horario.slice(0, 5) : "Horário não definido" }}
       </p>
     </div>
@@ -81,11 +95,37 @@ const props = defineProps({
     </div>
 
     <div class="gols">
-      {{}}
+    <!-- Goals for Team M -->
+    <div class="timeM">
+      <h3>Goals for {{ timeM.nome }}</h3>
+      <div v-for="gol in golsTimeM" :key="gol.id" style="color: white;">
+        {{ getJogador(gol.jogador)[0]?.nome }} - {{ getTime(gol.time)[0]?.nome }}
+      </div>
     </div>
+
+    <!-- Goals for Team V -->
+    <div class="timeV">
+      <h3>Goals for {{ timeV.nome }}</h3>
+      <div v-for="gol in golsTimeV" :key="gol.id" style="color: white;">
+        {{ getJogador(gol.jogador)[0]?.nome }} - {{ getTime(gol.time)[0]?.nome }}
+      </div>
+    </div>
+  </div>
+
   </div>
 </template>
 <style scoped>
+.gols {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.timeM, .timeV {
+  background-color: #303030;
+  padding: 20px;
+  border-radius: 8px;
+}
 .jogoComponent {
   width: 1200px;
   height: 300px;

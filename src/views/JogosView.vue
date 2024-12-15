@@ -53,6 +53,7 @@ function SeletorRodada(operation){
             :gols="jogo.gols"
             :id="jogo.id"
             :tipo="jogo.tipo_jogo"
+            :realizado="jogo.jogo_realizado"
           ></JogoComponent>
       </div>
     </div>

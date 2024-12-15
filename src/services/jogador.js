@@ -10,6 +10,28 @@ class JogadorService {
     }
   }
 
+  async getJogador(id) {
+    try {
+      const { data } = await api.get(`api/jogadores/${id}/`)
+      return data
+    } catch (error) {
+      console.log('error in getJogadores', error)
+      throw error
+    }
+  }
+
+  async getArtilheiros(){
+    try {
+      const results = await api.get(`api/jogadores/artilheiros`)
+      console.log(results.data)
+      return results.data
+    }
+    catch (error) {
+      console.log('error in getArtilheiros', error)
+      throw error
+    }
+  }
+
   async createJogador(newJogador) {
     try {
       const { data } = await api.post(`api/jogadores/`, newJogador)

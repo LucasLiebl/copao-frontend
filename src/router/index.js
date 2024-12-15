@@ -1,17 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { useAuthStore } from '../stores/auth.js';
 import LayoutFull from '../layouts/LayoutFull.vue';
-import CrudJogador from '../views/CrudJogador.vue';
-import CrudTime from '../views/CrudTime.vue';
-import CrudRodada from '@/views/CrudRodada.vue';
-import CrudJogo from '@/views/CrudJogo.vue';
+import CrudJogador from '../views/cruds/CrudJogador.vue';
+import CrudTime from '../views/cruds/CrudTime.vue';
+import CrudRodada from '@/views/cruds/CrudRodada.vue';
+import CrudJogo from '@/views/cruds/CrudJogo.vue';
 import Tabela from '@/views/TabelaView.vue';
-import TestCard from '@/views/TestCard.vue';
 import TodosPosicaoView from '@/views/TodosPosicaoView.vue';
 import Jogos from '@/views/JogosView.vue';
 import JogoView from '@/views/JogoView.vue';
 import LoginView from '@/views/LoginView.vue';
 import RegisterView from '@/views/RegisterView.vue';
 import ChaveamentoView from '@/views/ChaveamentoView.vue';
+import JogadorView from '@/views/JogadorView.vue';
+import PerfilView from '@/views/PerfilView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,9 +24,18 @@ const router = createRouter({
       component: LayoutFull,
       children: [
         {
-          path: 'tabela',
-          name: 'tabela',
+          path: '/home',
+          name: 'Home',
           component: Tabela,
+          props: true,
+          // beforeEnter: (to, from, next) => {
+          //   const authStore = useAuthStore();
+          //   if (authStore.isLogged) {
+          //     next();
+          //   } else {
+          //     next('/login'); 
+          //   }
+          // }
         },
         {
           path: 'crudjogador',
@@ -47,15 +58,16 @@ const router = createRouter({
           component: CrudJogo,
         },
         {
-          path: 'testCard',
-          name: 'TestCard',
-          component: TestCard,
-        },
-        {
           path: '/time/:id',
           name: 'time',
           component: TodosPosicaoView,
           props: true
+        },
+        {
+          path:'/jogador/:id',
+          name: 'jogador',
+          component: JogadorView,
+          props: true,
         },
         {
           path: 'jogos',
@@ -69,7 +81,7 @@ const router = createRouter({
           props: true,
         },
         {
-          path: 'login',
+          path: '/',
           name: 'login',
           component: LoginView,
         },
@@ -77,6 +89,11 @@ const router = createRouter({
           path: 'register',
           name: 'register',
           component: RegisterView,
+        },
+        {
+          path: 'perfil',
+          name: 'perfil',
+          component: PerfilView,
         },
         {
           path: 'chaveamento',

@@ -19,8 +19,8 @@ const props = defineProps({
     type: String
   },
   foto: {
-    type: Image,
-    default: '../../public/default-player.png'
+    type: String,
+    default: 'https://i.ibb.co/Svg73R0/default-player.png'
   }
 })
 </script>

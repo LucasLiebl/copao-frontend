@@ -15,6 +15,7 @@ export const useAuthStore = defineStore('auth', () => {
     id: computed(() => state.token ? jwtDecode(state.token).id : ''),
     foto: computed(() => state.token ? jwtDecode(state.token).foto : ''),
     nome: computed(() => state.token ? jwtDecode(state.token).nome : ''),
+    grupos: computed(() => state.token ? jwtDecode(state.token).groups : []),
   });
     const isLoading = computed(() => state.loading);
     const isLogged = computed(() => state.isLogged);
@@ -24,6 +25,7 @@ export const useAuthStore = defineStore('auth', () => {
         id: state.id,
         foto: state.foto,
         nome: state.nome,
+        grupos: state.grupos,
       };
     })
 
@@ -45,7 +47,6 @@ export const useAuthStore = defineStore('auth', () => {
         console.error('Erro no login:', error);
         state.isLogged = false;
         state.token = '';
-        throw error;
       } finally {
         state.loading = false
       }
@@ -55,6 +56,21 @@ export const useAuthStore = defineStore('auth', () => {
     //   state.isLogged = false;
     // }
     
+    }
+
+    const logoutUser = async () => {
+      state.loading = true;
+      try {
+        state.token = null;
+        state.isLogged = false;
+        const response = 'Logout efetuado com sucesso';
+        return response;
+      }catch(error){
+        console.error('Erro no logout:', error);
+      }finally{
+        state.loading = false;
+      }
+      
     }
 
     const createUser = async(user) =>{
@@ -69,12 +85,11 @@ export const useAuthStore = defineStore('auth', () => {
       } catch (error) {
         console.error('Erro no cadastro:', error);
         state.error = error;
-        throw error;
       } finally {
         state.loading = false
       }
 
     }
 
-  return { state, setToken, isLoading, isLogged, user, loginUser, createUser };
+  return { state, setToken, isLoading, isLogged, user, loginUser, createUser, logoutUser };
 });

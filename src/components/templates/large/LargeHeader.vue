@@ -1,13 +1,21 @@
 <script setup>
+import { ref, computed } from 'vue';
+import { useAuthStore } from '@/stores/auth'; 
+
+const authStore = useAuthStore();
+
+const isLogged = computed(() => authStore.isLogged);
+const user = computed(() => authStore.user);
+
 </script>
 
 <template>
 <header>
   <div class="logo">
-      <router-link to="/tabela"> <img src="https://i.ibb.co/9VfWVgh/COPAO-1.png" alt="logo"></router-link>
+      <router-link to="/home"> <img src="https://i.ibb.co/9VfWVgh/COPAO-1.png" alt="logo"></router-link>
     </div>
     <nav class="nav-links">
-      <router-link to="/tabela" 
+      <router-link to="/home" 
       
       :class="{'nav-item nav-item-select': $route.path === '/tabela','nav-item': $route.path !== '/tabela'}">
 
@@ -26,10 +34,53 @@
       <router-link to="/jogos" :class="{'nav-item nav-item-select': $route.path === '/jogos','nav-item': $route.path !== '/jogos'}"><img
           src="https://i.ibb.co/bNk0pxT/Vector.png" alt="" class="icon"> Jogos</router-link>
     </nav>
+    
+    <router-link class="perfilBorder" v-if="isLogged" to="/perfil">
+      <img :src=" user.foto ? user.foto : 'https://i.ibb.co/kmyjjy3/Default-pfp-svg.png'" alt="">
+       </router-link>
+
+    <router-link v-else to="/" class="loginBorder">
+      <img src="https://i.ibb.co/kmyjjy3/Default-pfp-svg.png" alt="">
+      Sing In
+    </router-link>
   </header>  
   </template>
 
 <style scoped>
+.perfilBorder{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #313131;
+  border-radius: 50%;
+  width: 3vw;
+  height: 3vw;
+  margin-left: auto;
+  margin-right: 2%;
+
+  img{
+    border-radius: 50%;
+    width: 80%;
+  }
+}
+.loginBorder{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #313131;
+  width: 6%;
+  height: 70%;
+  border-radius: 20px;
+  margin-left: auto;
+  margin-right: 2%;
+  color: white;
+  text-decoration: none;
+  font-size: 1.2em;
+  img{
+    border-radius: 50%;
+    width: 30%;
+  }
+}
 header {
   display: flex;
   background-color: #1E1E1E;

@@ -9,10 +9,6 @@ const props = defineProps({
     required: true,
     default: 'Artilheiros'
   },
-  id: {
-    type: String,
-    required: true
-  }
 })
 </script>
 
@@ -20,10 +16,13 @@ const props = defineProps({
   <div class="card">
     <h4 class="titulo">{{ props.titulo }}</h4>
     <div class="objetos">
-      <div class="object" v-for="object in props.datas.slice(0, 6)" :key="object">
-        <img :src="object.times[0]?.escudo" alt="">
-        <h4> {{ object.nome }} </h4>
-      </div>
+        <RouterLink class="object" v-for="object in props.datas" :key="object" :to="`/jogador/${object.id}`">
+          <img :src="object?.times[0]?.time.escudo.file" alt="" />
+          <h4>{{ object.nome }}</h4>
+          -
+          <h4>{{ object.gols.length }}</h4>
+          </RouterLink
+        >
     </div>
   </div>
 </template>
@@ -36,7 +35,8 @@ const props = defineProps({
   height: 420px;
   border-radius: 15px;
   padding: 15px;
-  gap: 12px;}
+  gap: 12px;
+}
 .titulo {
   color: white;
 }
@@ -49,7 +49,7 @@ h4 {
   display: flex;
   align-items: center;
   gap: 3px;
-  text-decoration: none
+  text-decoration: none;
 }
 .objetos {
   display: flex;

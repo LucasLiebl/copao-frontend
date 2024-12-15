@@ -40,10 +40,6 @@ const props = defineProps({
   },
   tipo: {
     type: String
-  },
-  realizado: {
-    type: Boolean,
-    default: false
   }
 })
 </script>
@@ -57,45 +53,35 @@ const props = defineProps({
     </div>
     <div class="times">
       <div class="timeM">
-        <h1>{{ props.timeM?.nome }}</h1>
         <div class="escudoTime">
           <img :src="props.escudoM" alt="" />
         </div>
       </div>
       <div class="placar">
-        <h1 v-if="props.realizado" >{{ gols ? gols.filter((g) => g?.time == timeM?.id).length : [].length }}</h1>
-        <h1 v-else></h1>
+        <h1>{{ gols ? gols.filter((g) => g?.time == timeM?.id).length : [].length }}</h1>
         <h1 class="versus">x</h1>
-        <h1 v-if="props.realizado">{{ gols ? gols.filter((g) => g?.time == timeV?.id).length : [].length }}</h1>
-        <h1 v-else></h1>
-
+        <h1>{{ gols ? gols.filter((g) => g?.time == timeV?.id).length : [].length }}</h1>
+        <div>{{ props.tipo }}</div>
       </div>
       <div class="timeV">
         <div class="escudoTime">
           <img :src="props.escudoV" alt="" />
         </div>
-        <h1>{{ props.timeV?.nome }}</h1>
       </div>
     </div>
-    <div class="tipoJogo"><p>{{ props.tipo }}</p></div>
-
   </RouterLink>
 </template>
 <style scoped>
 .jogoComponent {
-  width: 1000px;
+  width: 500px;
   height: 150px;
   background-color: #161616;
   border-radius: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 10px;
   text-decoration: none;
-  justify-content: center;
-}
-.tipoJogo{
-  color: #757575;
-  outline: none;
 }
 .dataJogo {
   font-size: 16px;

@@ -2,6 +2,7 @@
 import { reactive } from 'vue'
 import { useAuthStore } from '../stores/auth'
 import { useRouter } from 'vue-router'
+import { jwtDecode } from 'jwt-decode';
 
 const router = useRouter()
 
@@ -63,13 +64,15 @@ async function handleLogin() {
   <div v-if="authStore.state.error" class="error">
       {{ authStore.state.error.message }}
     </div>
-  error {{ authStore.state.error }}
+    error: {{ authStore.state.error }}
   <hr />
-    token {{ authStore.state.token }}
+    token: {{ authStore.state?.token }}
     <hr />
-    {{ authStore.state }}
+    decode token:  {{ authStore.state.token ? jwtDecode(authStore.state?.token) : 'null' }}
     <hr>
-    {{ authStore.user }}
+    state: {{ authStore.state }}
+    <hr>
+    user: {{ authStore.user }}
     </div>
 </template>
 

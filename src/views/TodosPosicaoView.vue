@@ -35,7 +35,12 @@ const jogadores = computed(() => {
 </script>
 
 <template>
-  <div class="jogadores-container">
+  <div  :class="timeStore.isLoading ? 'loading' : 'notLoading'">
+    <svg viewBox="25 25 50 50" >
+      <circle r="20" cy="50" cx="50"></circle>
+    </svg>
+  </div>
+  <div :class="timeStore.isLoading ? 'notLoading' : 'jogadores-container'">
     <div class="sizecontainer">
     <h1 class="elenco"> <img class="img" :src="timeStore.time.escudo?.url" alt=""> Elenco {{ timeStore.time.nome }} </h1>
     <div class="buttons-posicao">
@@ -49,19 +54,79 @@ const jogadores = computed(() => {
       </BotaoJogador>
   </div>
     <div class="posicao-container">
-      <CardJogador
-            v-for="item in jogadores" :key="item.id" 
-            :foto="item?.foto"      
-            :nome="item?.nome"
-            :numero="item?.numero"
-            :posicao="categories.find(c => c.id == item.posicao)?.texto"
+      <router-link  v-for="item in jogadores" :key="item.id" :to="`/jogador/${item.jogador.id}`" class="card-router">
+          <CardJogador
+            :key="item.id" 
+            :foto="item.jogador?.foto"      
+            :nome="item.jogador.nome"
+            :numero="item.jogador.numero"
+            :posicao="categories.find(c => c.id == item.jogador.posicao)?.texto"
           />
+      </router-link>
+      
     </div>
   </div>
   </div>
 </template>
 
 <style scoped>
+.card-router{
+  text-decoration: none;
+}
+
+svg {
+  width: 3.25em;
+  transform-origin: center;
+  animation: rotate4 2s linear infinite;
+}
+
+circle {
+  fill: none;
+  stroke: hsl(0, 0%, 100%);
+  stroke-width: 2;
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: dash4 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate4 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash4 {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+
+  100% {
+    stroke-dashoffset: -125px;
+  }
+}
+.notLoading{
+  display: none;
+  transition: 5ms;
+}
+.loading {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: rgb(32, 32, 32);
+  transition: 5ms;
+  display: flex;
+  align-content: center;
+  justify-content: center
+  
+}
+
 .sizecontainer{
   display: flex;
   flex-direction: column;

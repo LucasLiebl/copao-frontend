@@ -34,7 +34,13 @@ async function handleLogin() {
 </script>
 
 <template>
-  <div class="container">
+    <div  :class="authStore.isLoading ? 'loading' : 'notLoading'">
+    <svg viewBox="25 25 50 50" >
+      <circle r="20" cy="50" cx="50"></circle>
+    </svg>
+  </div>
+
+  <div  :class="authStore.isLoading ? 'notLoading' : 'container'">
     <div class="authContainer">
       <div class="img-container">
         <img src="https://i.ibb.co/V3qVcFz/IMG-0362.jpg" alt="" />
@@ -78,6 +84,59 @@ async function handleLogin() {
 </template>
 
 <style scoped>
+svg {
+  width: 3.25em;
+  transform-origin: center;
+  animation: rotate4 2s linear infinite;
+}
+
+circle {
+  fill: none;
+  stroke: hsl(0, 0%, 100%);
+  stroke-width: 2;
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: dash4 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate4 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash4 {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+
+  100% {
+    stroke-dashoffset: -125px;
+  }
+}
+.notLoading{
+  display: none;
+  transition: 5ms;
+}
+.loading {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: rgb(32, 32, 32);
+  transition: 5ms;
+  display: flex;
+  align-content: center;
+  justify-content: center
+  
+}
+
 .debug{
   color: white;
 }

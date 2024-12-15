@@ -1,18 +1,23 @@
 import { defineStore } from 'pinia'
 import { computed, reactive } from 'vue'
 import { JogadorService } from '@/services'
+import jogador from '@/services/jogador'
 
 export const useJogadorStore = defineStore('jogador', () => {
   const state = reactive({
     jogadores: [],
+    jogador: [],
     selectedJogador: null,
     loading: false,
     error: null,
-    connection: false
+    connection: false,
+    artilheiros: [],
   })
   const isLoading = computed(() => state.loading)
   const jogadoresCount = computed(() => state.jogadores.length)
   const jogadores = computed(() => state.jogadores)
+  const artilheiros = computed(() => state.artilheiros)
+  const jogador = computed(() => state.jogador)
 
   const getJogadores = async () => {
     state.loading = true
@@ -24,6 +29,33 @@ export const useJogadorStore = defineStore('jogador', () => {
       state.loading = false
       state.connection = true
     }
+  }
+
+  const getJogador = async (id) => {
+    state.loading = true
+    try {
+      console.log(id)
+      const data = await JogadorService.getJogador(id)
+      state.jogador = data
+    } catch (error) {
+      state.error = error
+    } finally {
+      state.loading = false
+    }
+  }
+  
+
+  const getArtilheiros = async () => {
+    state.loading = true
+    try{
+      state.artilheiros = await JogadorService.getArtilheiros()
+    }catch (error){
+      state.error = error
+    }finally{
+      state.loading = false
+      state.connection = true
+    }
+
   }
 
   const createJogador = async (newJogador) => {
@@ -70,9 +102,13 @@ export const useJogadorStore = defineStore('jogador', () => {
     isLoading,
     jogadoresCount,
     jogadores,
+    artilheiros,
+    jogador,
     getJogadores,
     createJogador,
     updateJogador,
-    deleteJogador
+    deleteJogador,
+    getArtilheiros,
+    getJogador,
   }
 })

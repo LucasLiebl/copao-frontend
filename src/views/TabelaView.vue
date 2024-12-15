@@ -11,6 +11,7 @@ const JogadorStore = useJogadorStore()
 onMounted(async () => {
   await timeStore.getTimes()
   await JogadorStore.getJogadores()
+  await JogadorStore.getArtilheiros()
   console.log(JogadorStore.jogadores)
 })
 </script>
@@ -24,7 +25,7 @@ onMounted(async () => {
   <div :class="timeStore.isLoading ? 'notLoading' : 'container'">
     <div class="cards">
       <CardComponent :datas="timeStore.times" />
-      <CardComponentArt :datas="JogadorStore.jogadores" :titulo="'Artilheiros'" />
+      <CardComponentArt :datas="JogadorStore.artilheiros" :titulo="'Artilheiros'" />
     </div>
 
     <div class="tabelaContainer">
