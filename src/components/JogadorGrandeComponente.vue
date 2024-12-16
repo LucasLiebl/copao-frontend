@@ -34,7 +34,7 @@ function posicao(number) {
 
 const timeAtual = computed(() =>
   props.data.times && props.data.times[0] && props.data.times[0].time
-    ? props.data.times[0].time.nome
+    ? props.data.times[(props.data.times).length - 1].time.nome
     : 'N/A'
 )
 

@@ -44,8 +44,7 @@ const props = defineProps({
     default: ""
   },
   gols: {
-    type: Array,
-    default: () => []
+    default: [],
   }
 });
 
@@ -60,8 +59,8 @@ function getTime(id) {
   return timeStore.times.filter((t) => t.id == id)
 }
 
-const golsTimeM = computed(() => props.gols.filter((gol) => gol.time === props.timeM.id));
-const golsTimeV = computed(() => props.gols.filter((gol) => gol.time === props.timeV.id));
+const golsTimeM = computed(() => props.gols ? props.gols.filter((gol) => gol.time === props.timeM.id) : []);
+const golsTimeV = computed(() => props.gols ? props.gols.filter((gol) => gol.time === props.timeV.id) : []);
 
 
 
