@@ -104,6 +104,7 @@ circle {
   border-radius: 15px;
   align-items: flex-start;
   justify-content: center;
+  
 }
 .cards {
   display: flex;
@@ -117,17 +118,15 @@ circle {
     flex-direction: column;
     align-items: center;
   }
-  .tabelaContainer {
-    width: 91%;
-  }
+.tabelaContainer{
+  width: 85%;
+  overflow: scroll;
+}
   .cards {
     flex-direction: column;
     width: 100%;
     align-items: center;
   }
-  .cards .card {
-    width: 90%;
-    max-width: 350px;
-  }
+ 
 }
 </style>

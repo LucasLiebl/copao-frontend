@@ -1,5 +1,8 @@
 <script setup>
 import { computed } from 'vue'
+import { useWindowSize } from '@vueuse/core'
+
+const { width } = useWindowSize()
 
 const props = defineProps({
   times: {
@@ -14,6 +17,7 @@ const sortedTimes = computed(() => {
 console.log( "sorted times ",sortedTimes)
 </script>
 <template>
+  <div class="table-container">
     <table>
       <thead>
         <tr>
@@ -27,8 +31,8 @@ console.log( "sorted times ",sortedTimes)
           <th>GP</th>
           <th>GC</th>
           <th>SG</th>
-          <th>%</th>
-          <th>ult. jogos</th>
+          <th v-if="width > 768">%</th>
+          <th v-if="width > 768">ult. jogos</th>
         </tr>
       </thead>
       <tbody>
@@ -40,20 +44,17 @@ console.log( "sorted times ",sortedTimes)
                   sortedTimes.indexOf(time) + 1 >= 5
                     ? 'zona-r'
                       : 'zona-c'
-                "
-              >
-              </span>
-              <span><h1>{{ sortedTimes.indexOf(time) + 1 }}º  </h1></span>
+                " 
+              ></span>
+              <span><h1>{{ sortedTimes.indexOf(time) + 1 }}º</h1></span>
             </div>
           </td>
-
           <td style="font-weight: 900; width: 220px">
             <div class="nomeEscudo">
-              <span style="display: flex"
-                ><img style="width: 4vh" :src="time.escudo?.url" alt=""
-              /></span>
-
-              <span> <h1>{{ time.nome.charAt(0).toUpperCase() + time.nome.slice(1) }}</h1></span>
+              <span style="display: flex">
+                <img style="width: 4vh" :src="time.escudo?.url" alt="" />
+              </span>
+              <span v-if="width > 768"><h1>{{ time.nome.charAt(0).toUpperCase() + time.nome.slice(1) }}</h1></span>
             </div>
           </td>
           <td class="marks">{{ time.pontos }}</td>
@@ -64,21 +65,22 @@ console.log( "sorted times ",sortedTimes)
           <td>{{ time.gols_pro }}</td>
           <td class="marks">{{ time.gols_contra }}</td>
           <td>{{ time.gols_pro - time.gols_contra }}</td>
-          <td class="marks">
+          <td v-if="width > 768" class="marks">
             {{ ((time.vitoria / (time.vitoria + time.empate + time.derrota)) * 100).toFixed(0) }}
           </td>
-          <td class="ult_jogos">
+          <td v-if="width > 768" class="ult_jogos">
             <span
               v-for="jogo in time.ultimos_jogos"
               :key="jogo.legth"
               :class="jogo == '1' ? 'v' : jogo == '-1' ? 'd' : 'e'"
-            >
-            </span>
+            ></span>
           </td>
         </tr>
       </tbody>
     </table>
+  </div>
 </template>
+
 <style scoped>
 table {
   width: 90%;
@@ -158,5 +160,32 @@ th{
   border-radius: 50%;
   content: '';
   display: block;
+}
+.table-container {
+  width: 100%;
+  overflow-x: auto; /* Permite scroll horizontal */
+}
+
+@media screen and (max-width: 768px) {
+  .table-container {
+    margin-top: 10px; /* Opcional: espaço para melhor visualização */
+    border-radius: 8px; /* Opcional: bordas arredondadas para o contêiner */
+  }
+
+  table {
+    width: 100%;
+    table-layout: auto; /* Ajusta o layout da tabela */
+  }
+
+  th, td {
+    text-align: center;
+    font-size: 0.8rem; /* Ajuste do tamanho da fonte */
+    padding: 8px;
+  }
+
+  .tr-dados {
+    font-size: 0.8rem;
+    height: auto;
+  }
 }
 </style>
