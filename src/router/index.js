@@ -14,6 +14,7 @@ import RegisterView from '@/views/RegisterView.vue';
 import ChaveamentoView from '@/views/ChaveamentoView.vue';
 import JogadorView from '@/views/JogadorView.vue';
 import PerfilView from '@/views/PerfilView.vue';
+import TelaInicialView from '@/views/TelaInicialView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,8 +25,13 @@ const router = createRouter({
       component: LayoutFull,
       children: [
         {
-          path: '/home',
-          name: 'Home',
+          path: '/',
+          name: 'TelaInicial',
+          component: TelaInicialView,
+        },
+        {
+          path: '/tabela',
+          name: 'tabela',
           component: Tabela,
           props: true,
           // beforeEnter: (to, from, next) => {
@@ -81,7 +87,7 @@ const router = createRouter({
           props: true,
         },
         {
-          path: '/',
+          path: '/login',
           name: 'login',
           component: LoginView,
         },
