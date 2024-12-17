@@ -1,18 +1,16 @@
 <script setup>
-import dateFormat from 'dateformat'
+import { useWindowSize } from "@vueuse/core";
+import dateFormat from "dateformat";
 
 const props = defineProps({
-  horario: {
-    type: String,
-    default: ''
-  },
   data: {
-    type: String,
-    default: ''
+    type: String
+  },
+  horario: {
+    type: String
   },
   endereco: {
-    type: String,
-    default: ''
+    type: String
   },
   foto: {
     type: Image
@@ -24,12 +22,10 @@ const props = defineProps({
     type: Object
   },
   escudoM: {
-    type: String,
-    default: ''
+    type: String
   },
   escudoV: {
-    type: String,
-    default: ''
+    type: String
   },
   gols: {
     type: Array
@@ -47,8 +43,10 @@ const props = defineProps({
   }
 })
 </script>
+
 <template>
-  <RouterLink class="jogoComponent" :to="`/jogo/${props.id}`">
+  <div>
+  <RouterLink v-if="width > 768" class="jogoComponent" :to="`/jogo/${props.id}`">
     <div class="dataJogo">
       <p>
         {{ dateFormat(props.data, 'dd/mm') }} · {{ props.endereco ? props.endereco : "Local não definido" }} ·
@@ -80,7 +78,40 @@ const props = defineProps({
     <div class="tipoJogo"><p>{{ props.tipo }}</p></div>
 
   </RouterLink>
+
+    <!-- Layout para Mobile -->
+    <div v-else class="jogoComponentMobile">
+      <RouterLink :to="`/jogo/${props.id}`">
+        <div class="placarMobile">
+          <!-- Time Visitante com imagem acima -->
+          <div class="escudoTimeMobile">
+            <img :src="props.escudoV" alt="Escudo do Time Visitante" />
+          </div>
+                      <h1>{{ props.timeV.nome }}</h1>
+
+          <!-- Placar -->
+          <div class="placarValues">
+            <h1>{{ gols ? gols.filter((g) => g?.time == timeM?.id).length : [].length }}</h1>
+            <h1 class="versus">x</h1>
+            <h1>{{ gols ? gols.filter((g) => g?.time == timeV?.id).length : [].length }}</h1>
+          </div>
+
+          <!-- Time Mandante com imagem abaixo -->
+          <h1>{{ props.timeM.nome }}</h1>
+          <div class="escudoTimeMobile">
+            <img :src="props.escudoM" alt="Escudo do Time Mandante" />
+          </div>
+        </div>
+
+        <div class="dataJogoMobile">
+          <p>{{ dateFormat(props.data, "dd/mm") }} · {{ props.endereco }}</p>
+          <p>Horário: {{ props.horario.slice(0, 5) }}</p>
+        </div>
+      </RouterLink>
+    </div>
+  </div>
 </template>
+
 <style scoped>
 .jogoComponent {
   width: 1000px;
@@ -142,5 +173,53 @@ img {
   & .versus {
     color: #757575;
   }
+}
+
+
+/* Mobile */
+.jogoComponentMobile {
+  width: 100%;
+  background-color: #161616;
+  border-radius: 15px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.jogoComponentMobile a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.escudoTimeMobile {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.placarMobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: white;
+}
+
+.placarValues {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dataJogoMobile {
+  text-align: center;
+  color: #757575;
+  font-size: 14px;
+}
+
+img {
+  width: 100%;
+  height: auto;
 }
 </style>
