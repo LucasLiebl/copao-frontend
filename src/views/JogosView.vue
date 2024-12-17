@@ -77,7 +77,7 @@ function SeletorRodada(operation){
   align-items: center;
   background-color: #1e1e1e;
   width: 100vw;
-  height: 800px;
+  height: 100%;
   border-radius: 15px;
   padding: 25px;
   gap: 24px;
@@ -103,6 +103,10 @@ transform: scale(0.7)}
   .inside-container {
     padding: 5px; 
     gap: 8px; 
+  }
+  .container{
+    padding: 5%;
+    margin-bottom: 45px;
   }
  
   .jogosComponent {

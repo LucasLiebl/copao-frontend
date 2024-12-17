@@ -1,4 +1,5 @@
 <script setup>
+import ShieldStar from 'vue-material-design-icons/ShieldStar.vue'
 const props = defineProps({
   datas: {
     type: Array,
@@ -17,7 +18,9 @@ function primeiraLetraMaiuscula(string) {
 
 <template>
   <div class="card">
-    <h4 class="titulo">{{ props.titulo }}</h4>
+    <h4 class="titulo">{{ props.titulo }}
+    <ShieldStar class="icon"/>
+    </h4>
     <div class="objetos">
     
         <RouterLink class="object" v-for="object in props.datas" :key="object" :to="`/time/${object.id}`">
@@ -36,9 +39,16 @@ function primeiraLetraMaiuscula(string) {
   height: 420px;
   border-radius: 15px;
   padding: 15px;
-  gap: 12px;}
-.titulo {
+  gap: 12px;
+  }
+  .titulo {
   color: white;
+  display: flex;
+  align-items: center;
+  gap:4%;
+}
+.icon{
+  display: flex;
 }
 h4 {
   font-size: 18px;
@@ -48,14 +58,13 @@ h4 {
   color: #757575;
   display: flex;
   align-items: center;
-  gap: 3px;
-  text-decoration: none
+  gap: 4%;
+  text-decoration: none;
 }
 .objetos {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-left: 45px;
 }
 img {
   width: 29px;

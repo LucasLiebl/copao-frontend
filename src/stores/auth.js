@@ -33,6 +33,9 @@ export const useAuthStore = defineStore('auth', () => {
      state.token = newToken
     };
 
+    const isAdmin = computed(() => state.grupos.includes('Admin'));
+
+
     const loginUser = async (user) => {
       state.token = '';
       state.isLogged = false;
@@ -91,5 +94,5 @@ export const useAuthStore = defineStore('auth', () => {
 
     }
 
-  return { state, setToken, isLoading, isLogged, user, loginUser, createUser, logoutUser };
+  return { state, setToken, isLoading, isLogged, user, loginUser, createUser, logoutUser, isAdmin };
 });

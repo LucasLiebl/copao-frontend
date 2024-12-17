@@ -38,6 +38,7 @@ console.log(jogo.value)
       <CardComponent :datas="timeStore.times"  />
       <CardComponentArt :datas="JogadorStore.artilheiros" :titulo="'Artilheiros'" />
     </div>
+    
     <div class="tabelaContainer"><JogoGrandeComponent
             :key="jogo"
             :data="jogo.data"
@@ -49,6 +50,8 @@ console.log(jogo.value)
             :escudo-v="jogo.time_visitante?.escudo?.url"
             :gols="jogo.gols"
             :id="jogo.id"
+            :tipo="jogo.tipo_jogo"
+            :realizado="jogo.jogo_realizado"
           ></JogoGrandeComponent></div>
  
           </div>

@@ -1,4 +1,6 @@
 <script setup>
+import Soccer from 'vue-material-design-icons/Soccer.vue';
+
 const props = defineProps({
   datas: {
     type: Array,
@@ -14,7 +16,10 @@ const props = defineProps({
 
 <template>
   <div class="card">
-    <h4 class="titulo">{{ props.titulo }}</h4>
+    <h4 class="titulo">{{ props.titulo }}
+      <Soccer class="icon"></Soccer>
+
+    </h4>
     <div class="objetos">
         <RouterLink class="object" v-for="object in props.datas" :key="object" :to="`/jogador/${object.id}`">
           <img :src="object?.times[0]?.time.escudo.file" alt="" />
@@ -39,6 +44,12 @@ const props = defineProps({
 }
 .titulo {
   color: white;
+  display: flex;
+  align-items: center;
+  gap:4%;
+}
+.icon{
+  display: flex;
 }
 h4 {
   font-size: 18px;
@@ -48,14 +59,13 @@ h4 {
   color: #757575;
   display: flex;
   align-items: center;
-  gap: 3px;
+  gap: 4%;
   text-decoration: none;
 }
 .objetos {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-left: 45px;
 }
 img {
   width: 29px;

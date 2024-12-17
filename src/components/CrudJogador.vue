@@ -1,11 +1,13 @@
 <script setup>
 import { onMounted, reactive, ref } from 'vue'
-import { useJogadorStore } from '@/stores'
+import { useJogadorStore, useTimeStore } from '@/stores'
 
 const jogadorStore = useJogadorStore()
+const timesStore = useTimeStore()
 
-onMounted(() => {
-  jogadorStore.getJogadores()
+onMounted(async () => {
+  await jogadorStore.getJogadores()
+  await timesStore.getTimes()
 })
 
 
@@ -18,8 +20,8 @@ const newObject = reactive({
   id: null,
   times: [
     {
-      time: 1,
-      data_inicio: '2024-12-22'
+      time: '',
+      data_inicio: ''
     }
   ]
 })
@@ -68,6 +70,9 @@ function editar(jogador_para_editar) {
             <option value="2">Fixo</option>
             <option value="3">Ala</option>
             <option value="4">Pivo</option>
+          </select>
+          <select v-model="newObject.times[0].time">
+            <option v-for="time in timesStore.times" :key="time.id" :value="time.id">{{ time.nome }}</option>
           </select>
           <input type="number" placeholder="numero" v-model="newObject.numero" />
           <input type="submit" class="submit-button" />

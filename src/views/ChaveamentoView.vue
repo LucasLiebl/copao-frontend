@@ -1,9 +1,11 @@
 <script setup>
 import { useJogoStore } from '@/stores';
 import { onMounted,ref } from 'vue';
+import { useWindowSize } from "@vueuse/core";
 import JogoSmallComponent from '@/components/JogoSmallComponent.vue';
 import JogoComponent from '@/components/JogoComponent.vue';
 
+const { width } = useWindowSize();
 const jogoStore = useJogoStore();
 const semi = ref([])
 const final = ref([])
@@ -46,6 +48,7 @@ console.log(semi, final)
         </div>
         <div class="semi"><div v-for="jogo in semi" :key="jogo.id">
             <JogoSmallComponent 
+            v-if="width > 768"
             :data="jogo.data"
             :endereco="jogo.endereco"
             :horario="jogo.horario"
@@ -57,6 +60,20 @@ console.log(semi, final)
             :id="jogo.id"
             :tipo="jogo.tipo_jogo"
             ></JogoSmallComponent>
+            <JogoComponent 
+            v-else
+            :data="jogo.data"
+            :endereco="jogo.endereco"
+            :horario="jogo.horario"
+            :time-m="jogo.time_mandante"
+            :time-v="jogo.time_visitante"
+            :escudo-m="jogo.time_mandante.escudo?.url"
+            :escudo-v="jogo.time_visitante.escudo?.url"
+            :gols="jogo.gols"
+            :id="jogo.id"
+            :tipo="jogo.tipo_jogo">
+
+            </JogoComponent>
         </div>
     </div>
         

@@ -24,7 +24,7 @@ async function handleLogin() {
 
     if (response) {
       alert('Login efetuado com sucesso. Redirenionando para a página de home.');
-      router.push('/home');
+      router.push('/tabela');
     }
   } catch (error) {
     console.error('Erro no login:', error);
@@ -60,7 +60,7 @@ async function handleLogin() {
       </div>
     </div>
   </div>
-  <div class="debug">
+  <!-- <div class="debug">
   <div v-if="authStore.state.error" class="error">
       {{ authStore.state.error.message }}
     </div>
@@ -73,7 +73,7 @@ async function handleLogin() {
     state: {{ authStore.state }}
     <hr>
     user: {{ authStore.user }}
-    </div>
+    </div> -->
 </template>
 
 <style scoped>

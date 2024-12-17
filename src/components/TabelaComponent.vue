@@ -17,7 +17,6 @@ const sortedTimes = computed(() => {
 console.log( "sorted times ",sortedTimes)
 </script>
 <template>
-  <div class="table-container">
     <table>
       <thead>
         <tr>
@@ -78,7 +77,6 @@ console.log( "sorted times ",sortedTimes)
         </tr>
       </tbody>
     </table>
-  </div>
 </template>
 
 <style scoped>
@@ -161,16 +159,9 @@ th{
   content: '';
   display: block;
 }
-.table-container {
-  width: 100%;
-  overflow-x: auto; /* Permite scroll horizontal */
-}
 
 @media screen and (max-width: 768px) {
-  .table-container {
-    margin-top: 10px; /* Opcional: espaço para melhor visualização */
-    border-radius: 8px; /* Opcional: bordas arredondadas para o contêiner */
-  }
+
 
   table {
     width: 100%;

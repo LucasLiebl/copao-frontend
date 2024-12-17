@@ -8,6 +8,7 @@
 <style scoped>
 header {
   display: flex;
+  justify-content: center;
   background-color: #1E1E1E;
   height: 75px;
   width: 100%;

@@ -2,6 +2,7 @@
 import { useWindowSize } from "@vueuse/core";
 import dateFormat from "dateformat";
 
+const { width } = useWindowSize();
 const props = defineProps({
   data: {
     type: String
@@ -87,7 +88,7 @@ const props = defineProps({
           <div class="escudoTimeMobile">
             <img :src="props.escudoV" alt="Escudo do Time Visitante" />
           </div>
-                      <h1>{{ props.timeV.nome }}</h1>
+                      <h1>{{ props.timeV?.nome }}</h1>
 
           <!-- Placar -->
           <div class="placarValues">
@@ -97,7 +98,7 @@ const props = defineProps({
           </div>
 
           <!-- Time Mandante com imagem abaixo -->
-          <h1>{{ props.timeM.nome }}</h1>
+          <h1>{{ props.timeM?.nome }}</h1>
           <div class="escudoTimeMobile">
             <img :src="props.escudoM" alt="Escudo do Time Mandante" />
           </div>
@@ -105,7 +106,7 @@ const props = defineProps({
 
         <div class="dataJogoMobile">
           <p>{{ dateFormat(props.data, "dd/mm") }} · {{ props.endereco }}</p>
-          <p>Horário: {{ props.horario.slice(0, 5) }}</p>
+          <p>Horário: {{ props.horario ? props.horario.slice(0, 5) : "Horário não definido" }}</p>
         </div>
       </RouterLink>
     </div>

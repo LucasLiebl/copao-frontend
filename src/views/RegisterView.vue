@@ -69,7 +69,7 @@ async function handleLogin() {
       </div>
     </div>
   </div>
-  <div class="debug">
+  <!-- <div class="debug">
   <div v-if="authStore.state.error" class="error">
       {{ authStore.state.error.message }}
     </div>
@@ -80,7 +80,7 @@ async function handleLogin() {
     {{ authStore.state }}
     <hr>
     {{ authStore.user }}
-    </div>
+    </div> -->
 </template>
 
 <style scoped>

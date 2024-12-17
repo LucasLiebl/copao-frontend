@@ -67,6 +67,17 @@ export const useJogoStore = defineStore('jogo', () => {
     }
   }
 
+  const gerarSemis = async () => {
+    state.loading = true
+    try {
+      await JogoService.gerarSemis()
+    } catch (error) {
+      state.error = error
+    } finally {
+      state.loading = false
+    }
+  }
+
  
   const updateJogo = async (jogo) => {
     state.loading = true
@@ -106,6 +117,7 @@ export const useJogoStore = defineStore('jogo', () => {
     createJogo,
     updateJogo,
     deleteJogo,
-    getJogosbyTipo
+    getJogosbyTipo,
+    gerarSemis
   }
 })

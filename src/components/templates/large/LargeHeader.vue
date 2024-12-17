@@ -1,6 +1,8 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useAuthStore } from '@/stores/auth'; 
+import TableHeadersEye from 'vue-material-design-icons/TableHeadersEye.vue';
+import Soccer from 'vue-material-design-icons/Soccer.vue';
 
 const authStore = useAuthStore();
 
@@ -12,14 +14,15 @@ const user = computed(() => authStore.user);
 <template>
 <header>
   <div class="logo">
-      <router-link to="/home"> <img src="https://i.ibb.co/9VfWVgh/COPAO-1.png" alt="logo"></router-link>
+      <router-link to="/"> <img src="https://i.ibb.co/9VfWVgh/COPAO-1.png" alt="logo"></router-link>
     </div>
     <nav class="nav-links">
-      <router-link to="/home" 
+      <router-link to="/tabela" 
       
       :class="{'nav-item nav-item-select': $route.path === '/tabela','nav-item': $route.path !== '/tabela'}">
 
-      <img src="https://i.ibb.co/BNTvDmn/Classificacao-Vector.png" alt="" class="icon"> Classificação
+      <TableHeadersEye :class="{'icon icon-select': $route.path === '/tabela','icon': $route.path !== '/tabela'}"></TableHeadersEye> 
+      Classificação
 
       </router-link>
 
@@ -31,15 +34,40 @@ const user = computed(() => authStore.user);
       
       </router-link>
           
-      <router-link to="/jogos" :class="{'nav-item nav-item-select': $route.path === '/jogos','nav-item': $route.path !== '/jogos'}"><img
-          src="https://i.ibb.co/bNk0pxT/Vector.png" alt="" class="icon"> Jogos</router-link>
+      <router-link to="/jogos" :class="{'nav-item nav-item-select': $route.path === '/jogos','nav-item': $route.path !== '/jogos'}">
+        
+        <Soccer :class="{'icon icon-select': $route.path === '/jogos','icon': $route.path !== '/jogos'}"></Soccer> 
+      Jogos</router-link>
     </nav>
+
+    <nav v-if="authStore.isAdmin" class="nav-admin">
+        <router-link to="/crudjogo" :class="{'nav-item nav-item-select': $route.path === '/crudjogo','nav-item': $route.path !== '/crudjogo'}">
+          Crud Jogo
+        </router-link>
+
+        <div class="nav-item" @click="authStore.gerarSemis()">
+          Gerar Semis
+        </div>
+
+        <div class="nav-item" @click="authStore.gerarFinal()">
+          Gerar Final
+        </div>
+
+        <router-link to="/crudtime" :class="{'nav-item nav-item-select': $route.path === '/crudtime','nav-item': $route.path !== '/crudtime'}">
+          Crud Time
+        </router-link>
+
+        <router-link to="/crudjogador" :class="{'nav-item nav-item-select': $route.path === '/crudjogador','nav-item': $route.path !== '/crudjogador'}">
+          Crud Jogador
+        </router-link>
+
+      </nav>
     
     <router-link class="perfilBorder" v-if="isLogged" to="/perfil">
       <img :src=" user.foto ? user.foto : 'https://i.ibb.co/kmyjjy3/Default-pfp-svg.png'" alt="">
        </router-link>
 
-    <router-link v-else to="/" class="loginBorder">
+    <router-link v-else to="/login" class="loginBorder">
       <img src="https://i.ibb.co/kmyjjy3/Default-pfp-svg.png" alt="">
       Sing In
     </router-link>
@@ -95,12 +123,22 @@ header {
 }
 .icon{
   color: #757575;
+  transition: all .2s; 
+  display: flex;
+
 }
 
 .nav-links {
   display: flex;
   gap: 40px;
   margin-left: 40px;
+
+}
+.nav-admin{
+  display: flex;
+  gap: 40px;
+  margin-left: auto;
+
 }
 
 .nav-item {
@@ -115,6 +153,10 @@ header {
 }
 .nav-item-select{
   color: white;
+}
+.icon-select{
+  color: white;
+  transition: all .2s;
 }
 .nav-item-select::after {
   content: '';

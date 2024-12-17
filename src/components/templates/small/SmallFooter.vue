@@ -1,10 +1,11 @@
-  <script setup></script>
+  <script setup>
+  import TableHeadersEye from 'vue-material-design-icons/TableHeadersEye.vue';
+  import Soccer from 'vue-material-design-icons/Soccer.vue';
+
+</script>
 
   <template>
-    <div class="app-container">
-      <div class="content">
-        <div>Conteúdo Principal</div>
-      </div>
+ 
       <div class="container-nav">
         <div class="conteudo">          
     <nav class="nav-links">
@@ -12,7 +13,7 @@
       
       :class="{'nav-item nav-item-select': $route.path === '/tabela','nav-item': $route.path !== '/tabela'}">
 
-      <img src="https://i.ibb.co/BNTvDmn/Classificacao-Vector.png" alt="" class="icon">
+      <TableHeadersEye :class="{'icon icon-select': $route.path === '/tabela','icon': $route.path !== '/tabela'}"></TableHeadersEye> 
 
       </router-link>
 
@@ -24,26 +25,17 @@
       
       </router-link>
           
-      <router-link to="/jogos" :class="{'nav-item nav-item-select': $route.path === '/jogos','nav-item': $route.path !== '/jogos'}"><img
-          src="https://i.ibb.co/bNk0pxT/Vector.png" alt="" class="icon"></router-link>
+      <router-link to="/jogos" :class="{'nav-item nav-item-select': $route.path === '/jogos','nav-item': $route.path !== '/jogos'}">
+        <Soccer :class="{'icon icon-select': $route.path === '/jogos','icon': $route.path !== '/jogos'}"></Soccer> 
+      </router-link>
     </nav>
         </div>
       </div>
-    </div>
   </template>
 
 
   <style scoped>
-  .app-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 88vh; 
-
-  }
-
-  .content {
-    flex: 1; 
-  }
+ 
 
   .conteudo{
     display: flex;
@@ -59,7 +51,6 @@
     bottom: 0px;
     width: 100%;
     position: fixed;
-  
   }
 
 .nav-links {

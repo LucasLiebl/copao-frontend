@@ -2,6 +2,8 @@
 import { onMounted, ref, computed } from "vue";
 import dateFormat from "dateformat";
 import { useJogadorStore, useTimeStore } from "@/stores";
+import Soccer from 'vue-material-design-icons/Soccer.vue';
+
 
 const jogadorStore = useJogadorStore()
 const timeStore = useTimeStore()
@@ -45,6 +47,14 @@ const props = defineProps({
   },
   gols: {
     default: [],
+  },
+  realizado: {
+    type: Boolean,
+    default: false
+  },
+  tipo: {
+    type: String,
+    default: ""
   }
 });
 
@@ -81,9 +91,11 @@ const golsTimeV = computed(() => props.gols ? props.gols.filter((gol) => gol.tim
         <h1>{{ props.timeM.nome }}</h1>
       </div>
       <div class="placar">
-        <h1>{{ gols ? gols.filter((g) => g?.time == timeM?.id).length : [].length }}</h1>
+        <h1 v-if="props.realizado" >{{ gols ? gols.filter((g) => g?.time == timeM?.id).length : [].length }}</h1>
+        <h1 v-else></h1>
         <h1 class="versus">-</h1>
-        <h1>{{ gols ? gols.filter((g) => g?.time == timeV?.id).length : [].length }}</h1>
+        <h1 v-if="props.realizado">{{ gols ? gols.filter((g) => g?.time == timeV?.id).length : [].length }}</h1>
+        <h1 v-else></h1>
       </div>
       <div class="timeV">
         <h1>{{ props.timeV.nome }}</h1>
@@ -92,39 +104,82 @@ const golsTimeV = computed(() => props.gols ? props.gols.filter((gol) => gol.tim
         </div>
       </div>
     </div>
-
+   <p class="tipo">Fase: {{ props.tipo }}</p> 
+    <h1 class="realizado" v-if="!props.realizado">Jogo ainda não aconteceu!</h1>
     <div class="gols">
-    <!-- Goals for Team M -->
+      <div class="golsM">
+        <div v-for="gol in golsTimeM" :key="gol.id" style="color: white;">
+          <Soccer class="icon"/>
+        {{ getJogador(gol.jogador)[0]?.nome }} 
+      </div>
+      </div>
+      <div class="golsV">
+        
+        <div v-for="gol in golsTimeV" :key="gol.id" style="color: white;">
+          <Soccer class="icon"/>
+        {{ getJogador(gol.jogador)[0]?.nome }}
+      </div>
+      </div>
+    <!-- Goals for Team M
     <div class="timeM">
       <h3>Goals for {{ timeM.nome }}</h3>
       <div v-for="gol in golsTimeM" :key="gol.id" style="color: white;">
-        {{ getJogador(gol.jogador)[0]?.nome }} - {{ getTime(gol.time)[0]?.nome }}
+        {{ getJogador(gol.jogador)[0]?.nome }} 
       </div>
     </div>
 
-    <!-- Goals for Team V -->
+    Goals for Team V
     <div class="timeV">
       <h3>Goals for {{ timeV.nome }}</h3>
       <div v-for="gol in golsTimeV" :key="gol.id" style="color: white;">
-        {{ getJogador(gol.jogador)[0]?.nome }} - {{ getTime(gol.time)[0]?.nome }}
+        {{ getJogador(gol.jogador)[0]?.nome }}
       </div>
-    </div>
+    </div> -->
   </div>
 
   </div>
 </template>
 <style scoped>
+.tipo{
+  font-size: 16px;
+  font-weight: 500;
+  color: #757575;
+
+}
+.realizado{
+  color: #757575;
+  font-weight: 700;
+}
+.icon{
+  display: flex;
+}
 .gols {
   display: flex;
+    flex-direction: row;
+    gap: 40px;
+    width: 850px;
+    justify-content: space-between;
+}
+.golsM, .golsV{
+  display: flex;
+  width: 40%;
+  gap: 10px;
   flex-direction: column;
-  gap: 40px;
+}
+.golsM{
+  align-items: flex-end;
+  & .icon{
+    justify-content: flex-end;
+  }
+}
+.golsV{
+align-items: flex-start;
+& .icon{
+    justify-content: flex-start;
+  }
 }
 
-.timeM, .timeV {
-  background-color: #303030;
-  padding: 20px;
-  border-radius: 8px;
-}
+
 .jogoComponent {
   width: 1200px;
   height: 300px;
