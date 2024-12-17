@@ -1,10 +1,12 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useAuthStore } from '@/stores/auth'; 
+import { useJogoStore } from '@/stores';
 import TableHeadersEye from 'vue-material-design-icons/TableHeadersEye.vue';
 import Soccer from 'vue-material-design-icons/Soccer.vue';
 
 const authStore = useAuthStore();
+const jogoStore = useJogoStore();
 
 const isLogged = computed(() => authStore.isLogged);
 const user = computed(() => authStore.user);
@@ -45,14 +47,6 @@ const user = computed(() => authStore.user);
           Crud Jogo
         </router-link>
 
-        <div class="nav-item" @click="authStore.gerarSemis()">
-          Gerar Semis
-        </div>
-
-        <div class="nav-item" @click="authStore.gerarFinal()">
-          Gerar Final
-        </div>
-
         <router-link to="/crudtime" :class="{'nav-item nav-item-select': $route.path === '/crudtime','nav-item': $route.path !== '/crudtime'}">
           Crud Time
         </router-link>
@@ -60,6 +54,14 @@ const user = computed(() => authStore.user);
         <router-link to="/crudjogador" :class="{'nav-item nav-item-select': $route.path === '/crudjogador','nav-item': $route.path !== '/crudjogador'}">
           Crud Jogador
         </router-link>
+
+        <div class="nav-item" @click="jogoStore.gerarSemis()">
+          Gerar Semis
+        </div>
+
+        <div class="nav-item" @click="jogoStore.gerarFinal()">
+          Gerar Final
+        </div>
 
       </nav>
     
@@ -85,7 +87,7 @@ const user = computed(() => authStore.user);
   height: 3vw;
   margin-left: auto;
   margin-right: 2%;
-
+  
   img{
     border-radius: 50%;
     width: 80%;
@@ -96,7 +98,7 @@ const user = computed(() => authStore.user);
   align-items: center;
   justify-content: space-around;
   background-color: #313131;
-  width: 6%;
+  width: 8%;
   height: 70%;
   border-radius: 20px;
   margin-left: auto;
@@ -149,6 +151,7 @@ header {
   display: flex;
   align-items: center;
   gap: 5px;
+  cursor: pointer;
   transition: all .1s;
 }
 .nav-item-select{

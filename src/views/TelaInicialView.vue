@@ -93,7 +93,7 @@ button:active {
 }
 
 h1 {
-  font-size: 5rem;
+  font-size: 400%;
   font-weight: 700;
   color: white;
   line-height: 1.1;

@@ -46,10 +46,20 @@ class JogoService {
 
   async gerarSemis(){
     try {
-      const data  = await api.post(`api/gerarsemis`)
+      const data  = await api.post(`api/jogos/gerarsemis`)
       return data
     } catch (error) {
       console.log('error in gerarSemis', error)
+      throw error
+    }
+  }
+
+  async gerarFinal(){
+    try{
+      const data = await api.post('api/jogos/gerarfinais')
+      return data
+    }catch(error){
+      console.log('error in gerarFinal')
       throw error
     }
   }
