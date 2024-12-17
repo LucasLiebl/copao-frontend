@@ -106,7 +106,7 @@ const golsTimeV = computed(() => props.gols ? props.gols.filter((gol) => gol.tim
     </div>
    <p class="tipo">Fase: {{ props.tipo }}</p> 
     <h1 class="realizado" v-if="!props.realizado">Jogo ainda não aconteceu!</h1>
-    <div class="gols">
+    <div class="gols" v-if="props.realizado">
       <div class="golsM">
         <div v-for="gol in golsTimeM" :key="gol.id" style="color: white;">
           <Soccer class="icon"/>
@@ -159,7 +159,9 @@ const golsTimeV = computed(() => props.gols ? props.gols.filter((gol) => gol.tim
     gap: 40px;
     width: 850px;
     justify-content: space-between;
-}
+    position: absolute;
+    top:40%;
+  }
 .golsM, .golsV{
   display: flex;
   width: 40%;
@@ -182,7 +184,7 @@ align-items: flex-start;
 
 .jogoComponent {
   width: 1000px;
-  height: 300px;
+  height: 50%;
   background-color: #0e0e0e;
   border-radius: 25px;
   display: flex;

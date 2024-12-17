@@ -27,12 +27,12 @@ const categories = [
   { id: 4, texto: 'PIVOS' }
 ]
 const jogadores = computed(() => {
-  if (posicaoSelecionada.value === 0) {
-    return timeStore.time.jogadores
-  } else {
-    return  timeStore.time.jogadores.filter((j) => j.posicao === posicaoSelecionada.value)
-  }
-})
+  console.log("Posição selecionada:", posicaoSelecionada.value); // Log position selected
+  return timeStore.time.jogadores.filter((i) => {
+    console.log("Posição jogador:", i.jogador.posicao); // Log each player's position
+    return posicaoSelecionada.value === 0 || i.jogador.posicao === posicaoSelecionada.value;
+  });
+});
 </script>
 
 <template>
@@ -53,12 +53,13 @@ const jogadores = computed(() => {
         :posicaoSelecionada="posicaoSelecionada"
       >
       </BotaoJogador>
+
   </div>
     <div class="posicao-container">
       <router-link  v-for="item in jogadores" :key="item.id" :to="`/jogador/${item.jogador.id}`" class="card-router">
           <CardJogador
             :key="item.id" 
-            :foto="item.jogador?.foto"      
+            :foto="item.jogador.foto?.url"      
             :nome="item.jogador.nome"
             :numero="item.jogador.numero"
             :posicao="categories.find(c => c.id == item.jogador.posicao)?.texto"

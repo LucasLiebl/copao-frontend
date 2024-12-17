@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import { computed, reactive } from 'vue'
 import { JogadorService } from '@/services'
-import jogador from '@/services/jogador'
 
 export const useJogadorStore = defineStore('jogador', () => {
   const state = reactive({
@@ -62,6 +61,7 @@ export const useJogadorStore = defineStore('jogador', () => {
     state.loading = true
     try {
       state.jogadores.push(await JogadorService.createJogador(newJogador))
+      await getJogadores()
     } catch (error) {
       state.error = error
     } finally {
@@ -73,6 +73,7 @@ export const useJogadorStore = defineStore('jogador', () => {
     state.loading = true
     try {
       await JogadorService.updateJogador(jogador)
+      await getJogadores()
     } catch (error) {
       state.error = error
     } finally {

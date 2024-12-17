@@ -23,7 +23,8 @@ const newObject = reactive({
   time_mandante: '',
   time_visitante: '',
   gols: '',
-  cartoes: ''
+  cartoes: '',
+  realizado: ''
 })
 
 const deleteID = ref(0)
@@ -34,25 +35,33 @@ function editar(jogo_para_editar) {
 function salvar(newObject) {
   console.log(newObject)
   if (newObject.id) {
-    newObject.gols = allGoals
-    jogoStore.updateJogo(newObject)
-    console.log('updateJogo console.log')
+    try {
+      newObject.gols = allGoals
+      jogoStore.updateJogo(newObject)
+      console.log('updateJogo console.log')
+      alert('jogo atualizado')
+    } catch (error) {
+      alert(error)
+    }
   } else {
-    console.log(newObject)
-    newObject.gols = allGoals
-    jogoStore.createJogo(newObject)
+    try {
+      console.log(newObject)
+      newObject.gols = allGoals
+      jogoStore.createJogo(newObject)
+      alert('jogo criado')
+    } catch (error) {
+      alert(error)
+    }
   }
 }
 
 const selectJogadores = computed(() => {
-  return timeStore.times
-    .filter((time) => time.id === newObject.time_mandante || time.id === newObject.time_visitante)
-    .flatMap((time) => time.jogadores)
+  return timeStore.times.filter((time) => time.id === newObject.time_mandante || time.id === newObject.time_visitante).flatMap((time) => time.jogadores)
 })
 // filter: Selects only the teams whose id matches newObject.time_mandante or newObject.time_visitante.
 // flatMap: Maps over each selected team to extract the jogadores array, and then "flattens" all these arrays into a single array of players.
 
-console.log(selectJogadores)
+console.log("selectJogadores",selectJogadores)
 
 const selectTimes = computed(() => {
   return timeStore.times.filter(
@@ -140,14 +149,14 @@ function acharTime(timeID) {
             <input type="text" v-model="newObject.endereco" />
           </div>
           <div class="inputdiv">
-            <label for="rodada">Rodada</label> 
+            <label for="rodada">Rodada</label>
             <select name="" id="" v-model="newObject.rodada">
               <option v-for="rodada in rodadaStore.rodadas" :key="rodada" :value="rodada.id">
                 {{ rodada.numero_rodada }}
               </option>
             </select>
-
           </div>
+          
         </div>
       </div>
 
@@ -155,9 +164,10 @@ function acharTime(timeID) {
       <div class="golsSection">
         <div class="inputdiv">
           <label for="marcadorGol">Marcador</label>
+          {{ selectJogador }}
           <select name="" id="" v-model="golsJsonField.jogador">
-            <option v-for="jogador in selectJogadores" :key="jogador.id" :value="jogador.id">
-              {{ jogador.nome }} ({{ jogador.id }})
+            <option v-for="item in selectJogadores" :key="item.id" :value="item.jogador.id">
+              {{ item.jogador.nome }} - {{item.time.nome }}
             </option>
           </select>
         </div>
@@ -180,12 +190,12 @@ function acharTime(timeID) {
           <div>{{ acharTime(gol.time) }}</div>
           <div>{{ gol.gol_pro }}</div>
           <div class="buttons">
-            <div class="squareButton" @click="removerGol(gol.id)" > {{gol.id}} </div>
+            <div class="squareButton" @click="removerGol(gol.id)">{{ gol.id }}</div>
           </div>
         </div>
       </div>
 
-      <input type="submit" class="saveButton"> 
+      <input type="submit" class="saveButton" />
     </form>
   </div>
   <h1>Jogo Listagem</h1>
@@ -223,10 +233,11 @@ function acharTime(timeID) {
 .saveButton {
   height: 54px;
   width: 100px;
-  background-color: #E72740;
+  background-color: #e72740;
   border-radius: 15px;
   color: white;
   font-weight: 700;
+  cursor: pointer;
 }
 form {
   display: flex;
@@ -234,11 +245,11 @@ form {
   align-items: flex-start;
   gap: 30px;
 }
-.golsList{
+.golsList {
   display: flex;
-    flex-direction: column;
-    gap: 30px;
-    align-items: flex-end;
+  flex-direction: column;
+  gap: 30px;
+  align-items: flex-end;
 }
 .buttons {
   display: flex;
@@ -253,7 +264,7 @@ form {
 .golDiv {
   display: flex;
   gap: 15%;
-  width:  600px;
+  width: 600px;
   height: 54px;
   background-color: #161616;
   border-radius: 15px;

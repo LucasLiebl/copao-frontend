@@ -2,6 +2,7 @@
 import { computed } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router';
+import { jwtDecode } from "jwt-decode";
 
 const router = useRouter();
 const authStore = useAuthStore();

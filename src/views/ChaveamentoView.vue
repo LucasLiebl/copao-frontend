@@ -28,7 +28,7 @@ console.log(semi, final)
     <h1>Carregando...</h1>
   </div>
   <div v-else-if="semi.length === 0">
-    <h1>NADA AINDA</h1>
+    <h1 class="mata-mata">Mata-mata ainda não comecou...</h1>
   </div>
     <div v-else class="chaveamento-container"> 
         <div><img src="https://i.ibb.co/9VfWVgh/COPAO-1.png" alt="" /></div>
@@ -81,6 +81,11 @@ console.log(semi, final)
 </div>
 </template>
 <style scoped>
+.mata-mata{
+  color: #757575;
+  font-weight: 700;
+}
+
 .container {
   padding: 2.5%;
   display: flex;

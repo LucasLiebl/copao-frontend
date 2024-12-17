@@ -2,8 +2,12 @@
 import CardComponent from '@/components/CardComponent.vue';
 import CardComponentArt from '@/components/CardComponentArt.vue';
 import JogadorGrandeComponente from '@/components/JogadorGrandeComponente.vue';
-import { onMounted, } from 'vue'
+import { onMounted, watch } from 'vue'
 import { useTimeStore, useJogadorStore, } from '@/stores'  // Ajuste o import se necessário
+import { useRoute } from 'vue-router'; // Import Vue Router's useRoute for route access
+
+const route = useRoute(); // To access route params
+
 
 const props = defineProps(['id'])
 const timeStore = useTimeStore()  // Atualize o nome do store
@@ -15,6 +19,17 @@ onMounted(async () => {
   await JogadorStore.getJogadores()
   await JogadorStore.getArtilheiros()
 })
+
+// Watch for changes in the `id` prop or the route
+watch(
+  () => route.params.id, // Watch for changes in the route parameter 'id'
+  async (newId) => {
+    // If the 'id' changes, fetch the data again
+    props.id = newId; // Update the `id` prop
+    await   await JogadorStore.getJogador(props.id); // Refetch the data for the new player
+  },
+  { immediate: true } // Fetch data immediately on initial mount
+);
 
 
 </script>
@@ -28,9 +43,8 @@ onMounted(async () => {
     <div class="tabelaContainer">
         <JogadorGrandeComponente
             :data="JogadorStore.jogador"
-            :foto="JogadorStore.jogador.foto"
+            :foto="JogadorStore.jogador.foto?.url"
             ></JogadorGrandeComponente>
-
     </div>
  
  </div>

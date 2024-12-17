@@ -16,7 +16,6 @@ const props = defineProps({
   },
   foto: {
     type: Image,
-    default: 'https://i.ibb.co/Svg73R0/default-player.png'
   },
 })
 

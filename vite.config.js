@@ -13,19 +13,19 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'apple-touch-icon.png', 'masked-icon.svg'],
       manifest: {
-        name: 'Fake Store',
-        short_name: 'FakeStore',
-        description: 'Fake Store: Fantástica loja de produtos',
+        name: 'Copão',
+        short_name: 'Copão',
+        description: 'Copão: Sistema para o Copão IFC',
         theme_color: '#ffffff',
         icons: [
           {
-            src: 'pwa-192x192.png',
+            src: 'https://i.ibb.co/9VfWVgh/COPAO-1.png',
             sizes: '192x192',
             type: 'image/png',
             purpose: 'any',
           },
           {
-            src: 'pwa-512x512.png',
+            src: 'https://i.ibb.co/9VfWVgh/COPAO-1.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'maskable',
