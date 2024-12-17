@@ -1,5 +1,5 @@
 <script setup>
-import { onBeforeMount, ref, computed } from 'vue'
+import { onBeforeMount, ref,  } from 'vue'
 import { useRodadaStore } from '@/stores'
 import JogoComponent from '@/components/JogoComponent.vue'
 import ChevronLeft from 'vue-material-design-icons/ChevronLeft.vue'
@@ -99,4 +99,17 @@ function SeletorRodada(operation){
 .icon:active {
 transform: scale(0.7)}
 
+@media screen and (max-width: 480px) {
+  .inside-container {
+    padding: 5px; 
+    gap: 8px; 
+  }
+ 
+  .jogosComponent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;  
+    gap: 30px;
+  }
+}
 </style>

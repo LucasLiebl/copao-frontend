@@ -42,7 +42,7 @@ const jogadores = computed(() => {
   </div>
   <div :class="timeStore.isLoading ? 'notLoading' : 'jogadores-container'">
     <div class="sizecontainer">
-    <h1 class="elenco"> <img class="img" :src="timeStore.time.escudo?.url" alt=""> Elenco {{ timeStore.time.nome }} </h1>
+    <h1 class="elenco"> <img class="img" :src="timeStore.time.escudo?.url" alt=""> {{ timeStore.time.nome }} </h1>
     <div class="buttons-posicao">
       <BotaoJogador 
       v-for="category in categories" :key="category.id"
@@ -130,7 +130,6 @@ circle {
 .sizecontainer{
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   margin-left:110px;
   margin-right: 110px;
   gap: 40px ;
@@ -169,5 +168,32 @@ circle {
 .posicao-container > h1 {
   margin-left: 0px;
   text-align: left;
+}
+@media screen and (max-width: 768px) {
+  .posicao-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .buttons-posicao {
+    display: flex;
+    flex-direction: column; 
+    gap: 15px; 
+    align-items: center; 
+  }
+  .jogadores-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .jogadores-container{
+    width: 100%; 
+    margin-left: 0px;
+    margin-right: 0px; 
+    margin-top: 20px; 
+    gap: 15px;
+    padding: 5px;
+    align-items: center;
+  }
 }
 </style>

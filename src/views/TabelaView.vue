@@ -72,6 +72,9 @@ circle {
     stroke-dashoffset: -125px;
   }
 }
+
+
+
 .notLoading{
   display: none;
   transition: 5ms;
@@ -101,11 +104,29 @@ circle {
   border-radius: 15px;
   align-items: flex-start;
   justify-content: center;
+  
 }
 .cards {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 34px;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+.tabelaContainer{
+  width: 85%;
+  overflow: scroll;
+}
+  .cards {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+ 
 }
 </style>
